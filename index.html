@@ -1,5 +1,5 @@
 
-<!-- Admin.html - لوحة تحكم إدارة الانخراطات -->
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* نفس الأنماط التي كانت موجودة في ملفك الأصلي (لم يتم تغييرها للحفاظ على الهوية) */
+    /* جميع الأنماط موجودة كما هي - لم يتم تغييرها */
     :root{--primary:#2986B0;--primary-light:#7ED6D1;--accent:#F59E0B;--dark:#222;--bg:#F5F5F5;--muted:#64748b;--border:#e5e7eb;--danger:#b91c1c;--success:#166534}*{box-sizing:border-box;font-family:Cairo,Tahoma,Arial,sans-serif}body{margin:0;background:var(--bg);color:var(--dark)}.sidebar{position:fixed;right:0;top:0;width:280px;height:100vh;background:linear-gradient(180deg,#2986B0,#1d5f7d 65%,#222);color:#fff;padding:22px;overflow-y:auto;box-shadow:0 0 25px #0002}.logo{width:112px;height:112px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 16px;border:4px solid #ffffff40;background:white}.sidebar h2{text-align:center;margin:0 0 6px;font-size:22px;font-weight:800}.subtitle{text-align:center;color:#ffffffd0;font-size:13px;margin-bottom:18px}.admin-badge{background:#ffffff1a;border:1px solid #ffffff26;border-radius:14px;padding:10px;margin-bottom:14px;text-align:center}.sidebar button{width:100%;padding:13px 15px;margin-bottom:10px;background:#ffffff17;color:white;border:1px solid #ffffff20;border-radius:15px;cursor:pointer;font-size:15px;font-weight:800;text-align:right}.sidebar button:hover,.sidebar button.current{background:var(--accent);transform:translateX(-4px)}.main{margin-right:300px;padding:26px}.topbar{background:#fff;padding:18px 22px;border-radius:22px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:16px;box-shadow:0 8px 22px #0000000f}.topbar h1{margin:0;font-size:26px}.status{color:var(--muted);font-size:12px;margin-top:4px}.content{display:none;animation:fade .25s ease}.active{display:block}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:22px}.card,.box{background:#fff;border-radius:22px;padding:22px;box-shadow:0 8px 22px #0000000f;border:1px solid #2986b014;margin-bottom:22px}.card{border-top:5px solid var(--primary)}.card h3{color:var(--muted);font-size:14px;margin:0 0 9px}.value{font-size:27px;font-weight:800;color:var(--accent)}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}.submit,.print-btn{width:100%;padding:14px;margin-top:15px;border:0;border-radius:14px;background:linear-gradient(135deg,#2986B0,#7ED6D1);color:#fff;font-size:16px;font-weight:800;cursor:pointer}.secondary{background:linear-gradient(135deg,#F59E0B,#A86417)}.danger{background:#fee2e2!important;color:var(--danger)!important}.actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}th,td{padding:12px;border-bottom:1px solid var(--border);text-align:center;font-size:14px}th{background:#2986B0;color:white}tr:nth-child(even){background:#f8fafc}.ok{background:#dcfce7;color:#166534;padding:10px;border-radius:12px;margin-top:12px}.error{background:#fee2e2;color:#b91c1c;padding:10px;border-radius:12px;margin-top:12px}.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2986B0,#7ED6D1)}.login-card{width:min(440px,92vw);background:white;border-radius:26px;padding:28px;box-shadow:0 22px 55px #0003;text-align:center}.app-shell{display:none}.brand-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.brand-header img{width:70px;height:70px;border-radius:50%}.brand-title{font-weight:800;font-size:20px}.brand-subtitle{color:#64748b}.mini{padding:8px 12px;border:0;border-radius:10px;color:white;background:var(--primary);font-weight:800;cursor:pointer}.search-bar{background:#fff;border-radius:22px;padding:12px 20px;margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;box-shadow:0 4px 12px #00000008}.search-bar input{flex:2;min-width:200px;margin:0}.search-bar select{flex:1;min-width:150px;margin:0}@media print{.sidebar,.topbar,.no-print{display:none!important}.main{margin:0;padding:0}}@media(max-width:800px){.sidebar{position:relative;width:100%;height:auto}.main{margin-right:0;padding:16px}.topbar{display:block}}.card-badge{background:white;border-radius:16px;padding:10px;text-align:center;box-shadow:0 4px 12px #0001;margin:10px 0}.card-badge img{max-width:100px;margin:auto}
   </style>
 </head>
@@ -24,31 +24,278 @@
 </div></div>
 
 <script>
-const APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbys0fwsOQoSYi49aUY8wSTnxcW9uJefZJxNyKC1YwXIVBaloV-dxTGSMiJ7SZYfUPTdSA/exec'; // ⚠️ ضع رابط النشر الجديد
-let sessionToken = localStorage.getItem('membership_session_token') || '', currentAdmin = JSON.parse(localStorage.getItem('membership_current_admin') || 'null'), currentReport = null;
-async function apiRequest(action, args) { const res = await fetch(APPS_SCRIPT_WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ action, args: args || [] }) }); const json = await res.json(); if (!json.ok) throw new Error(json.error); return json.data; }
-const google = { script: { run: new Proxy({}, { get(t, prop) { if (prop === 'withSuccessHandler') return cb => new Proxy({}, { get(tt, p2) { return (...args) => apiRequest(p2, args).then(cb).catch(console.error); } }); return (...args) => apiRequest(prop, args).catch(console.error); } }) } };
-function showTab(id, btn) { if (id === 'admins' && currentAdmin?.role !== 'super') return alert('غير مسموح'); document.querySelectorAll('.content').forEach(c => c.classList.remove('active')); document.getElementById(id).classList.add('active'); document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('current')); if (btn) btn.classList.add('current'); }
-function setMsg(id, text, type) { document.getElementById(id).innerHTML = `<div class="${type}">${text}</div>`; }
-function login() { google.script.run.withSuccessHandler(res => { sessionToken = res.token; currentAdmin = res.admin; localStorage.setItem('membership_session_token', sessionToken); localStorage.setItem('membership_current_admin', JSON.stringify(currentAdmin)); loginScreen.style.display = 'none'; appShell.style.display = 'block'; applyRoleUI(); renderReport(res.report); }).withFailureHandler(e => setMsg('loginMsg', e.message, 'error')).loginAdmin({ username: loginUsername.value, password: loginPassword.value }); }
-function logout() { google.script.run.withSuccessHandler(() => { localStorage.clear(); location.reload(); }).logoutAdmin(sessionToken); }
-function applyRoleUI() { adminBadge.textContent = currentAdmin.name + ' | ' + currentAdmin.roleLabel; document.querySelectorAll('.super-only').forEach(x => x.style.display = currentAdmin.role === 'super' ? 'block' : 'none'); }
-function loadReport(manual) { if (manual) syncStatus.textContent = 'جاري التحميل...'; google.script.run.withSuccessHandler(r => renderReport(r)).withFailureHandler(e => syncStatus.textContent = e.message).getMembershipReport(); }
-function renderReport(r) { currentReport = r; syncStatus.textContent = new Date().toLocaleString('ar-DZ'); document.querySelectorAll('.brand-logo').forEach(i => i.src = r.identity.logoUrl); totalMembers.textContent = r.totals.total; activeMembers.textContent = r.totals.active; pendingRequests.textContent = r.pendingRequests.length; totalValue.textContent = r.totals.value.toLocaleString() + ' دج'; pendingTable.innerHTML = pendingRequestsTable(r.pendingRequests.slice(0,5)); recentMembersTable.innerHTML = membersTable(r.members.slice(0,5), true); if(document.getElementById('requestsTable')) loadRequests(); if(document.getElementById('membersTable')) loadMembers(); }
-function pendingRequestsTable(rows) { if(!rows.length) return '<p>لا توجد طلبات</p>'; return `<table><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>الحالة</th><th>إجراء</th></tr>${rows.map(r => `<tr><td>${r.requestNo}</td><td>${r.firstName} ${r.lastName}</td><td>${r.phone}</td><td>${r.membershipType}</td><td>${r.status}</td><td><button class="mini" onclick="approveReq('${r.requestNo}')">قبول</button> <button class="mini danger" onclick="rejectReq('${r.requestNo}')">رفض</button></td></tr>`).join('')}</table>`; }
-function membersTable(rows, simple) { if(!rows.length) return '<p>لا يوجد أعضاء</p>'; return `<table><tr><th>رقم العضوية</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>الحالة</th>${!simple?'<th>طباعة</th>':''}</tr>${rows.map(m => `<tr><td>${m.memberId}</td><td>${m.firstName} ${m.lastName}</td><td>${m.phone}</td><td>${m.membershipType}</td><td>${m.status}</td>${!simple?`<td><button class="mini" onclick="printCard('${m.memberId}')">🖨️ طباعة البطاقة</button></td>`:''}</tr>`).join('')}</table>`; }
-function requestsTableHtml(rows) { if(!rows.length) return '<p>لا توجد طلبات</p>'; return `<table><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>تاريخ الطلب</th><th>الحالة</th><th>صور</th><th>إجراء</th></tr>${rows.map(r => `<tr><td>${r.requestNo}</td><td>${r.firstName} ${r.lastName}</td><td>${r.phone}</td><td>${r.membershipType}</td><td>${r.createdAt}</td><td>${r.status}</td><td><a href="${r.photoUrl}" target="_blank">📷</a> <a href="${r.docFrontUrl}" target="_blank">🪪</a></td><td>${r.status === 'قيد الانتظار' && currentAdmin?.role !== 'viewer' ? `<button class="mini" onclick="approveReq('${r.requestNo}')">قبول</button> <button class="mini danger" onclick="rejectReq('${r.requestNo}')">رفض</button>` : ''}</td></tr>`).join('')}</table>`; }
-function loadRequests() { if(!currentReport) return; document.getElementById('requestsTable').innerHTML = requestsTableHtml(currentReport.requests); }
-function loadMembers() { if(!currentReport) return; document.getElementById('membersTable').innerHTML = membersTable(currentReport.members, false); }
-function approveReq(no) { if(!confirm('تأكيد قبول الطلب؟')) return; google.script.run.withSuccessHandler(r => { loadReport(true); }).withFailureHandler(e => alert(e.message)).approveMembershipRequest(no, sessionToken); }
-function rejectReq(no) { if(!confirm('رفض الطلب؟')) return; google.script.run.withSuccessHandler(r => { loadReport(true); }).withFailureHandler(e => alert(e.message)).rejectMembershipRequest(no, sessionToken); }
-function printCard(memberId) { google.script.run.withSuccessHandler(m => { const win = window.open('', '_blank'); win.document.write(`
-<html dir="rtl"><head><title>بطاقة العضوية</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet"><style>body{font-family:Cairo;padding:20px;background:#eee}.card{max-width:400px;margin:auto;background:white;border-radius:24px;overflow:hidden;box-shadow:0 12px 30px #0002;direction:rtl}.header{background:linear-gradient(135deg,#2986B0,#1d5f7d);color:white;padding:20px;text-align:center}.header img{width:80px;height:80px;border-radius:50%;border:3px solid white;margin-bottom:10px}.content{padding:20px}.row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0}.label{font-weight:700;color:#2986B0}.qrcode{text-align:center;padding:15px;background:#f5f5f5;margin-top:15px;border-radius:12px}.footer{background:#f9f9f9;padding:12px;text-align:center;font-size:12px;color:#777}@media print{body{background:white}.card{box-shadow:none}}</style></head><body><div class="card"><div class="header"><img src="${currentReport.identity.logoUrl}"><h2>بطاقة العضوية</h2><h3>${m.memberId}</h3></div><div class="content"><div class="row"><span class="label">الاسم:</span><span>${m.firstName} ${m.lastName}</span></div><div class="row"><span class="label">نوع العضوية:</span><span>${m.membershipType}</span></div><div class="row"><span class="label">تاريخ التسجيل:</span><span>${m.createdAt}</span></div><div class="row"><span class="label">الحالة:</span><span>${m.status === 'نشط' ? '✔️ نشط' : '⛔ موقوف'}</span></div><div class="qrcode">🔹 رمز QR للتحقق 🔹<br><small>${m.memberId}</small></div></div><div class="footer">جمعية الجواهر بقمار - نظام العضوية الرسمي</div></div><script>window.print()<\/script></body></html>`); }).withFailureHandler(e => alert(e.message)).getMemberCardData(memberId, sessionToken); }
-function loadAdmins() { if(currentAdmin?.role !== 'super') return; google.script.run.withSuccessHandler(list => { adminsTable.innerHTML = `<table><tr><th>الاسم</th><th>الدخول</th><th>الصلاحية</th><th>نشط</th><th>إجراء</th></tr>${list.map(a => `<tr><td><input id="n_${a.id}" value="${a.name}"></td><td><input id="u_${a.id}" value="${a.username}"></td><td><select id="r_${a.id}"><option ${a.role==='super'?'selected':''}>super</option><option ${a.role==='editor'?'selected':''}>editor</option><option ${a.role==='viewer'?'selected':''}>viewer</option></select></td><td><select id="a_${a.id}"><option ${a.active?'selected':''}>true</option><option ${!a.active?'selected':''}>false</option></select><input id="p_${a.id}" placeholder="pass"></td><td><button onclick="saveAdmin('${a.id}')">حفظ</button> <button onclick="deleteAdmin('${a.id}')">حذف</button></td></tr>`).join('')}</table>`; }).withFailureHandler(e => setMsg('adminMsg', e.message, 'error')).listAdmins(sessionToken); }
-function addAdminUser() { google.script.run.withSuccessHandler(() => loadAdmins()).withFailureHandler(e => setMsg('adminMsg', e.message, 'error')).addAdmin({ name: adminName.value, username: adminUsername.value, password: adminPassword.value, role: adminRole.value }, sessionToken); }
-function saveAdmin(id) { google.script.run.withSuccessHandler(res => { if(res.currentAdmin) currentAdmin = res.currentAdmin; loadAdmins(); }).withFailureHandler(e => alert(e.message)).updateAdmin({ id, name: document.getElementById('n_'+id).value, username: document.getElementById('u_'+id).value, password: document.getElementById('p_'+id).value, role: document.getElementById('r_'+id).value, active: document.getElementById('a_'+id).value === 'true' }, sessionToken); }
-function deleteAdmin(id) { if(confirm('حذف؟')) google.script.run.withSuccessHandler(() => loadAdmins()).withFailureHandler(e => alert(e.message)).deleteAdmin(id, sessionToken); }
-window.onload = () => { if(APPS_SCRIPT_WEB_APP_URL !== 'ضع_رابط_التطبيق_هنا' && sessionToken && currentAdmin) { loginScreen.style.display = 'none'; appShell.style.display = 'block'; applyRoleUI(); loadReport(true); } };
+// ================== إعدادات API ==================
+const APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbys0fwsOQoSYi49aUY8wSTnxcW9uJefZJxNyKC1YwXIVBaloV-dxTGSMiJ7SZYfUPTdSA/exec'; // ⚠️ ضع رابط النشر الجديد هنا
+let sessionToken = localStorage.getItem('membership_session_token') || '';
+let currentAdmin = JSON.parse(localStorage.getItem('membership_current_admin') || 'null');
+let currentReport = null;
+
+// دالة موحدة لاستدعاء API
+async function callAPI(action, args = {}) {
+    if (!APPS_SCRIPT_WEB_APP_URL || APPS_SCRIPT_WEB_APP_URL.includes('ضع_رابط')) {
+        throw new Error('الرجاء وضع رابط Google Apps Script Web App الصحيح');
+    }
+    const payload = { action, args, sessionToken, admin: currentAdmin };
+    const response = await fetch(APPS_SCRIPT_WEB_APP_URL, {
+        method: 'POST',
+       headers: { 'Content-Type': 'text/plain;charset=utf-8' }, mode: 'cors',
+        body: JSON.stringify(payload)
+    });
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const json = await response.json();
+    if (!json.ok) throw new Error(json.error || 'خطأ غير معروف من الخادم');
+    return json.data;
+}
+
+// دوال مساعدة
+function setMsg(id, text, type) { 
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = `<div class="${type}">${text}</div>`;
+}
+function esc(s) { return String(s || '').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+function showTab(id, btn) { 
+    if (id === 'admins' && currentAdmin?.role !== 'super') { alert('غير مسموح'); return; }
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active')); 
+    document.getElementById(id).classList.add('active'); 
+    document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('current')); 
+    if (btn) btn.classList.add('current'); 
+}
+
+// تسجيل الدخول
+async function login() {
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    setMsg('loginMsg', 'جاري تسجيل الدخول...', 'ok');
+    try {
+        const res = await callAPI('loginAdmin', { username, password });
+        sessionToken = res.token;
+        currentAdmin = res.admin;
+        localStorage.setItem('membership_session_token', sessionToken);
+        localStorage.setItem('membership_current_admin', JSON.stringify(currentAdmin));
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('appShell').style.display = 'block';
+        applyRoleUI();
+        await loadReport(true);
+    } catch(e) {
+        setMsg('loginMsg', 'خطأ: ' + e.message, 'error');
+    }
+}
+
+function logout() {
+    localStorage.removeItem('membership_session_token');
+    localStorage.removeItem('membership_current_admin');
+    location.reload();
+}
+
+function applyRoleUI() {
+    document.getElementById('adminBadge').textContent = currentAdmin.name + ' | ' + currentAdmin.roleLabel;
+    document.querySelectorAll('.super-only').forEach(x => x.style.display = currentAdmin.role === 'super' ? 'block' : 'none');
+}
+
+// تحميل التقرير الرئيسي
+async function loadReport(manual) {
+    if(manual) document.getElementById('syncStatus').textContent = 'جاري التحميل...';
+    try {
+        const report = await callAPI('getMembershipReport');
+        renderReport(report);
+        if(manual) document.getElementById('syncStatus').textContent = 'تم التحديث بنجاح';
+    } catch(e) {
+        document.getElementById('syncStatus').textContent = 'خطأ: ' + e.message;
+        console.error(e);
+    }
+}
+
+function renderReport(r) {
+    currentReport = r;
+    document.getElementById('syncStatus').textContent = new Date().toLocaleString('ar-DZ');
+    document.querySelectorAll('.brand-logo').forEach(i => i.src = r.identity.logoUrl);
+    document.getElementById('totalMembers').textContent = r.totals.total;
+    document.getElementById('activeMembers').textContent = r.totals.active;
+    document.getElementById('pendingRequests').textContent = r.pendingRequests.length;
+    document.getElementById('totalValue').textContent = r.totals.value.toLocaleString() + ' دج';
+    document.getElementById('pendingTable').innerHTML = pendingRequestsTable(r.pendingRequests.slice(0,5));
+    document.getElementById('recentMembersTable').innerHTML = membersTable(r.members.slice(0,5), true);
+    loadRequests();
+    loadMembers();
+}
+
+function pendingRequestsTable(rows) {
+    if(!rows.length) return '<p>لا توجد طلبات</p>';
+    return `<table><thead><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>${rows.map(r => `<tr>
+        <td>${esc(r.requestNo)}</td>
+        <td>${esc(r.firstName)} ${esc(r.lastName)}</td>
+        <td>${esc(r.phone)}</td>
+        <td>${esc(r.membershipType)}</td>
+        <td>${esc(r.status)}</td>
+        <td><button class="mini" onclick="approveReq('${esc(r.requestNo)}')">قبول</button> <button class="mini danger" onclick="rejectReq('${esc(r.requestNo)}')">رفض</button></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function membersTable(rows, simple) {
+    if(!rows.length) return '<p>لا يوجد أعضاء</p>';
+    return `<table><thead><tr><th>رقم العضوية</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>الحالة</th>${!simple ? '<th>طباعة</th>' : ''}</tr></thead><tbody>${rows.map(m => `<tr>
+        <td>${esc(m.memberId)}</td>
+        <td>${esc(m.firstName)} ${esc(m.lastName)}</td>
+        <td>${esc(m.phone)}</td>
+        <td>${esc(m.membershipType)}</td>
+        <td>${esc(m.status)}</td>
+        ${!simple ? `<td><button class="mini" onclick="printCard('${esc(m.memberId)}')">🖨️ طباعة البطاقة</button></td>` : ''}
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function requestsTableHtml(rows) {
+    if(!rows.length) return '<p>لا توجد طلبات</p>';
+    return `<table><thead><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>تاريخ الطلب</th><th>الحالة</th><th>صور</th><th>إجراء</th></tr></thead><tbody>${rows.map(r => `<tr>
+        <td>${esc(r.requestNo)}</td>
+        <td>${esc(r.firstName)} ${esc(r.lastName)}</td>
+        <td>${esc(r.phone)}</td>
+        <td>${esc(r.membershipType)}</td>
+        <td>${esc(r.createdAt)}</td>
+        <td>${esc(r.status)}</td>
+        <td><a href="${esc(r.photoUrl)}" target="_blank">📷</a> <a href="${esc(r.docFrontUrl)}" target="_blank">🪪</a></td>
+        <td>${r.status === 'قيد الانتظار' && currentAdmin?.role !== 'viewer' ? `<button class="mini" onclick="approveReq('${esc(r.requestNo)}')">قبول</button> <button class="mini danger" onclick="rejectReq('${esc(r.requestNo)}')">رفض</button>` : ''}</td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+function loadRequests() { 
+    if(!currentReport) return; 
+    document.getElementById('requestsTable').innerHTML = requestsTableHtml(currentReport.requests); 
+}
+
+function loadMembers() { 
+    if(!currentReport) return; 
+    document.getElementById('membersTable').innerHTML = membersTable(currentReport.members, false); 
+}
+
+async function approveReq(no) { 
+    if(!confirm('تأكيد قبول الطلب؟')) return; 
+    try {
+        await callAPI('approveMembershipRequest', { requestNo: no });
+        await loadReport(true);
+    } catch(e) { alert(e.message); }
+}
+
+async function rejectReq(no) { 
+    if(!confirm('رفض الطلب؟')) return; 
+    try {
+        await callAPI('rejectMembershipRequest', { requestNo: no });
+        await loadReport(true);
+    } catch(e) { alert(e.message); }
+}
+
+async function printCard(memberId) { 
+    try {
+        const m = await callAPI('getMemberCardData', { memberId });
+        const win = window.open('', '_blank');
+        win.document.write(`
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <title>بطاقة العضوية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body{font-family:Cairo;padding:20px;background:#eee}
+        .card{max-width:400px;margin:auto;background:white;border-radius:24px;overflow:hidden;box-shadow:0 12px 30px #0002;direction:rtl}
+        .header{background:linear-gradient(135deg,#2986B0,#1d5f7d);color:white;padding:20px;text-align:center}
+        .header img{width:80px;height:80px;border-radius:50%;border:3px solid white;margin-bottom:10px}
+        .content{padding:20px}
+        .row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0}
+        .label{font-weight:700;color:#2986B0}
+        .qrcode{text-align:center;padding:15px;background:#f5f5f5;margin-top:15px;border-radius:12px}
+        .footer{background:#f9f9f9;padding:12px;text-align:center;font-size:12px;color:#777}
+        @media print{body{background:white}.card{box-shadow:none}}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <img src="${currentReport?.identity?.logoUrl || ''}">
+            <h2>بطاقة العضوية</h2>
+            <h3>${esc(m.memberId)}</h3>
+        </div>
+        <div class="content">
+            <div class="row"><span class="label">الاسم:</span><span>${esc(m.firstName)} ${esc(m.lastName)}</span></div>
+            <div class="row"><span class="label">نوع العضوية:</span><span>${esc(m.membershipType)}</span></div>
+            <div class="row"><span class="label">تاريخ التسجيل:</span><span>${esc(m.createdAt)}</span></div>
+            <div class="row"><span class="label">الحالة:</span><span>${m.status === 'نشط' ? '✔️ نشط' : '⛔ موقوف'}</span></div>
+            <div class="qrcode">🔹 رمز QR للتحقق 🔹<br><small>${esc(m.memberId)}</small></div>
+        </div>
+        <div class="footer">جمعية الجواهر بقمار - نظام العضوية الرسمي</div>
+    </div>
+    <script>window.print()<\/script>
+</body>
+</html>`);
+        win.document.close();
+    } catch(e) { alert(e.message); }
+}
+
+// إدارة الأدمن
+async function loadAdmins() { 
+    if(currentAdmin?.role !== 'super') return; 
+    try {
+        const list = await callAPI('listAdmins');
+        document.getElementById('adminsTable').innerHTML = `
+        <table><thead><tr><th>الاسم</th><th>الدخول</th><th>الصلاحية</th><th>نشط</th><th>كلمة مرور جديدة</th><th>إجراء</th></tr></thead><tbody>
+        ${list.map(a => `<tr>
+            <td><input id="n_${a.id}" value="${esc(a.name)}"></td>
+            <td><input id="u_${a.id}" value="${esc(a.username)}"></td>
+            <td><select id="r_${a.id}"><option ${a.role==='super'?'selected':''}>super</option><option ${a.role==='editor'?'selected':''}>editor</option><option ${a.role==='viewer'?'selected':''}>viewer</option></select></td>
+            <td><select id="a_${a.id}"><option ${a.active?'selected':''}>true</option><option ${!a.active?'selected':''}>false</option></select></td>
+            <td><input id="p_${a.id}" placeholder="كلمة مرور جديدة"></td>
+            <td><button class="mini" onclick="saveAdmin('${a.id}')">حفظ</button> <button class="mini danger" onclick="deleteAdmin('${a.id}')">حذف</button></td>
+        </tr>`).join('')}
+        </tbody></table>`;
+    } catch(e) { setMsg('adminMsg', e.message, 'error'); }
+}
+
+async function addAdminUser() { 
+    try {
+        await callAPI('addAdmin', { 
+            name: document.getElementById('adminName').value, 
+            username: document.getElementById('adminUsername').value, 
+            password: document.getElementById('adminPassword').value, 
+            role: document.getElementById('adminRole').value 
+        });
+        setMsg('adminMsg', 'تمت الإضافة', 'ok');
+        document.getElementById('adminName').value = '';
+        document.getElementById('adminUsername').value = '';
+        document.getElementById('adminPassword').value = '';
+        await loadAdmins();
+    } catch(e) { setMsg('adminMsg', e.message, 'error'); }
+}
+
+async function saveAdmin(id) { 
+    try {
+        const res = await callAPI('updateAdmin', { 
+            id, 
+            name: document.getElementById('n_'+id).value, 
+            username: document.getElementById('u_'+id).value, 
+            password: document.getElementById('p_'+id).value, 
+            role: document.getElementById('r_'+id).value, 
+            active: document.getElementById('a_'+id).value === 'true' 
+        });
+        if(res.currentAdmin) currentAdmin = res.currentAdmin;
+        await loadAdmins();
+    } catch(e) { alert(e.message); }
+}
+
+async function deleteAdmin(id) { 
+    if(!confirm('حذف؟')) return; 
+    try {
+        await callAPI('deleteAdmin', { id });
+        await loadAdmins();
+    } catch(e) { alert(e.message); }
+}
+
+// بدء التشغيل
+window.onload = () => { 
+    if(APPS_SCRIPT_WEB_APP_URL !== 'ضع_رابط_التطبيق_هنا' && sessionToken && currentAdmin) { 
+        document.getElementById('loginScreen').style.display = 'none'; 
+        document.getElementById('appShell').style.display = 'block'; 
+        applyRoleUI(); 
+        loadReport(true); 
+    } 
+};
 </script>
 </body>
 </html>
