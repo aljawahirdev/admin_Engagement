@@ -1,301 +1,676 @@
 
 
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    /* جميع الأنماط موجودة كما هي - لم يتم تغييرها */
-    :root{--primary:#2986B0;--primary-light:#7ED6D1;--accent:#F59E0B;--dark:#222;--bg:#F5F5F5;--muted:#64748b;--border:#e5e7eb;--danger:#b91c1c;--success:#166534}*{box-sizing:border-box;font-family:Cairo,Tahoma,Arial,sans-serif}body{margin:0;background:var(--bg);color:var(--dark)}.sidebar{position:fixed;right:0;top:0;width:280px;height:100vh;background:linear-gradient(180deg,#2986B0,#1d5f7d 65%,#222);color:#fff;padding:22px;overflow-y:auto;box-shadow:0 0 25px #0002}.logo{width:112px;height:112px;object-fit:cover;border-radius:50%;display:block;margin:0 auto 16px;border:4px solid #ffffff40;background:white}.sidebar h2{text-align:center;margin:0 0 6px;font-size:22px;font-weight:800}.subtitle{text-align:center;color:#ffffffd0;font-size:13px;margin-bottom:18px}.admin-badge{background:#ffffff1a;border:1px solid #ffffff26;border-radius:14px;padding:10px;margin-bottom:14px;text-align:center}.sidebar button{width:100%;padding:13px 15px;margin-bottom:10px;background:#ffffff17;color:white;border:1px solid #ffffff20;border-radius:15px;cursor:pointer;font-size:15px;font-weight:800;text-align:right}.sidebar button:hover,.sidebar button.current{background:var(--accent);transform:translateX(-4px)}.main{margin-right:300px;padding:26px}.topbar{background:#fff;padding:18px 22px;border-radius:22px;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;gap:16px;box-shadow:0 8px 22px #0000000f}.topbar h1{margin:0;font-size:26px}.status{color:var(--muted);font-size:12px;margin-top:4px}.content{display:none;animation:fade .25s ease}.active{display:block}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:22px}.card,.box{background:#fff;border-radius:22px;padding:22px;box-shadow:0 8px 22px #0000000f;border:1px solid #2986b014;margin-bottom:22px}.card{border-top:5px solid var(--primary)}.card h3{color:var(--muted);font-size:14px;margin:0 0 9px}.value{font-size:27px;font-weight:800;color:var(--accent)}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}.submit,.print-btn{width:100%;padding:14px;margin-top:15px;border:0;border-radius:14px;background:linear-gradient(135deg,#2986B0,#7ED6D1);color:#fff;font-size:16px;font-weight:800;cursor:pointer}.secondary{background:linear-gradient(135deg,#F59E0B,#A86417)}.danger{background:#fee2e2!important;color:var(--danger)!important}.actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:12px 0}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}th,td{padding:12px;border-bottom:1px solid var(--border);text-align:center;font-size:14px}th{background:#2986B0;color:white}tr:nth-child(even){background:#f8fafc}.ok{background:#dcfce7;color:#166534;padding:10px;border-radius:12px;margin-top:12px}.error{background:#fee2e2;color:#b91c1c;padding:10px;border-radius:12px;margin-top:12px}.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2986B0,#7ED6D1)}.login-card{width:min(440px,92vw);background:white;border-radius:26px;padding:28px;box-shadow:0 22px 55px #0003;text-align:center}.app-shell{display:none}.brand-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.brand-header img{width:70px;height:70px;border-radius:50%}.brand-title{font-weight:800;font-size:20px}.brand-subtitle{color:#64748b}.mini{padding:8px 12px;border:0;border-radius:10px;color:white;background:var(--primary);font-weight:800;cursor:pointer}.search-bar{background:#fff;border-radius:22px;padding:12px 20px;margin-bottom:20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;box-shadow:0 4px 12px #00000008}.search-bar input{flex:2;min-width:200px;margin:0}.search-bar select{flex:1;min-width:150px;margin:0}@media print{.sidebar,.topbar,.no-print{display:none!important}.main{margin:0;padding:0}}@media(max-width:800px){.sidebar{position:relative;width:100%;height:auto}.main{margin-right:0;padding:16px}.topbar{display:block}}.card-badge{background:white;border-radius:16px;padding:10px;text-align:center;box-shadow:0 4px 12px #0001;margin:10px 0}.card-badge img{max-width:100px;margin:auto}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم | جمعية الجواهر بقمار</title>
+<link rel="icon" type="image/png" href="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=256">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#299E9D;--primary-dark:#1F7E7D;--accent:#7ED6D1;--gold:#F59E0B;--gold-brown:#A86417;--dark:#222222;--bg:#F5F5F5;--card:#fff;--text:#222222;--muted:#667085;--danger:#b91c1c;--success:#059669;--warning:#A86417;--border:rgba(41,158,157,.18);--shadow:0 18px 45px rgba(41,158,157,.16);--radius:22px}*{box-sizing:border-box;margin:0;padding:0}body{font-family:"Cairo",sans-serif;background:radial-gradient(circle at top right,rgba(126,214,209,.2),transparent 25%),linear-gradient(180deg,#F5F5F5,#FFFFFF);color:var(--text);min-height:100vh}button,input,select,textarea{font-family:inherit}.hidden{display:none!important}.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(460px,100%);background:#fff;border:1px solid var(--border);border-radius:32px;box-shadow:var(--shadow);padding:32px;text-align:center}.logo{width:86px;height:86px;border-radius:24px;object-fit:cover;box-shadow:var(--shadow);background:white}.login-card h1{font-size:24px;color:var(--primary-dark);margin:14px 0 6px}.login-card p{color:var(--muted);line-height:1.8}.field{display:grid;gap:7px;margin-top:14px;text-align:right}.field label{font-size:13px;font-weight:800;color:var(--primary-dark)}input,select,textarea{width:100%;padding:13px 15px;border:2px solid var(--border);border-radius:16px;background:#fff;outline:none;color:var(--text);transition:.2s}input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(126,214,209,.2)}textarea{min-height:90px;resize:vertical}.btn{border:none;border-radius:16px;padding:12px 16px;font-weight:800;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-2px)}.btn:disabled{opacity:.65;cursor:not-allowed;transform:none}.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;box-shadow:var(--shadow)}.btn-soft{background:rgba(41,158,157,.12);color:var(--primary-dark)}.btn-dark{background:#222222;color:#fff}.btn-gold{background:rgba(245,158,11,.16);color:#92400e}.btn-danger{background:rgba(220,38,38,.12);color:#b91c1c}.btn-success{background:rgba(16,185,129,.13);color:#047857}.btn-small{padding:8px 10px;border-radius:12px;font-size:12px}.msg{margin-top:12px;padding:12px;border-radius:14px;display:none;line-height:1.7}.msg.error{display:block;background:rgba(220,38,38,.12);color:var(--danger)}.msg.success{display:block;background:rgba(16,185,129,.12);color:var(--success)}.app{display:grid;grid-template-columns:290px 1fr;min-height:100vh}.sidebar{background:#222222;color:#fff;padding:20px;position:sticky;top:0;height:100vh;overflow:auto}.brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}.brand img{width:58px;height:58px;border-radius:18px;object-fit:cover;background:#fff}.brand h2{font-size:16px;line-height:1.5}.brand span{display:block;font-size:11px;color:rgba(255,255,255,.7)}.nav{display:grid;gap:9px}.nav button{width:100%;justify-content:flex-start;background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.08)}.nav button.active,.nav button:hover{background:rgba(126,214,209,.18);border-color:rgba(126,214,209,.35);transform:none}.side-info{margin-top:20px;padding:14px;border-radius:18px;background:rgba(255,255,255,.06);line-height:1.8;color:rgba(255,255,255,.78);font-size:13px}.main{padding:24px;overflow:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:20px}.top h1{color:var(--primary-dark);font-size:28px}.userbox{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);padding:10px 14px;border-radius:18px;box-shadow:0 10px 25px rgba(41,158,157,.08)}.grid{display:grid;gap:16px}.cards{grid-template-columns:repeat(5,minmax(150px,1fr))}.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 12px 30px rgba(41,158,157,.08);padding:18px}.stat b{font-size:30px;color:var(--primary-dark);display:block}.stat span{color:var(--muted);font-size:13px}.section{display:none}.section.active{display:block}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}.section-title h2{font-size:22px;color:var(--primary-dark)}.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.form-grid .full{grid-column:1/-1}.form-grid .two{grid-column:span 2}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}.search{max-width:360px}.table-wrap{overflow:auto;border-radius:20px;border:1px solid var(--border);background:#fff}table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:right;padding:12px;border-bottom:1px solid rgba(41,158,157,.10);font-size:13px;vertical-align:middle}th{background:rgba(41,158,157,.11);color:var(--primary-dark);font-weight:800;position:sticky;top:0}tr:hover td{background:#fbffff}.badge{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.badge.pending{background:rgba(245,158,11,.16);color:#92400e}.badge.active,.badge.ok{background:rgba(16,185,129,.13);color:#047857}.badge.no{background:rgba(220,38,38,.12);color:#b91c1c}.badge.off{background:#eee;color:#555}.actions{display:flex;gap:7px;flex-wrap:wrap}.modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;z-index:9999;padding:18px}.modal.show{display:flex}.modal-card{background:#fff;width:min(1120px,100%);max-height:92vh;overflow:auto;border-radius:28px;padding:24px;position:relative}.close{position:absolute;left:18px;top:18px;width:40px;height:40px;border:none;border-radius:50%;background:#f2f4f7;cursor:pointer;font-size:20px}.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:16px}.detail{border:1px solid var(--border);border-radius:14px;padding:10px}.detail b{display:block;color:var(--primary-dark);font-size:12px;margin-bottom:5px}.photo{width:74px;height:74px;border-radius:16px;object-fit:cover;background:#f2f4f7}#printArea{display:none}.empty{padding:28px;text-align:center;color:var(--muted)}@media(max-width:1100px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.cards{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.form-grid .two{grid-column:1/-1}.main{padding:16px}}@media(max-width:650px){.cards{grid-template-columns:1fr}.top h1{font-size:22px}.card{padding:14px}}@media print{body>*:not(#printArea){display:none!important}#printArea{display:block!important}body{background:#fff}.print-doc{font-family:"Cairo",Arial,sans-serif;width:190mm;min-height:270mm;margin:0 auto;padding:12mm;background:#fff;color:#222222}.doc-border{border:2px solid #1F7E7D;border-radius:10px;padding:12mm;min-height:245mm}.doc-head{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid #299E9D;padding-bottom:10px;margin-bottom:18px}.doc-logo{width:78px;height:78px;border-radius:18px;object-fit:cover}.doc-title{text-align:center}.doc-title h1{font-size:23px;color:#1F7E7D}.doc-title p{font-size:12px;color:#555}.id-card{width:86mm;height:54mm;border:2px solid #1F7E7D;border-radius:18px;padding:7mm;margin:0 auto;background:linear-gradient(135deg,#F5F5F5,#fff);position:relative;overflow:hidden}.id-card:before{content:"";position:absolute;inset:auto -25mm -35mm auto;width:80mm;height:80mm;background:rgba(126,214,209,.22);border-radius:50%}.id-head{display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(41,158,157,.35);padding-bottom:5px}.id-head img{width:15mm;height:15mm;border-radius:5mm;object-fit:cover}.id-head h2{font-size:12px;color:#1F7E7D}.id-body{display:grid;grid-template-columns:22mm 1fr 22mm;gap:6px;align-items:center;margin-top:6px;position:relative;z-index:1}.id-photo{width:22mm;height:27mm;border-radius:5mm;object-fit:cover;border:1px solid #299E9D}.id-info b{font-size:9px;color:#1F7E7D}.id-info div{font-size:10px;margin:2px 0}.id-qr{width:21mm;height:21mm}.doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.doc-field{border:1px solid rgba(41,158,157,.25);padding:10px;border-radius:12px}.doc-field b{display:block;font-size:12px;color:#1F7E7D;margin-bottom:4px}.signs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:35px}.sign{text-align:center;border-top:1px solid #222222;padding-top:8px}}
+
+/* ===== بطاقة العضو - معاينة / طباعة / تحميل صورة ===== */
+.member-card-modal-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding-inline-start:44px}.member-card-modal-title h2{color:var(--primary-dark);font-size:22px}.member-card-note{background:#F5F5F5;color:#1F7E7D;border:1px solid rgba(41,158,157,.14);border-radius:14px;padding:10px 14px;margin:10px 0 16px;text-align:center;font-weight:700}.member-card-stage{display:flex;justify-content:center;align-items:center;overflow:auto;padding:10px 4px 16px}.member-card-actions{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:10px}.member-card-warning{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px auto 0;width:fit-content;max-width:100%;padding:10px 16px;border-radius:12px;background:#fff6d8;color:#9a6a00;font-size:12px;font-weight:800}.member-card-loading{padding:28px;text-align:center;color:var(--primary-dark);font-weight:900}.member-card-print-sheet{width:86mm;height:54mm;display:flex;align-items:center;justify-content:center;background:#fff;margin:0 auto;overflow:hidden}.aj-card-stamp{display:none!important}
+.aj-member-card{position:relative;width:86em;height:54em;font-size:10px;direction:rtl;unicode-bidi:isolate;isolation:isolate;font-family:"Cairo",Arial,sans-serif;background:#fff;border:.42em solid #299E9D;border-radius:3.15em;overflow:hidden;box-shadow:none;color:#222222;flex:0 0 auto}.aj-member-card *{box-sizing:border-box}.aj-member-card,.aj-member-card *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}.aj-member-card:before{content:"";position:absolute;inset:.65em;border:.12em solid rgba(41,158,157,.55);border-radius:2.55em;pointer-events:none;z-index:8}.aj-member-card:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1}.aj-card-bg{position:absolute;left:50%;top:50%;width:38%;height:38%;transform:translate(-50%,-50%);object-fit:contain;opacity:.08;pointer-events:none;z-index:1}.aj-card-corner{display:none!important}.aj-card-logo-box{position:absolute;top:2.2em;width:16.8em;text-align:center;z-index:3}.aj-card-logo-box.left{left:4.4em}.aj-card-logo-box.right{right:5.3em}.aj-card-logo{width:12.6em;height:10.8em;object-fit:contain;display:block;margin:0 auto}.aj-card-logo-text{margin-top:.1em;color:#222222;font-weight:900;font-size:1.25em;line-height:1.65;white-space:nowrap}.aj-card-title{direction:rtl;unicode-bidi:plaintext;position:absolute;top:3.05em;left:21.2em;right:21.2em;text-align:center;z-index:3}.aj-card-title h3{margin:0;color:#222222;font-size:3.35em;line-height:1.15;font-weight:900;letter-spacing:.01em}.aj-card-title p{margin:.55em 0 0;color:#222222;font-size:2.05em;line-height:1.2;font-weight:900}.aj-card-pill{direction:rtl;unicode-bidi:plaintext;position:absolute;top:15.15em;left:25.7em;width:34.6em;height:7.25em;border-radius:1.25em;background:#fff;border:.32em solid #A86417;display:flex;align-items:center;justify-content:center;color:#299E9D;font-weight:900;font-size:1em;line-height:1;box-shadow:inset 0 0 0 .22em rgba(168,100,23,.45),0 .15em .2em rgba(0,0,0,.06);z-index:2}.aj-card-pill span{font-size:4.1em;letter-spacing:.01em}.aj-validity{position:absolute;left:5.15em;top:19.55em;width:21.8em;height:3.9em;display:flex;align-items:center;justify-content:center;gap:.55em;direction:rtl;unicode-bidi:isolate;text-align:center;font-size:1em;font-weight:900;color:#299E9D;z-index:5;background:rgba(255,255,255,.98);border:.22em solid rgba(41,158,157,.55);border-radius:1.05em;box-shadow:0 .12em .3em rgba(0,0,0,.05)}.aj-validity .aj-validity-icon{font-size:2.15em;line-height:1;color:#299E9D}.aj-validity .aj-validity-text{font-size:1.55em;line-height:1;white-space:nowrap;direction:rtl;unicode-bidi:isolate}.aj-card-photo{position:absolute;left:3.75em;top:24.3em;width:21.2em;height:24.7em;object-fit:cover;border:.28em solid #299E9D;border-radius:2.05em;background:#eef6f6;z-index:2}.aj-card-qr{position:absolute;top:20.35em;right:8.15em;width:12.1em;height:12.1em;object-fit:contain;z-index:3}.aj-card-fields{position:absolute;right:6.15em;top:33em;width:43.5em;z-index:3}.aj-card-row{display:grid;grid-template-columns:17.8em 1fr;align-items:center;gap:1.25em;margin-bottom:1.15em;font-weight:900;direction:rtl}.aj-card-row .k{grid-column:1;color:#299E9D;font-size:1.72em;line-height:1.25;text-align:right;white-space:nowrap;direction:rtl;unicode-bidi:plaintext}.aj-card-row .v{grid-column:2;color:#222222;font-size:1.58em;line-height:1.35;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:rtl;unicode-bidi:plaintext}.aj-card-row.long .k{font-size:1.54em}.aj-card-row.long .v{font-size:1.42em}
+.member-edit-panel{border:1px solid var(--border);border-radius:22px;background:#fff;padding:18px;box-shadow:0 12px 30px rgba(41,158,157,.08)}.member-edit-panel .form-grid{grid-template-columns:repeat(4,1fr)}.member-edit-panel textarea{min-height:76px}.member-edit-section-title{grid-column:1/-1;margin:8px 0 0;padding:10px 12px;border-radius:14px;background:rgba(41,158,157,.10);color:var(--primary-dark);font-weight:900}.member-edit-help{grid-column:1/-1;color:var(--muted);font-size:12px;line-height:1.8;margin-top:2px}.member-edit-panel input[readonly]{background:#f8fafc;color:#667085}
+@media(max-width:720px){.member-card-modal-title{align-items:flex-start;flex-direction:column}.member-card-stage{justify-content:flex-start}.aj-member-card{font-size:7.2px}.modal-card{padding:18px}}@media(max-width:460px){.aj-member-card{font-size:5.8px}.member-card-actions .btn{width:100%}}@media print{body.printing-member-card #printArea{display:flex!important;align-items:center;justify-content:center;width:86mm;height:54mm;margin:0 auto;padding:0;background:#fff}body.printing-member-card #printArea .member-card-print-sheet{width:86mm;height:54mm;margin:0;padding:0}body.printing-member-card #printArea .aj-member-card{font-size:1mm!important;width:86em!important;height:54em!important;box-shadow:none!important;margin:0!important;border-radius:3.15em!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body.printing-member-card #printArea .member-card-actions,body.printing-member-card #printArea .member-card-note,body.printing-member-card #printArea .member-card-warning{display:none!important}}
+
+/* ===== Al Jawahir visual identity ===== */
+body{font-family:"Cairo",Arial,sans-serif;background:radial-gradient(circle at top right,rgba(126,214,209,.22),transparent 25%),linear-gradient(180deg,#F5F5F5,#FFFFFF)!important;}
+h1,h2,h3,h4,.brand h2,.section-title h2,.login-card h1,.aj-card-title h3,.aj-card-pill span{font-family:"Cairo",Arial,sans-serif;font-weight:800;}
+:lang(en),.en{font-family:"Lora",Georgia,serif;}
+.btn-primary{background:linear-gradient(135deg,#299E9D,#1F7E7D)!important;}
+.btn-dark,.sidebar{background:#222222!important;}
+.btn-gold{background:rgba(245,158,11,.16)!important;color:#A86417!important;}
+.aj-member-card{border-color:#299E9D!important;color:#222222!important;background:linear-gradient(135deg,#F5F5F5 0%,#FFFFFF 55%,rgba(126,214,209,.22) 100%)!important;}
+.aj-member-card:before{border-color:rgba(41,158,157,.55)!important;}
+.aj-card-title h3{color:#222222!important;}
+.aj-card-title p,.aj-card-logo-text{color:#222222!important;}
+.aj-card-pill{border-color:#A86417!important;color:#299E9D!important;}
+.aj-validity,.aj-card-row .k{color:#299E9D!important;}
+.aj-card-photo{border-color:#299E9D!important;background:#F5F5F5!important;}
+
+
+/* ===== Admin permissions + receipt document ===== */
+.admin-permissions-card{border-top:5px solid var(--primary)!important}.admin-only.hidden-by-role{display:none!important}.viewer-disabled{opacity:.5;pointer-events:none}.receipt-stage{display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:8px 0 14px}.receipt-doc{width:190mm;min-height:270mm;background:#fff;color:#222;font-family:"Cairo",Arial,sans-serif;direction:rtl;border:2px solid #299E9D;border-radius:14px;padding:10mm;position:relative;overflow:hidden;box-shadow:0 12px 30px rgba(41,158,157,.12)}.receipt-doc:before{content:"";position:absolute;inset:7mm;border:1px solid rgba(41,158,157,.35);border-radius:10px;pointer-events:none}.receipt-watermark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70mm;height:70mm;object-fit:contain;opacity:.055;z-index:0}.receipt-head{position:relative;z-index:1;display:grid;grid-template-columns:28mm 1fr 28mm;gap:10px;align-items:center;border-bottom:3px solid #299E9D;padding-bottom:8mm;margin-bottom:8mm}.receipt-logo{width:26mm;height:26mm;object-fit:contain;border-radius:8mm;background:#fff}.receipt-title{text-align:center}.receipt-title h1{margin:0;color:#299E9D;font-size:22px;font-weight:900;line-height:1.5}.receipt-title p{margin:2px 0 0;color:#222;font-weight:800}.receipt-pill{display:inline-flex;margin-top:8px;padding:6px 22px;border-radius:999px;background:#F59E0B;color:#fff;font-weight:900}.receipt-meta{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10mm}.receipt-field{border:1px solid rgba(41,158,157,.28);border-radius:12px;padding:9px 12px;background:#fff}.receipt-field b{display:block;color:#1F7E7D;font-size:12px;margin-bottom:3px}.receipt-section-title{position:relative;z-index:1;margin:10px 0;padding:9px 12px;border-radius:12px;background:rgba(41,158,157,.10);color:#1F7E7D;font-weight:900}.receipt-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:8px}.receipt-qr{width:28mm;height:28mm;object-fit:contain}.receipt-signs{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:26mm;margin-top:26mm}.receipt-sign{text-align:center;border-top:1px solid #222;padding-top:8px;font-weight:800}.receipt-note{position:relative;z-index:1;margin-top:10mm;border:1px dashed #A86417;border-radius:12px;padding:10px;color:#555;line-height:1.9}.receipt-actions{display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}@media(max-width:720px){.receipt-doc{width:100%;min-height:auto;padding:16px}.receipt-head,.receipt-meta,.receipt-grid{grid-template-columns:1fr}.receipt-logo{margin:auto}.receipt-signs{gap:20px;margin-top:40px}}@page{size:A4 portrait;margin:0}
+@media print{
+body.printing-receipt{
+ background:#fff!important;
+}
+body.printing-receipt #printArea{display:block!important;width:210mm!important;min-height:297mm!important;margin:0 auto!important;padding:0!important;background:#fff}body.printing-receipt #printArea .receipt-doc{box-shadow:none!important;margin:0 auto;border-radius:10px!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body.printing-receipt #printArea .receipt-actions{display:none!important}}
+
+/* ===== Receipts one-page print/PDF fix ===== */
+.receipt-doc{
+  width:190mm!important;
+  min-height:277mm!important;
+  max-height:277mm!important;
+  padding:7mm!important;
+  overflow:hidden!important;
+}
+.receipt-doc:before{inset:4mm!important}
+.receipt-head{
+  grid-template-columns:22mm 1fr 22mm!important;
+  padding-bottom:4mm!important;
+  margin-bottom:4mm!important;
+  gap:6px!important;
+}
+.receipt-logo{width:21mm!important;height:21mm!important}
+.receipt-title h1{font-size:19px!important;line-height:1.25!important}
+.receipt-title p{font-size:11px!important;margin-top:0!important}
+.receipt-pill{margin-top:4px!important;padding:4px 16px!important;font-size:12px!important}
+.receipt-meta{gap:6px!important;margin-bottom:5mm!important}
+.receipt-grid{gap:6px!important}
+.receipt-field{padding:6px 9px!important;border-radius:9px!important;font-size:12px!important;line-height:1.45!important}
+.receipt-field b{font-size:11px!important;margin-bottom:2px!important}
+.receipt-section-title{margin:6px 0!important;padding:6px 10px!important;border-radius:9px!important;font-size:12px!important}
+.receipt-qr{width:22mm!important;height:22mm!important}
+.receipt-note{margin-top:5mm!important;padding:7px 9px!important;line-height:1.55!important;font-size:12px!important}
+.receipt-signs{gap:18mm!important;margin-top:14mm!important}
+.receipt-sign{padding-top:6px!important;font-size:12px!important}
+@media print{
+  body.printing-receipt #printArea{
+    width:210mm!important;
+    height:297mm!important;
+    min-height:297mm!important;
+    display:flex!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    padding:10mm!important;
+    overflow:hidden!important;
+  }
+  body.printing-receipt #printArea .receipt-doc{
+    width:190mm!important;
+    height:277mm!important;
+    min-height:277mm!important;
+    max-height:277mm!important;
+    padding:7mm!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+  }
+}
+
+</style>
+
+<style id="arabic-card-fix">
+#memberCard,.member-card,.aj-member-card,.aj-card{
+ direction:rtl !important;
+ unicode-bidi:embed !important;
+ font-family:'Cairo',sans-serif !important;
+}
+#memberCard *, .member-card *, .aj-member-card *, .aj-card *{
+ direction:rtl !important;
+ unicode-bidi:embed !important;
+ font-family:'Cairo',sans-serif !important;
+}
+.aj-validity{
+ left:4.2em !important;
+ top:18.6em !important;
+ z-index:20 !important;
+}
+@media print{
+ body{
+   -webkit-print-color-adjust:exact !important;
+   print-color-adjust:exact !important;
+ }
+}
+</style>
+
+
+<style id="aljawahir-dashboard-like-ambulance">
+:root{
+  --primary:#299E9D!important;
+  --primary-light:#7ED6D1!important;
+  --primary-dark:#1F7E7D!important;
+  --accent:#F59E0B!important;
+  --gold:#F59E0B!important;
+  --gold-brown:#A86417!important;
+  --dark:#222222!important;
+  --ink:#222222!important;
+  --bg:#F5F5F5!important;
+  --muted:#596575!important;
+  --border:#e2e8f0!important;
+  --shadow:0 10px 25px -5px rgba(0,0,0,.08),0 8px 10px -6px rgba(0,0,0,.02)!important;
+  --radius:22px!important;
+}
+html,body{direction:rtl;background:var(--bg)!important;color:var(--dark)!important;font-family:'Cairo',sans-serif!important;}
+body{background:radial-gradient(circle at top right,rgba(126,214,209,.20),transparent 28%),linear-gradient(180deg,#F5F5F5,#FFFFFF)!important;}
+.app{grid-template-columns:280px 1fr!important;min-height:100vh;background:transparent!important;}
+.sidebar{background:linear-gradient(180deg,var(--primary),var(--primary-dark))!important;color:#fff!important;padding:24px!important;box-shadow:var(--shadow)!important;border-inline-end:1px solid rgba(255,255,255,.12)!important;}
+.brand{justify-content:center;text-align:center;flex-direction:column;gap:10px;margin-bottom:30px!important;}
+.brand img{width:74px!important;height:74px!important;border-radius:22px!important;background:#fff!important;padding:3px;box-shadow:0 12px 24px rgba(0,0,0,.12)!important;}
+.brand h2{font-size:19px!important;line-height:1.6!important;font-weight:900!important;}
+.brand span{font-size:12px!important;color:var(--primary-light)!important;font-weight:700!important;}
+.nav{gap:10px!important;}
+.nav button{padding:14px 16px!important;border-radius:14px!important;background:rgba(255,255,255,.08)!important;color:#fff!important;border:1px solid rgba(255,255,255,.10)!important;font-weight:800!important;justify-content:flex-start!important;box-shadow:none!important;}
+.nav button.active,.nav button:hover{background:rgba(255,255,255,.20)!important;border-color:rgba(255,255,255,.32)!important;transform:none!important;}
+.side-info{background:rgba(255,255,255,.10)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:18px!important;color:rgba(255,255,255,.86)!important;}
+.main{padding:28px!important;}
+.top{background:#fff!important;border-radius:22px!important;padding:22px 28px!important;box-shadow:var(--shadow)!important;border:1px solid var(--border)!important;margin-bottom:28px!important;}
+.top h1{margin:0!important;color:var(--primary)!important;font-size:26px!important;font-weight:900!important;}
+.userbox{border-radius:999px!important;box-shadow:none!important;background:#F8FAFC!important;border:1px solid var(--border)!important;}
+.btn{border-radius:14px!important;font-weight:900!important;}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-light))!important;color:#fff!important;box-shadow:var(--shadow)!important;}
+.btn-dark{background:var(--dark)!important;color:#fff!important;}
+.btn-soft{background:rgba(41,158,157,.12)!important;color:var(--primary-dark)!important;}
+.btn-gold{background:var(--accent)!important;color:#fff!important;}
+.btn-danger{background:rgba(220,38,38,.12)!important;color:#b91c1c!important;}
+.cards{grid-template-columns:repeat(5,minmax(150px,1fr))!important;gap:20px!important;}
+.card{background:#fff!important;border:1px solid var(--border)!important;border-radius:22px!important;padding:22px!important;box-shadow:var(--shadow)!important;position:relative!important;overflow:hidden!important;}
+.card:before{content:"";position:absolute;top:0;right:0;left:0;height:5px;background:var(--primary);}
+.cards .card:nth-child(2):before{background:var(--primary-light)!important;}
+.cards .card:nth-child(3):before{background:var(--accent)!important;}
+.cards .card:nth-child(4):before{background:var(--gold-brown)!important;}
+.cards .card:nth-child(5):before{background:var(--dark)!important;}
+.stat b{font-size:34px!important;color:var(--dark)!important;font-weight:900!important;}
+.stat span{color:var(--muted)!important;font-size:13px!important;font-weight:800!important;}
+.section-title h2,.card h3{color:var(--primary)!important;font-weight:900!important;}
+input,select,textarea{border:2px solid var(--border)!important;border-radius:16px!important;background:#fff!important;}
+input:focus,select:focus,textarea:focus{border-color:var(--primary)!important;box-shadow:0 0 0 4px rgba(126,214,209,.22)!important;}
+.table-wrap{border-radius:20px!important;border:1px solid var(--border)!important;box-shadow:var(--shadow)!important;background:#fff!important;}
+th{background:rgba(41,158,157,.11)!important;color:var(--primary-dark)!important;font-weight:900!important;}
+.badge{border-radius:999px!important;font-weight:900!important;}
+.login-card{border-radius:32px!important;border:1px solid var(--border)!important;box-shadow:var(--shadow)!important;}
+.login-card h1{color:var(--primary)!important;font-weight:900!important;}
+/* Member card refinements with same visual identity */
+.aj-member-card{border-color:var(--primary)!important;background:linear-gradient(135deg,#F5F5F5 0%,#FFFFFF 52%,rgba(126,214,209,.26) 100%)!important;box-shadow:none!important;color:var(--dark)!important;}
+.aj-member-card:before{border-color:rgba(41,158,157,.55)!important;}
+.aj-card-pill{background:#fff!important;border-color:var(--accent)!important;color:var(--primary)!important;box-shadow:inset 0 0 0 .22em rgba(245,158,11,.28),0 .15em .2em rgba(0,0,0,.06)!important;}
+.aj-card-row .k,.aj-validity{color:var(--primary)!important;}
+.aj-validity{border-color:rgba(41,158,157,.55)!important;background:rgba(255,255,255,.98)!important;}
+.aj-card-photo{border-color:var(--primary)!important;background:#F5F5F5!important;}
+.aj-card-title h3{color:var(--dark)!important;}
+.aj-card-title p,.aj-card-logo-text{color:var(--dark)!important;}
+@media(max-width:1100px){.app{grid-template-columns:1fr!important}.sidebar{position:relative!important;height:auto!important}.cards{grid-template-columns:repeat(2,1fr)!important}.main{padding:16px!important}}
+@media(max-width:650px){.cards{grid-template-columns:1fr!important}.top{padding:18px!important}.top h1{font-size:22px!important}.card{padding:16px!important}}
+
+
+/* ===== Receipt logo preserve + centered A4 large table fix ===== */
+.receipt-stage{
+  width:100%!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:flex-start!important;
+}
+.receipt-doc,.receipt-doc *{
+  -webkit-print-color-adjust:exact!important;
+  print-color-adjust:exact!important;
+}
+.receipt-doc{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.receipt-logo,.receipt-watermark,.receipt-qr{
+  display:block!important;
+  object-fit:contain!important;
+}
+.receipt-grid,.receipt-meta{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+@media print{
+  html,body{width:210mm!important;min-height:297mm!important;background:#fff!important;}
+  body.printing-receipt #printArea{
+    width:210mm!important;
+    height:297mm!important;
+    min-height:297mm!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    padding:10mm!important;
+    margin:0 auto!important;
+    background:#fff!important;
+    overflow:hidden!important;
+  }
+  body.printing-receipt #printArea .receipt-doc{
+    width:190mm!important;
+    height:277mm!important;
+    min-height:277mm!important;
+    max-height:277mm!important;
+    margin:0 auto!important;
+    page-break-inside:avoid!important;
+    break-inside:avoid!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+  body.printing-receipt #printArea .receipt-logo,
+  body.printing-receipt #printArea .receipt-watermark,
+  body.printing-receipt #printArea .receipt-qr{
+    display:block!important;
+    visibility:visible!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+}
+</style>
+
 </head>
 <body>
-<div id="loginScreen" class="login-screen"><div class="login-card"><img class="logo brand-logo"><h1>دخول الإدارة</h1><p>جمعية الجواهر بقمار<br>منصة إدارة الانخراطات</p><input id="loginUsername" placeholder="اسم الدخول"><input id="loginPassword" type="password" placeholder="كلمة المرور"><button class="submit" onclick="login()">تسجيل الدخول</button><div id="loginMsg"></div></div></div>
-<div id="appShell" class="app-shell"><div class="sidebar"><img class="logo brand-logo"><h2>جمعية الجواهر بقمار</h2><div class="subtitle">إدارة الانخراطات والبطاقات</div><div class="admin-badge" id="adminBadge"></div><button class="current" onclick="showTab('dashboard',this)">لوحة التحكم</button><button onclick="showTab('requests',this);loadRequests()">طلبات الانخراط</button><button onclick="showTab('members',this);loadMembers()">الأعضاء المسجلون</button><button class="super-only" onclick="showTab('admins',this);loadAdmins()">إدارة الأدمن</button><button onclick="logout()">تسجيل الخروج</button></div>
-<div class="main"><div class="topbar"><div><h1>لوحة إدارة الانخراطات</h1><div class="status" id="syncStatus">النظام متصل</div></div><button class="print-btn secondary" onclick="loadReport(true)">تحديث</button></div>
-<div id="dashboard" class="content active"><div class="brand-header"><img class="brand-logo"><div><div class="brand-title">جمعية الجواهر بقمار</div><div class="brand-subtitle">ملخص الانخراطات</div></div></div><div class="cards"><div class="card"><h3>إجمالي الأعضاء</h3><div class="value" id="totalMembers">0</div></div><div class="card"><h3>نشط</h3><div class="value" id="activeMembers">0</div></div><div class="card"><h3>قيد الانتظار</h3><div class="value" id="pendingRequests">0</div></div><div class="card"><h3>الإيرادات</h3><div class="value" id="totalValue">0 دج</div></div></div><div class="box"><h2>الطلبات الجديدة</h2><div id="pendingTable" class="table-wrap"></div></div><div class="box"><h2>آخر الأعضاء المسجلين</h2><div id="recentMembersTable" class="table-wrap"></div></div></div>
-<div id="requests" class="content"><div class="box"><h2>طلبات الانخراط</h2><button class="submit secondary" onclick="loadRequests()">تحديث</button><div id="requestsTable" class="table-wrap"></div></div></div>
-<div id="members" class="content"><div class="box"><h2>الأعضاء</h2><button class="submit secondary" onclick="loadMembers()">تحديث</button><div id="membersTable" class="table-wrap"></div></div></div>
-<div id="admins" class="content super-only"><div class="box"><h2>إدارة الأدمن</h2><div class="form-grid"><input id="adminName" placeholder="الاسم"><input id="adminUsername" placeholder="اسم الدخول"><input id="adminPassword" type="password" placeholder="كلمة المرور"><select id="adminRole"><option value="super">ادمن كامل</option><option value="editor">محرر</option><option value="viewer">مشاهد</option></select></div><button class="submit" onclick="addAdminUser()">إضافة</button><div id="adminMsg"></div><div id="adminsTable" class="table-wrap"></div></div></div>
-</div></div>
+<section id="loginView" class="login-wrap"><div class="login-card"><img class="logo" src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"><h1>لوحة التحكم الإدارية</h1><p>جمعية الجواهر بقمار<br>نظام المنخرطين والبطاقات</p><form id="loginForm"><div class="field"><label>اسم المستخدم</label><input id="username" value="admin" autocomplete="username" required></div><div class="field"><label>كلمة المرور</label><input id="password" type="password" value="admin123" autocomplete="current-password" required></div><button class="btn btn-primary" style="width:100%;margin-top:18px">تسجيل الدخول</button><div id="loginMsg" class="msg"></div></form></div></section>
+<section id="appView" class="app hidden"><aside class="sidebar"><div class="brand"><a href="https://aljawahirdev.github.io/home/"><img src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"></a><h2>جمعية الجواهر بقمار<span>لوحة التحكم الإدارية</span></h2></div><nav class="nav"><button class="btn active" data-tab="dashboard">لوحة التحكم</button><button class="btn" data-tab="employees">الموارد البشرية</button><button class="btn" data-tab="requests">طلبات الانخراط</button><button class="btn" data-tab="members">المنخرطون</button><button class="btn" data-tab="leaves">العطل والحضور</button><button class="btn" data-tab="payments">الأجور/التعويضات</button><button class="btn admin-only" data-tab="admins">صلاحيات الأدمن</button><button class="btn" data-tab="logs">السجلات</button></nav><div class="side-info">نظام إداري موحد لتسيير المنخرطين والموارد البشرية والبطاقات الرقمية بهوية جمعية الجواهر.</div></aside><main class="main"><div class="top"><h1 id="pageTitle">لوحة التحكم - جمعية الجواهر</h1><div class="userbox"><span id="userName">—</span><button class="btn btn-danger btn-small" onclick="logout()">خروج</button></div></div><div id="globalMsg" class="msg"></div>
+<section id="dashboard" class="section active"><div class="grid cards"><div class="card stat"><b id="stEmployees">0</b><span>إجمالي الموارد البشرية</span></div><div class="card stat"><b id="stActiveEmployees">0</b><span>نشطون</span></div><div class="card stat"><b id="stPending">0</b><span>طلبات انخراط قيد الدراسة</span></div><div class="card stat"><b id="stMembers">0</b><span>منخرطون نشطون</span></div><div class="card stat"><b id="stLeaves">0</b><span>عطل قيد الدراسة</span></div></div><div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px"><div class="card"><h3 style="color:var(--primary-dark);margin-bottom:12px">آخر طلبات الانخراط</h3><div id="recentRequests"></div></div><div class="card"><h3 style="color:var(--primary-dark);margin-bottom:12px">آخر الموارد البشرية</h3><div id="recentEmployees"></div></div></div></section>
+<section id="employees" class="section"><div class="section-title"><h2>إدارة الموارد البشرية</h2><button class="btn btn-soft" onclick="resetEmployeeForm()">إضافة جديدة</button></div><div class="card"><form id="employeeForm"><input type="hidden" name="id"><input type="hidden" name="photoUrl"><div class="form-grid"><div class="field"><label>الرقم الوظيفي</label><input name="employeeNo" placeholder="يولد تلقائياً إذا ترك فارغاً"></div><div class="field two"><label>الاسم الكامل</label><input name="fullName" required></div><div class="field"><label>الحالة</label><select name="status"><option>نشط</option><option>موقوف</option><option>منتهي</option></select></div><div class="field"><label>المنصب</label><input name="position" required placeholder="موظف، متطوع، سائق..."></div><div class="field"><label>القسم</label><input name="department" placeholder="إدارة، نشاطات، إسعاف..."></div><div class="field"><label>الهاتف</label><input name="phone" required></div><div class="field"><label>البريد الإلكتروني</label><input name="email" type="email"></div><div class="field two"><label>العنوان</label><input name="address"></div><div class="field"><label>تاريخ الميلاد</label><input name="birthDate" type="date"></div><div class="field"><label>تاريخ الالتحاق</label><input name="startDate" type="date"></div><div class="field"><label>نوع العقد</label><select name="contractType"><option>تطوع</option><option>دوام كامل</option><option>دوام جزئي</option><option>مؤقت</option></select></div><div class="field"><label>الأجر الشهري</label><input name="salary" type="number" min="0"></div><div class="field"><label>نوع الوثيقة</label><select name="docType"><option>بطاقة التعريف الوطنية</option><option>رخصة السياقة</option><option>جواز السفر</option></select></div><div class="field"><label>رقم الوثيقة</label><input name="docNumber"></div><div class="field"><label>جهة الإصدار</label><input name="docPlace"></div><div class="field"><label>تاريخ الإصدار</label><input name="issueDate" type="date"></div><div class="field two"><label>جهة الاتصال الطارئ</label><input name="emergencyContact"></div><div class="field two"><label>صورة شخصية</label><input name="photoFile" type="file" accept="image/*"></div><div class="field full"><label>ملاحظات</label><textarea name="notes"></textarea></div></div><div class="toolbar"><button class="btn btn-primary">حفظ المورد البشري</button><button class="btn btn-soft" type="button" onclick="resetEmployeeForm()">تفريغ</button></div></form></div><div class="toolbar"><input class="search" id="employeeSearch" placeholder="بحث في الموارد البشرية..." oninput="renderEmployees()"><button class="btn btn-dark" onclick="loadAll()">تحديث</button></div><div class="table-wrap"><table><thead><tr><th>الصورة</th><th>الرقم</th><th>الاسم</th><th>المنصب</th><th>القسم</th><th>الهاتف</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="employeesBody"></tbody></table></div></section>
+<section id="requests" class="section"><div class="section-title"><h2>طلبات الانخراط</h2><button class="btn btn-dark" onclick="loadAll()">تحديث</button></div><div class="toolbar"><input class="search" id="requestSearch" placeholder="بحث في الطلبات..." oninput="renderRequests()"><select id="requestStatusFilter" onchange="renderRequests()"><option value="">كل الحالات</option><option>قيد الدراسة</option><option>مقبول</option><option>مرفوض</option></select></div><div class="table-wrap"><table><thead><tr><th>رقم الطلب</th><th>التاريخ</th><th>الاسم</th><th>الهاتف</th><th>نوع الانخراط</th><th>المبلغ</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="requestsBody"></tbody></table></div></section>
+<section id="members" class="section"><div class="section-title"><h2>المنخرطون وبطاقات QR</h2><button class="btn btn-dark" onclick="loadAll()">تحديث</button></div><div class="toolbar"><input class="search" id="memberSearch" placeholder="بحث في المنخرطين..." oninput="renderMembers()"></div><div class="table-wrap"><table><thead><tr><th>رقم البطاقة</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>تاريخ الانخراط</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="membersBody"></tbody></table></div></section>
+<section id="leaves" class="section"><div class="section-title"><h2>الحضور والعطل</h2></div><div class="grid" style="grid-template-columns:1fr 1fr"><div class="card"><h3 style="color:var(--primary-dark)">تسجيل حضور</h3><form id="attendanceForm"><div class="form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>الموظف</label><select name="employeeNo" class="employeeSelect" required></select></div><div class="field"><label>التاريخ</label><input type="date" name="date" required></div><div class="field"><label>الحالة</label><select name="status"><option>حاضر</option><option>غائب</option><option>مهمة خارجية</option><option>راحة</option></select></div><div class="field"><label>وقت الدخول</label><input name="checkIn" type="time"></div><div class="field"><label>وقت الخروج</label><input name="checkOut" type="time"></div><div class="field"><label>ملاحظات</label><input name="notes"></div></div><button class="btn btn-primary" style="margin-top:12px">حفظ الحضور</button></form></div><div class="card"><h3 style="color:var(--primary-dark)">طلب عطلة</h3><form id="leaveForm"><div class="form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>الموظف</label><select name="employeeNo" class="employeeSelect" required></select></div><div class="field"><label>نوع العطلة</label><select name="leaveType"><option>سنوية</option><option>مرضية</option><option>استثنائية</option><option>بدون أجر</option></select></div><div class="field"><label>من تاريخ</label><input type="date" name="fromDate" required></div><div class="field"><label>إلى تاريخ</label><input type="date" name="toDate" required></div><div class="field" style="grid-column:1/-1"><label>السبب</label><input name="reason"></div></div><button class="btn btn-primary" style="margin-top:12px">حفظ طلب العطلة</button></form></div></div><div class="section-title"><h2>طلبات العطل</h2></div><div class="table-wrap"><table><thead><tr><th>الموظف</th><th>النوع</th><th>من</th><th>إلى</th><th>الأيام</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="leavesBody"></tbody></table></div><div class="section-title"><h2>سجل الحضور</h2></div><div class="table-wrap"><table><thead><tr><th>الموظف</th><th>التاريخ</th><th>الحالة</th><th>الدخول</th><th>الخروج</th><th>ملاحظات</th></tr></thead><tbody id="attendanceBody"></tbody></table></div></section>
+<section id="payments" class="section"><div class="section-title"><h2>الأجور والتعويضات</h2></div><div class="card"><form id="paymentForm"><div class="form-grid"><div class="field"><label>الموظف</label><select name="employeeNo" class="employeeSelect" required></select></div><div class="field"><label>الشهر</label><input name="month" type="month" required></div><div class="field"><label>المبلغ</label><input name="amount" type="number" min="0" required></div><div class="field"><label>نوع الدفع</label><select name="paymentType"><option>أجر شهري</option><option>تعويض</option><option>منحة</option><option>مصروف مهمة</option></select></div><div class="field"><label>الحالة</label><select name="status"><option>مدفوع</option><option>قيد التحضير</option><option>مؤجل</option></select></div><div class="field two"><label>ملاحظات</label><input name="notes"></div></div><button class="btn btn-primary" style="margin-top:12px">حفظ الدفع</button></form></div><div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>الموظف</th><th>الشهر</th><th>المبلغ</th><th>النوع</th><th>الحالة</th><th>تاريخ التسجيل</th></tr></thead><tbody id="paymentsBody"></tbody></table></div></section>
 
+<section id="admins" class="section"><div class="section-title"><h2>إدارة صلاحيات الأدمن</h2><button class="btn btn-dark" onclick="loadAdmins()">تحديث</button></div><div class="card admin-permissions-card"><form id="adminForm"><input type="hidden" name="id"><div class="form-grid"><div class="field"><label>اسم المستخدم</label><input name="username" required></div><div class="field"><label>كلمة المرور</label><input name="password" type="password" placeholder="اتركها فارغة عند التعديل"></div><div class="field two"><label>الاسم الكامل</label><input name="name" required></div><div class="field"><label>الدور</label><select name="role"><option value="super">أدمن جميع الصلاحيات</option><option value="editor">محرر تعديل</option><option value="viewer">مشاهد فقط</option></select></div><div class="field"><label>الحالة</label><select name="status"><option>نشط</option><option>موقوف</option></select></div><div class="field full"><label>ملاحظات</label><textarea name="notes" placeholder="ملاحظات داخلية حول صلاحيات هذا الحساب"></textarea></div></div><div class="toolbar"><button class="btn btn-primary">حفظ حساب الأدمن</button><button class="btn btn-soft" type="button" onclick="resetAdminForm()">تفريغ</button></div></form></div><div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>اسم المستخدم</th><th>الاسم</th><th>الدور</th><th>الحالة</th><th>آخر تحديث</th><th>إجراءات</th></tr></thead><tbody id="adminsBody"></tbody></table></div></section>
+
+<section id="logs" class="section"><div class="section-title"><h2>سجل العمليات</h2><button class="btn btn-dark" onclick="loadLogs()">تحديث</button></div><div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>العملية</th><th>المنفذ</th><th>الدور</th><th>المرجع</th><th>التفاصيل</th></tr></thead><tbody id="logsBody"></tbody></table></div></section>
+</main></section><div class="modal" id="modal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><div id="modalContent"></div></div></div><div id="printArea"></div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
 <script>
-// ================== إعدادات API ==================
-const APPS_SCRIPT_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbys0fwsOQoSYi49aUY8wSTnxcW9uJefZJxNyKC1YwXIVBaloV-dxTGSMiJ7SZYfUPTdSA/exec'; // ⚠️ ضع رابط النشر الجديد هنا
-let sessionToken = localStorage.getItem('membership_session_token') || '';
-let currentAdmin = JSON.parse(localStorage.getItem('membership_current_admin') || 'null');
-let currentReport = null;
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbyyv50_e_AjD2CK8QEYVlTbQRF5QJnRlif-qWXM5xt_axlAHIgubcOyWVGP8gNsUKPZ7g/exec';
+const LOGO_URL='https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000';
+let token=localStorage.getItem('hrMembershipToken')||'';let currentUser=null;const state={employees:[],requests:[],members:[],leaves:[],attendance:[],payments:[],logs:[],admins:[]};
+function apiCall(action,args=[]){
+ const url=String(APPS_SCRIPT_URL||'').trim();
+ if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(url)||url.includes('PUT_APPS_SCRIPT')) return Promise.reject(new Error('ضع رابط Google Apps Script Web App الصحيح المنتهي بـ /exec داخل index.html'));
+ const cb='aljawahir_cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+ return new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>{cleanup();reject(new Error('تعذر الاتصال بالخادم. تأكد من نشر Google Apps Script بصلاحية Anyone وتحديث الرابط /exec.'));},30000);
+  function cleanup(){clearTimeout(timer);try{delete window[cb];}catch(e){window[cb]=undefined;} if(script&&script.parentNode)script.parentNode.removeChild(script);}
+  window[cb]=function(res){cleanup(); if(!res||res.ok!==true) return reject(new Error((res&&res.error)||'فشل الاتصال بالخادم')); resolve(res.data);};
+  const script=document.createElement('script');
+  script.onerror=function(){cleanup();reject(new Error('تعذر تحميل رابط Google Apps Script. تأكد من الرابط والصلاحيات.'));};
+  const qs=new URLSearchParams({api:'1',action:action,args:JSON.stringify(args||[]),callback:cb});
+  script.src=url+'?'+qs.toString();
+  document.head.appendChild(script);
+ });
+}
+function msg(text,type='success'){const el=document.getElementById('globalMsg');el.className='msg '+(type==='error'?'error':'success');el.textContent=text;setTimeout(()=>{el.style.display='none'},4500);}
+function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[s]));}
+function statusBadge(status){const s=String(status||'');let c=s.includes('قيد')?'pending':(s.includes('مقبول')||s.includes('نشط')||s.includes('مدفوع'))?'ok':(s.includes('مرفوض')||s.includes('موقوف'))?'no':'off';return `<span class="badge ${c}">${escapeHtml(s||'—')}</span>`;}
+function formToObj(form){const o={};new FormData(form).forEach((v,k)=>{if(!(v instanceof File))o[k]=String(v).trim();});return o;}
+function compressImage(file,maxW=900,quality=.72){return new Promise((resolve,reject)=>{if(!file||!file.size)return resolve('');const img=new Image();const reader=new FileReader();reader.onload=e=>{img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*(maxW/w));w=maxW}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);resolve(c.toDataURL('image/jpeg',quality));};img.onerror=reject;img.src=e.target.result};reader.onerror=reject;reader.readAsDataURL(file)});}
+async function init(){if(!token){showLogin();return}try{currentUser=await apiCall('verifySession',[token]);if(!currentUser){showLogin();return}showApp();await loadAll();}catch(e){showLogin();}}
+function showLogin(){document.getElementById('loginView').classList.remove('hidden');document.getElementById('appView').classList.add('hidden');}
+function showApp(){document.getElementById('loginView').classList.add('hidden');document.getElementById('appView').classList.remove('hidden');document.getElementById('userName').textContent=currentUser.name+' | '+roleLabel(currentUser.role);applyRolePermissions();}
+function roleLabel(r){return r==='super'?'ادمن جميع الصلاحيات':r==='editor'?'محرر تعديل':'مشاهد';}
+document.getElementById('loginForm').addEventListener('submit',async e=>{e.preventDefault();const lm=document.getElementById('loginMsg');lm.className='msg';lm.style.display='none';try{const res=await apiCall('loginAdmin',[document.getElementById('username').value,document.getElementById('password').value]);token=res.token;currentUser=res.user;localStorage.setItem('hrMembershipToken',token);showApp();await loadAll();}catch(err){lm.className='msg error';lm.style.display='block';lm.textContent='❌ '+err.message;}});
+async function logout(){try{await apiCall('logoutAdmin',[token])}catch(e){}localStorage.removeItem('hrMembershipToken');token='';showLogin();}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.tab).classList.add('active');document.getElementById('pageTitle').textContent=b.textContent.trim();if(b.dataset.tab==='logs')loadLogs();if(b.dataset.tab==='admins')loadAdmins();}));
+async function loadAll(){try{const [dash,employees,requests,members,leaves,attendance,payments]=await Promise.all([apiCall('getDashboard',[token]),apiCall('listEmployees',[token]),apiCall('listMembershipRequests',[token]),apiCall('listMembers',[token]),apiCall('listLeaveRequests',[token]),apiCall('listAttendance',[token]),apiCall('listPayments',[token])]);Object.assign(state,{employees,requests,members,leaves,attendance,payments});renderDashboard(dash);renderEmployees();renderRequests();renderMembers();renderLeaveAttendance();renderPayments();fillEmployeeSelects();applyRolePermissions();if(canManageAdmins())loadAdmins();}catch(e){msg('❌ '+e.message,'error');}}
+function renderDashboard(d){document.getElementById('stEmployees').textContent=d.employeesTotal||0;document.getElementById('stActiveEmployees').textContent=d.employeesActive||0;document.getElementById('stPending').textContent=d.requestsPending||0;document.getElementById('stMembers').textContent=d.membersActive||0;document.getElementById('stLeaves').textContent=d.leavesPending||0;document.getElementById('recentRequests').innerHTML=(d.recentRequests||[]).map(r=>`<div class="detail"><b>${escapeHtml(r.requestNo)}</b>${escapeHtml(r.fullName)} - ${statusBadge(r.status)}</div>`).join('')||'<div class="empty">لا توجد طلبات حديثة</div>';document.getElementById('recentEmployees').innerHTML=(d.recentEmployees||[]).map(e=>`<div class="detail"><b>${escapeHtml(e.employeeNo)}</b>${escapeHtml(e.fullName)} - ${escapeHtml(e.position)}</div>`).join('')||'<div class="empty">لا توجد موارد بشرية</div>';}
+function renderEmployees(){const q=(document.getElementById('employeeSearch')?.value||'').toLowerCase();const rows=state.employees.filter(e=>(e.employeeNo+e.fullName+e.position+e.phone+e.department).toLowerCase().includes(q));document.getElementById('employeesBody').innerHTML=rows.map(e=>`<tr><td>${e.photoUrl?`<img class="photo" src="${escapeHtml(e.photoUrl)}">`:'—'}</td><td>${escapeHtml(e.employeeNo)}</td><td>${escapeHtml(e.fullName)}</td><td>${escapeHtml(e.position)}</td><td>${escapeHtml(e.department)}</td><td>${escapeHtml(e.phone)}</td><td>${statusBadge(e.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editEmployee(${JSON.stringify(e).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-gold btn-small" onclick='printEmployeeBadge(${JSON.stringify(e).replace(/'/g,"&#39;")})'>بطاقة</button><button class="btn btn-danger btn-small" onclick="deleteEmployee('${escapeHtml(e.id)}')">حذف</button></div></td></tr>`).join('')||'<tr><td colspan="8" class="empty">لا توجد بيانات</td></tr>';}
+function resetEmployeeForm(){document.getElementById('employeeForm').reset();document.querySelector('#employeeForm [name=id]').value='';document.querySelector('#employeeForm [name=photoUrl]').value='';}
+function editEmployee(e){const f=document.getElementById('employeeForm');Object.keys(e).forEach(k=>{const el=f.elements[k];if(el)el.value=e[k]||''});window.scrollTo({top:0,behavior:'smooth'});}
+document.getElementById('employeeForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget;const data=formToObj(f);const file=f.elements.photoFile.files[0];if(file)data.photo=await compressImage(file,900,.72);try{const action=data.id?'updateEmployee':'addEmployee';state.employees=await apiCall(action,[data,token]);renderEmployees();fillEmployeeSelects();resetEmployeeForm();msg('تم حفظ المورد البشري بنجاح');}catch(err){msg('❌ '+err.message,'error');}});
+async function deleteEmployee(id){if(!confirm('تأكيد حذف هذا المورد البشري؟'))return;try{state.employees=await apiCall('deleteEmployee',[id,token]);renderEmployees();fillEmployeeSelects();msg('تم الحذف');}catch(e){msg('❌ '+e.message,'error');}}
+function renderRequests(){const q=(document.getElementById('requestSearch')?.value||'').toLowerCase();const st=document.getElementById('requestStatusFilter')?.value||'';const rows=state.requests.filter(r=>(!st||r.status===st)&&(r.requestNo+r.fullName+r.phone+r.membershipType).toLowerCase().includes(q));document.getElementById('requestsBody').innerHTML=rows.map(r=>`<tr><td>${escapeHtml(r.requestNo)}</td><td>${escapeHtml(r.requestDate)}</td><td>${escapeHtml(r.fullName)}</td><td>${escapeHtml(r.phone)}</td><td>${escapeHtml(r.membershipType)}</td><td>${escapeHtml(r.amount)} دج</td><td>${statusBadge(r.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='showRequest(${JSON.stringify(r).replace(/'/g,"&#39;")})'>عرض</button><button class="btn btn-dark btn-small" onclick='previewMembershipReceipt(${JSON.stringify(r).replace(/'/g,"&#39;")})'>وصل استلام</button>${r.status==='قيد الدراسة'?`<button class="btn btn-success btn-small" onclick="approveRequest('${escapeHtml(r.requestNo)}')">قبول</button><button class="btn btn-danger btn-small" onclick="rejectRequest('${escapeHtml(r.requestNo)}')">رفض</button>`:''}${r.cardNo?`<button class="btn btn-gold btn-small" onclick="printMemberByCard('${escapeHtml(r.cardNo)}')">معاينة البطاقة</button>`:''}</div></td></tr>`).join('')||'<tr><td colspan="8" class="empty">لا توجد طلبات</td></tr>';}
+function showRequest(r){document.getElementById('modalContent').innerHTML=`<h2 style="color:var(--primary-dark)">تفاصيل طلب الانخراط ${escapeHtml(r.requestNo)}</h2><div class="detail-grid">${detail('الاسم الكامل',r.fullName)}${detail('الهاتف',r.phone)}${detail('البريد',r.email)}${detail('تاريخ الميلاد',r.birthDate)}${detail('الجنس',r.gender)}${detail('نوع الوثيقة',r.docType)}${detail('رقم الوثيقة',r.docNumber)}${detail('جهة الإصدار',r.docPlace)}${detail('نوع الانخراط',r.membershipType)}${detail('المبلغ',r.amount+' دج')}${detail('العنوان',r.address)}${detail('الحالة',r.status)}${detail('الصورة الشخصية',r.photoUrl?`<a href="${r.photoUrl}" target="_blank">فتح الصورة</a>`:'—')}${detail('الوثيقة الأمامية',r.docFrontUrl?`<a href="${r.docFrontUrl}" target="_blank">فتح الوثيقة</a>`:'—')}${detail('الوثيقة الخلفية',r.docBackUrl?`<a href="${r.docBackUrl}" target="_blank">فتح الوثيقة</a>`:'—')}</div><div class="toolbar"><button class="btn btn-dark" onclick='previewMembershipReceipt(${JSON.stringify(r).replace(/'/g,"&#39;")})'>وصل استلام</button>${r.status==='قيد الدراسة'?`<button class="btn btn-success" onclick="approveRequest('${escapeHtml(r.requestNo)}')">قبول وإصدار بطاقة</button><button class="btn btn-danger" onclick="rejectRequest('${escapeHtml(r.requestNo)}')">رفض</button>`:''}</div>`;openModal();}
+function detail(k,v){return `<div class="detail"><b>${k}</b>${v||'—'}</div>`;}
+async function approveRequest(no){const amount=prompt('المبلغ المدفوع بالدينار الجزائري:', '');const notes=prompt('ملاحظات الإدارة:', '')||'';const confirmedAt=new Date().toISOString().slice(0,10);try{const res=await apiCall('approveMembershipRequest',[no,{amountPaid:amount,notes,approvedAt:confirmedAt,confirmedAt:confirmedAt,confirmationDate:confirmedAt,joinDate:confirmedAt},token]);state.members=res.members;state.requests=res.requests;const member=state.members.find(x=>String(x.cardNo||'')===String(res.cardNo||''));if(member){member.approvedAt=member.approvedAt||confirmedAt;member.confirmedAt=member.confirmedAt||confirmedAt;member.confirmationDate=member.confirmationDate||confirmedAt;member.joinDate=memberJoinDate(member)||confirmedAt;}renderRequests();renderMembers();closeModal();msg('تم قبول الطلب وإصدار البطاقة: '+res.cardNo);printMemberByCard(res.cardNo);}catch(e){msg('❌ '+e.message,'error');}}
+async function rejectRequest(no){const reason=prompt('سبب الرفض:', '')||'';try{state.requests=await apiCall('rejectMembershipRequest',[no,reason,token]);renderRequests();closeModal();msg('تم رفض الطلب');}catch(e){msg('❌ '+e.message,'error');}}
+function renderMembers(){const q=(document.getElementById('memberSearch')?.value||'').toLowerCase();const rows=state.members.filter(m=>(m.cardNo+m.fullName+m.phone+m.membershipType+m.requestNo+m.email+memberJoinDate(m)).toLowerCase().includes(q));document.getElementById('membersBody').innerHTML=rows.map(m=>`<tr><td>${escapeHtml(m.cardNo)}</td><td>${escapeHtml(m.fullName)}</td><td>${escapeHtml(m.phone)}</td><td>${escapeHtml(m.membershipType)}</td><td>${escapeHtml(memberJoinDate(m))}</td><td>${statusBadge(m.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editMember(${JSON.stringify(m).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-gold btn-small" onclick='previewMemberCard(${JSON.stringify(m).replace(/'/g,"&#39;")})'>معاينة البطاقة</button><button class="btn btn-dark btn-small" onclick='previewCardDeliveryReceipt(${JSON.stringify(m).replace(/'/g,"&#39;")})'>وصل استلام البطاقة</button>${m.status==='نشط'?`<button class="btn btn-danger btn-small" onclick="suspendMember('${escapeHtml(m.cardNo)}')">توقيف</button>`:`<button class="btn btn-success btn-small" onclick="activateMember('${escapeHtml(m.cardNo)}')">تفعيل</button>`}</div></td></tr>`).join('')||'<tr><td colspan="7" class="empty">لا يوجد منخرطون</td></tr>';}
+async function printMemberByCard(cardNo){const m=state.members.find(x=>x.cardNo===cardNo)||await apiCall('getMemberByNo',[cardNo,token]);if(m)printMemberCard(m);}
 
-// دالة موحدة لاستدعاء API
-async function callAPI(action, args = {}) {
-    if (!APPS_SCRIPT_WEB_APP_URL || APPS_SCRIPT_WEB_APP_URL.includes('ضع_رابط')) {
-        throw new Error('الرجاء وضع رابط Google Apps Script Web App الصحيح');
-    }
-    const payload = { action, args, sessionToken, admin: currentAdmin };
-    const response = await fetch(APPS_SCRIPT_WEB_APP_URL, {
-        method: 'POST',
-       headers: { 'Content-Type': 'text/plain;charset=utf-8' }, mode: 'cors',
-        body: JSON.stringify(payload)
-    });
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const json = await response.json();
-    if (!json.ok) throw new Error(json.error || 'خطأ غير معروف من الخادم');
-    return json.data;
+function editSafeValue(m,keys){for(const k of keys){if(m&&m[k]!==undefined&&m[k]!==null&&String(m[k]).trim()!=='')return m[k];}return '';}
+function cleanDateValue(v){v=String(v||'').trim();if(!v)return '';const iso=v.match(/^(\d{4}-\d{2}-\d{2})/);if(iso)return iso[1];return v;}
+function memberJoinDate(m){return cleanDateValue(editSafeValue(m,['approvedAt','confirmedAt','confirmationDate','approvalDate','acceptedAt','confirmDate','joinDate','membershipDate','subscriptionDate','startDate','requestDate','createdAt','createdDate','date']));}
+function editInput(id,label,value,type='text',cls='field',extra=''){return `<div class="${cls}"><label>${label}</label><input id="${id}" type="${type}" value="${escapeHtml(value||'')}" ${extra}></div>`;}
+function editTextarea(id,label,value,cls='field full'){return `<div class="${cls}"><label>${label}</label><textarea id="${id}">${escapeHtml(value||'')}</textarea></div>`;}
+function editFileInput(id,label,target,cls='field two'){return `<div class="${cls}"><label>${label}</label><input id="${id}" type="file" accept="image/*" onchange="previewEditImageFile('${id}','${target}')"><small style="color:var(--muted);line-height:1.7">اختيار صورة من الجهاز يثبتها داخل البطاقة والطباعة.</small><div id="${id}Preview" style="margin-top:8px"></div></div>`;}
+async function previewEditImageFile(fileId,targetId){const input=document.getElementById(fileId);const file=input&&input.files&&input.files[0];if(!file)return;const data=await compressImage(file,1200,.82);const target=document.getElementById(targetId);if(target)target.value=data;const box=document.getElementById(fileId+'Preview');if(box)box.innerHTML='<img src="'+data+'" style="width:86px;height:64px;object-fit:cover;border:1px solid var(--border);border-radius:12px;background:#fff">';}
+async function readEditImageValue(fileId,targetId){const input=document.getElementById(fileId);const file=input&&input.files&&input.files[0];if(file)return await compressImage(file,1200,.82);return getEditValue(targetId);}
+function getEditValue(id){return (document.getElementById(id)?.value||'').trim();}
+function editMember(m){
+const joinDate=memberJoinDate(m);
+const photo=editSafeValue(m,['photoUrl','photo','imageUrl']);
+const status=editSafeValue(m,['status'])||'نشط';
+document.getElementById('modalContent').innerHTML=`
+<div class="member-card-modal-title">
+<h2>تعديل معلومات المنخرط</h2>
+</div>
+<div class="member-card-note">نافذة تعديل مفصلة لبيانات البطاقة وبيانات الانخراط والوثائق. تاريخ الانخراط هو نفسه تاريخ التأكيد ويُستدعى تلقائياً عند توفره.</div>
+<div class="member-edit-panel">
+<div class="form-grid">
+<div class="member-edit-section-title">بيانات البطاقة والانخراط</div>
+${editInput('editCardNo','رقم البطاقة',m.cardNo||'')}
+${editInput('editRequestNo','رقم طلب الانخراط',m.requestNo||m.requestId||'')}
+${editInput('editJoinDate','تاريخ الانخراط / تاريخ التأكيد',joinDate,'text')}
+${editInput('editValidTo','تاريخ نهاية الصلاحية إن وجد',m.validTo||'')}
+<div class="field"><label>الحالة</label><select id="editStatus"><option ${status==='نشط'?'selected':''}>نشط</option><option ${status==='موقوف'?'selected':''}>موقوف</option><option ${status==='منتهي'?'selected':''}>منتهي</option><option ${status==='قيد الدراسة'?'selected':''}>قيد الدراسة</option></select></div>
+${editInput('editType','نوع الانخراط',m.membershipType||m.memberType||'')}
+${editInput('editAmount','المبلغ المدفوع',m.amountPaid||m.amount||'')}
+${editInput('editPaymentStatus','حالة الدفع',m.paymentStatus||'')}
+<div class="member-edit-section-title">البيانات الشخصية</div>
+${editInput('editFullName','الاسم الكامل',m.fullName||'','text','field two')}
+${editInput('editPhone','الهاتف',m.phone||'')}
+${editInput('editEmail','البريد الإلكتروني',m.email||'','email')}
+${editInput('editBirthDate','تاريخ الميلاد',m.birthDate||m.dateOfBirth||'')}
+${editInput('editBirthPlace','مكان الميلاد',m.birthPlace||m.placeOfBirth||m.birthLocation||'')}
+${editInput('editGender','الجنس',m.gender||'')}
+${editInput('editAddress','العنوان',m.address||m.location||m.commune||'','text','field two')}
+<div class="member-edit-section-title">الوثائق والصور</div>
+${editInput('editDocType','نوع الوثيقة',m.docType||'')}
+${editInput('editDocNumber','رقم الوثيقة',m.docNumber||'')}
+${editInput('editDocPlace','جهة الإصدار',m.docPlace||'')}
+${editInput('editIssueDate','تاريخ الإصدار',m.issueDate||'')}
+${editInput('editPhotoUrl','رابط الصورة الشخصية',photo,'text','field two')}
+${editFileInput('editPhotoFile','رفع الصورة الشخصية','editPhotoUrl','field two')}
+${editInput('editDocFrontUrl','رابط الهوية / الوثيقة من الجهة الأمامية',m.docFrontUrl||m.identityFrontUrl||'','text','field two')}
+${editFileInput('editDocFrontFile','رفع الهوية من الجهة الأمامية','editDocFrontUrl','field two')}
+${editInput('editDocBackUrl','رابط الهوية / الوثيقة من الجهة الخلفية',m.docBackUrl||m.identityBackUrl||'','text','field two')}
+${editFileInput('editDocBackFile','رفع الهوية من الجهة الخلفية','editDocBackUrl','field two')}
+<div class="member-edit-section-title">ملاحظات الإدارة</div>
+${editTextarea('editNotes','ملاحظات',m.notes||m.adminNotes||'')}
+<div class="member-edit-help">ملاحظة: هذه النافذة تحفظ التعديل في واجهة الإدارة الحالية، وتُظهر البيانات مباشرة في معاينة البطاقة والطباعة.</div>
+</div>
+<div class="member-card-actions">
+<button class="btn btn-primary" onclick="saveMemberEdit('${escapeHtml(m.cardNo||'')}')">حفظ التعديلات</button>
+<button class="btn btn-gold" onclick="saveMemberEdit('${escapeHtml(m.cardNo||'')}',true)">حفظ ومعاينة البطاقة</button>
+<button class="btn btn-dark" onclick="closeModal()">إغلاق</button>
+</div>
+</div>`;
+openModal();
+}
+async function saveMemberEdit(cardNo,previewAfter=false){
+const m=state.members.find(x=>x.cardNo===cardNo)||state.members.find(x=>String(x.cardNo||'')===String(getEditValue('editCardNo')));
+if(!m)return;
+const confirmedAt=cleanDateValue(getEditValue('editJoinDate'));
+const photoValue=await readEditImageValue('editPhotoFile','editPhotoUrl');
+const docFrontValue=await readEditImageValue('editDocFrontFile','editDocFrontUrl');
+const docBackValue=await readEditImageValue('editDocBackFile','editDocBackUrl');
+Object.assign(m,{
+cardNo:getEditValue('editCardNo'),
+requestNo:getEditValue('editRequestNo'),
+joinDate:confirmedAt,
+approvedAt:confirmedAt,
+confirmedAt:confirmedAt,
+confirmationDate:confirmedAt,
+validTo:getEditValue('editValidTo'),
+status:getEditValue('editStatus'),
+membershipType:getEditValue('editType'),
+amountPaid:getEditValue('editAmount'),
+paymentStatus:getEditValue('editPaymentStatus'),
+fullName:getEditValue('editFullName'),
+phone:getEditValue('editPhone'),
+email:getEditValue('editEmail'),
+birthDate:getEditValue('editBirthDate'),
+birthPlace:getEditValue('editBirthPlace'),
+gender:getEditValue('editGender'),
+address:getEditValue('editAddress'),
+docType:getEditValue('editDocType'),
+docNumber:getEditValue('editDocNumber'),
+docPlace:getEditValue('editDocPlace'),
+issueDate:getEditValue('editIssueDate'),
+photoUrl:photoValue,
+photo:photoValue,
+docFrontUrl:docFrontValue,
+identityFrontUrl:docFrontValue,
+docBackUrl:docBackValue,
+identityBackUrl:docBackValue,
+notes:getEditValue('editNotes')
+});
+renderMembers();
+closeModal();
+msg('تم حفظ التعديلات');
+if(previewAfter)previewMemberCard(m);
 }
 
-// دوال مساعدة
-function setMsg(id, text, type) { 
-    const el = document.getElementById(id);
-    if(el) el.innerHTML = `<div class="${type}">${text}</div>`;
+
+async function suspendMember(cardNo){const reason=prompt('سبب التوقيف:', '')||'';try{state.members=await apiCall('suspendMember',[cardNo,reason,token]);renderMembers();msg('تم توقيف البطاقة');}catch(e){msg('❌ '+e.message,'error');}}
+async function activateMember(cardNo){try{state.members=await apiCall('activateMember',[cardNo,'',token]);renderMembers();msg('تم تفعيل البطاقة');}catch(e){msg('❌ '+e.message,'error');}}
+function qrUrl(text,size=130){return 'https://api.qrserver.com/v1/create-qr-code/?size='+size+'x'+size+'&data='+encodeURIComponent(text||'');}
+const memberCardAssetCache={};let currentMemberCardNo='';let currentMemberCardHtml='';
+function memberQrText(m){return m.qrText||('ALJAWAHIR-MEMBER|'+(m.cardNo||'')+'|'+(m.fullName||'')+'|'+(m.status||''));}
+function timeoutPromise(p,ms){return new Promise((resolve,reject)=>{const t=setTimeout(()=>reject(new Error('timeout')),ms);Promise.resolve(p).then(v=>{clearTimeout(t);resolve(v);},e=>{clearTimeout(t);reject(e);});});}
+function blobToDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});}
+function extractDriveId(url){const u=String(url||'');let m=u.match(/[?&]id=([^&]+)/);if(m)return decodeURIComponent(m[1]);m=u.match(/\/d\/([a-zA-Z0-9_-]+)/);if(m)return m[1];m=u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);return m?m[1]:'';}
+function imageCandidates(url){url=String(url||'').trim();const out=[url];const id=extractDriveId(url);if(id){out.push('https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1000');out.push('https://lh3.googleusercontent.com/d/'+encodeURIComponent(id)+'=w1000');out.push('https://drive.google.com/uc?export=view&id='+encodeURIComponent(id));}return [...new Set(out.filter(Boolean))];}
+async function fetchDataUrl(url){const res=await fetch(url,{mode:'cors',credentials:'omit',cache:'force-cache'});if(!res.ok)throw new Error('fetch failed');const blob=await res.blob();if(!/^image\//.test(blob.type))throw new Error('not image');return await blobToDataUrl(blob);}
+async function apiImageDataUrl(url){try{const v=await timeoutPromise(apiCall('getImageAsDataUrl',[url,token]),7000);if(typeof v==='string'&&v.startsWith('data:image/'))return v;}catch(e){}return '';}
+async function imageDataUrl(url){url=String(url||'').trim();if(!url)return '';if(url.startsWith('data:'))return url;if(memberCardAssetCache[url])return memberCardAssetCache[url];const fromApi=await apiImageDataUrl(url);if(fromApi){memberCardAssetCache[url]=fromApi;return fromApi;}for(const candidate of imageCandidates(url)){try{const v=await timeoutPromise(fetchDataUrl(candidate),7000);if(v&&v.startsWith('data:image/')){memberCardAssetCache[url]=v;return v;}}catch(e){}}
+ memberCardAssetCache[url]=url;return url;}
+async function memberCardAssets(m){const memberPhoto=editSafeValue(m,['photoUrl','photo','imageUrl'])||LOGO_URL;const [logo,photo,qr,bg]=await Promise.all([imageDataUrl(LOGO_URL),imageDataUrl(memberPhoto),imageDataUrl(qrUrl(memberQrText(m),260)),imageDataUrl(LOGO_URL)]);return{logo,photo,qr,bg};}
+function buildMemberCardHtml(m,a={}){const blank='................';const val=v=>escapeHtml((v===0||v)?String(v):blank);const no=val(m.cardNo||m.memberNo||m.membershipNo||m.id);const first=String(m.firstName||'').trim();const last=String(m.lastName||'').trim();const fullName=val(m.fullName||[last,first].filter(Boolean).join(' '));const birthDate=String(m.birthDate||m.dateOfBirth||'').trim();const birthPlace=String(m.birthPlace||m.placeOfBirth||m.birthLocation||'').trim();const birth=val([birthDate,birthPlace].filter(Boolean).join(' - '));const type=val(m.membershipType||m.memberType||m.role||m.status||'منخرط');const address=val(m.address||m.location||m.commune);const joinDate=val(memberJoinDate(m));const logo=escapeHtml(a.logo||LOGO_URL);const photo=escapeHtml(a.photo||editSafeValue(m,['photoUrl','photo','imageUrl'])||LOGO_URL);const qr=escapeHtml(a.qr||qrUrl(memberQrText(m),260));const bg=escapeHtml(a.bg||a.logo||LOGO_URL);const imgAttr=' crossorigin="anonymous" referrerpolicy="no-referrer" decoding="async"';return `<div class="aj-member-card" id="memberCardPreview" dir="rtl" lang="ar" aria-label="بطاقة عضوية ${no}"><img class="aj-card-bg" src="${bg}" alt="خلفية البطاقة"${imgAttr}><div class="aj-card-corner"></div><div class="aj-card-logo-box left" dir="rtl" lang="ar"><img class="aj-card-logo" src="${logo}" alt="شعار جمعية الجواهر"${imgAttr}><div class="aj-card-logo-text" dir="rtl">جمعية الجواهر بقمار<br>     </div></div><div class="aj-card-logo-box right" dir="rtl" lang="ar"><img class="aj-card-logo" src="${logo}" alt="شعار جمعية الجواهر"${imgAttr}><div class="aj-card-logo-text" dir="rtl">جمعية الجواهر بقمار<br>      </div></div><div class="aj-card-title" dir="rtl" lang="ar"><h3 dir="rtl">جمعية الجواهر بقمار</h3><p dir="rtl">ولاية الوادي - الجزائر</p></div><div class="aj-card-pill" dir="rtl" lang="ar"><span dir="rtl">بطاقة عضوية</span></div><div class="aj-validity" dir="rtl" lang="ar"><span class="aj-validity-icon" aria-hidden="true"></span><span class="aj-validity-text">صالحة لمدة 3 سنوات</span></div><img class="aj-card-photo" src="${photo}" alt="الصورة الشخصية"${imgAttr}><img class="aj-card-qr" src="${qr}" alt="QR"${imgAttr}><div class="aj-card-fields" dir="rtl" lang="ar"><div class="aj-card-row"><span class="k" dir="rtl">رقم العضوية:</span><span class="v" dir="rtl">${no}</span></div><div class="aj-card-row"><span class="k" dir="rtl">الاسم واللقب:</span><span class="v" dir="rtl">${fullName}</span></div><div class="aj-card-row long"><span class="k" dir="rtl">تاريخ ومكان الميلاد:</span><span class="v" dir="rtl">${birth}</span></div><div class="aj-card-row"><span class="k" dir="rtl">الصفة:</span><span class="v" dir="rtl">${type}</span></div><div class="aj-card-row"><span class="k" dir="rtl">العنوان:</span><span class="v" dir="rtl">${address}</span></div><div class="aj-card-row"><span class="k" dir="rtl">تاريخ الانخراط:</span><span class="v" dir="rtl">${joinDate}</span></div></div></div>`;}
+
+async function waitForMemberCardReady(root){try{if(document.fonts){await Promise.all([document.fonts.load('900 28px "Cairo"'),document.fonts.load('700 16px "Cairo"'),document.fonts.ready]);}}catch(e){}const imgs=Array.from((root||document).querySelectorAll('img'));await Promise.all(imgs.map(img=>{if(img.complete&&img.naturalWidth!==0)return Promise.resolve();if(img.decode)return img.decode().catch(()=>{});return new Promise(res=>{img.onload=img.onerror=res;});}));await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));}
+async function makeMemberCardImagesSafe(root){const imgs=Array.from((root||document).querySelectorAll('img'));await Promise.all(imgs.map(async img=>{const src=img.getAttribute('src')||'';if(!src||src.startsWith('data:'))return;const safe=await imageDataUrl(src);if(safe&&safe.startsWith('data:image/')){img.setAttribute('data-original-src',src);img.setAttribute('src',safe);}}));await waitForMemberCardReady(root);}
+function downloadDataUrl(dataUrl,filename){const a=document.createElement('a');a.href=dataUrl;a.download=filename;document.body.appendChild(a);a.click();a.remove();}
+function memberCardFileName(){return 'بطاقة-عضوية-'+String(currentMemberCardNo||'member').replace(/[\/:*?"<>|\s]+/g,'-')+'.png';}
+async function downloadBySvgSnapshot(el){const clone=el.cloneNode(true);clone.removeAttribute('id');clone.setAttribute('xmlns','http://www.w3.org/1999/xhtml');const nodes=[el,...el.querySelectorAll('*')];const clones=[clone,...clone.querySelectorAll('*')];nodes.forEach((n,i)=>{const c=clones[i];const cs=getComputedStyle(n);let css='';for(let j=0;j<cs.length;j++){const k=cs[j];css+=k+':'+cs.getPropertyValue(k)+';';}if(n.classList&&n.classList.contains('aj-member-card'))css+='box-shadow:none!important;filter:none!important;';c.setAttribute('style',css+'direction:rtl;unicode-bidi:isolate;');});const w=Math.ceil(el.getBoundingClientRect().width),h=Math.ceil(el.getBoundingClientRect().height);const html=new XMLSerializer().serializeToString(clone);const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><foreignObject width="100%" height="100%">${html}</foreignObject></svg>`;const url='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);const img=new Image();img.decoding='async';await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url;});const canvas=document.createElement('canvas');const ratio=4;canvas.width=w*ratio;canvas.height=h*ratio;const ctx=canvas.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,w,h);ctx.scale(ratio,ratio);ctx.drawImage(img,0,0);return canvas.toDataURL('image/png');}
+function printMemberCard(m){return previewMemberCard(m);}
+async function previewMemberCard(m){currentMemberCardNo=m.cardNo||'';document.getElementById('modalContent').innerHTML=`<div class="member-card-modal-title"><h2>طباعة بطاقة العضوية</h2></div><div class="member-card-note">معاينة البطاقة قبل الطباعة. سيتم فتح نافذة الطباعة بحجم البطاقة (86mm × 54mm).</div><div class="member-card-loading">جاري تحضير البطاقة...</div>`;openModal();try{const assets=await memberCardAssets(m);currentMemberCardHtml=buildMemberCardHtml(m,assets);document.getElementById('modalContent').innerHTML=`<div class="member-card-modal-title"><h2>طباعة بطاقة العضوية</h2></div><div class="member-card-note">معاينة البطاقة قبل الطباعة. سيتم فتح نافذة الطباعة بحجم البطاقة (86mm × 54mm).</div><div class="member-card-stage">${currentMemberCardHtml}</div><div class="member-card-actions"><button class="btn btn-primary" onclick="printCurrentMemberCard()">طباعة البطاقة</button><button class="btn btn-soft" onclick="downloadCurrentMemberCardImage()">تحميل الصورة</button><button class="btn btn-dark" onclick="closeModal()">إغلاق</button></div><div class="member-card-warning">⚠ تأكد من اختيار طباعة بحجم البطاقة (86mm × 54mm).</div>`;}catch(e){document.getElementById('modalContent').innerHTML=`<div class="member-card-modal-title"><h2>طباعة بطاقة العضوية</h2></div><div class="msg error" style="display:block">تعذر تحضير البطاقة: ${escapeHtml(e.message||e)}</div><div class="member-card-actions"><button class="btn btn-dark" onclick="closeModal()">إغلاق</button></div>`;}}
+async function printCurrentMemberCard(){
+const el=document.getElementById('memberCardPreview');
+if(!el)return;
+try{
+let dataUrl;
+try{dataUrl=await downloadBySvgSnapshot(el);}catch(_e){const canvas=await exportMemberCardCanvas();dataUrl=canvas.toDataURL('image/png',1.0);}
+const printArea=document.getElementById('printArea');
+printArea.innerHTML='<div class="member-card-print-sheet"><img src="'+dataUrl+'" style="width:86mm;height:54mm;display:block"></div>';
+document.body.classList.add('printing-member-card');
+setTimeout(()=>window.print(),180);
+}catch(e){msg('تعذر تجهيز الطباعة: '+(e.message||e),'error');}
 }
-function esc(s) { return String(s || '').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
-function showTab(id, btn) { 
-    if (id === 'admins' && currentAdmin?.role !== 'super') { alert('غير مسموح'); return; }
-    document.querySelectorAll('.content').forEach(c => c.classList.remove('active')); 
-    document.getElementById(id).classList.add('active'); 
-    document.querySelectorAll('.sidebar button').forEach(b => b.classList.remove('current')); 
-    if (btn) btn.classList.add('current'); 
+async function exportMemberCardCanvas(){
+const el=document.getElementById('memberCardPreview');
+await makeMemberCardImagesSafe(el);
+await waitForMemberCardReady(el);
+const canvas=await html2canvas(el,{
+backgroundColor:'#ffffff',
+scale:5,
+useCORS:true,
+allowTaint:false,
+foreignObjectRendering:false,
+logging:false,
+imageTimeout:0,
+removeContainer:true,
+windowWidth:el.scrollWidth,
+windowHeight:el.scrollHeight,
+onclone:(doc)=>{
+doc.documentElement.setAttribute('dir','rtl');doc.documentElement.setAttribute('lang','ar');doc.body.style.fontFamily='"Cairo",Arial,sans-serif';doc.querySelectorAll('.aj-member-card,.aj-member-card *').forEach(e=>{e.style.direction='rtl';e.style.unicodeBidi='isolate';});doc.querySelectorAll('.aj-member-card').forEach(e=>{e.style.boxShadow='none';e.style.filter='none';});
+}
+});
+return canvas;
+}
+async function downloadCurrentMemberCardImage(){const el=document.getElementById('memberCardPreview');if(!el)return;try{await makeMemberCardImagesSafe(el);const filename=memberCardFileName();
+let dataUrl;
+try{dataUrl=await downloadBySvgSnapshot(el);}catch(_e){const canvas=await exportMemberCardCanvas();dataUrl=canvas.toDataURL('image/png',1.0);}
+downloadDataUrl(dataUrl,filename);
+msg('تم تحميل صورة البطاقة');
+}catch(e){msg('تعذر تحميل الصورة: '+(e.message||e),'error');}}
+window.addEventListener('afterprint',()=>{document.body.classList.remove('printing-member-card');});
+function printEmployeeBadge(e){const qr='ALJAWAHIR-HR|'+e.employeeNo+'|'+e.fullName+'|'+e.status;const html=`<div class="print-doc"><div class="doc-border"><div class="doc-head"><img class="doc-logo" src="${LOGO_URL}"><div class="doc-title"><h1>بطاقة مورد بشري</h1><p>جمعية الجواهر بقمار</p><p>الموارد البشرية</p></div><div><b>${escapeHtml(e.employeeNo)}</b></div></div><div class="id-card"><div class="id-head"><img src="${LOGO_URL}"><h2>بطاقة مورد بشري | جمعية الجواهر</h2></div><div class="id-body"><img class="id-photo" src="${escapeHtml(e.photoUrl||LOGO_URL)}"><div class="id-info"><div><b>الرقم</b> ${escapeHtml(e.employeeNo)}</div><div><b>الاسم</b> ${escapeHtml(e.fullName)}</div><div><b>المنصب</b> ${escapeHtml(e.position)}</div><div><b>القسم</b> ${escapeHtml(e.department)}</div><div><b>الحالة</b> ${escapeHtml(e.status)}</div></div><img class="id-qr" src="${qrUrl(qr,130)}"></div></div><div style="margin-top:26px" class="doc-grid">${printField('الرقم الوظيفي',e.employeeNo)}${printField('الاسم الكامل',e.fullName)}${printField('المنصب',e.position)}${printField('القسم',e.department)}${printField('الهاتف',e.phone)}${printField('نوع العقد',e.contractType)}${printField('تاريخ الالتحاق',e.startDate)}${printField('الحالة',e.status)}</div><div class="signs"><div class="sign">توقيع حامل البطاقة</div><div class="sign">ختم وتوقيع الإدارة</div></div></div></div>`;document.getElementById('printArea').innerHTML=html;window.print();}
+function printField(k,v){return `<div class="doc-field"><b>${k}</b>${escapeHtml(v||'—')}</div>`;}
+function fillEmployeeSelects(){const opts='<option value="">اختر</option>'+state.employees.map(e=>`<option value="${escapeHtml(e.employeeNo)}">${escapeHtml(e.employeeNo+' - '+e.fullName)}</option>`).join('');document.querySelectorAll('.employeeSelect').forEach(s=>s.innerHTML=opts);}
+document.getElementById('attendanceForm').addEventListener('submit',async e=>{e.preventDefault();try{state.attendance=await apiCall('addAttendance',[formToObj(e.currentTarget),token]);renderLeaveAttendance();e.currentTarget.reset();msg('تم حفظ الحضور');}catch(err){msg('❌ '+err.message,'error');}});
+document.getElementById('leaveForm').addEventListener('submit',async e=>{e.preventDefault();try{state.leaves=await apiCall('addLeaveRequest',[formToObj(e.currentTarget),token]);renderLeaveAttendance();e.currentTarget.reset();msg('تم حفظ طلب العطلة');}catch(err){msg('❌ '+err.message,'error');}});
+function renderLeaveAttendance(){document.getElementById('leavesBody').innerHTML=state.leaves.slice().reverse().map(l=>`<tr><td>${escapeHtml(l.employeeName)}</td><td>${escapeHtml(l.leaveType)}</td><td>${escapeHtml(l.fromDate)}</td><td>${escapeHtml(l.toDate)}</td><td>${escapeHtml(l.days)}</td><td>${statusBadge(l.status)}</td><td><div class="actions">${l.status==='قيد الدراسة'?`<button class="btn btn-success btn-small" onclick="processLeave('${escapeHtml(l.id)}','approve')">قبول</button><button class="btn btn-danger btn-small" onclick="processLeave('${escapeHtml(l.id)}','reject')">رفض</button>`:'—'}</div></td></tr>`).join('')||'<tr><td colspan="7" class="empty">لا توجد عطل</td></tr>';document.getElementById('attendanceBody').innerHTML=state.attendance.slice().reverse().slice(0,80).map(a=>`<tr><td>${escapeHtml(a.employeeName)}</td><td>${escapeHtml(a.date)}</td><td>${statusBadge(a.status)}</td><td>${escapeHtml(a.checkIn)}</td><td>${escapeHtml(a.checkOut)}</td><td>${escapeHtml(a.notes)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا يوجد حضور مسجل</td></tr>';}
+async function processLeave(id,type){const note=prompt('ملاحظة المعالجة:', '')||'';try{state.leaves=await apiCall(type==='approve'?'approveLeaveRequest':'rejectLeaveRequest',[id,note,token]);renderLeaveAttendance();msg('تمت معالجة طلب العطلة');}catch(e){msg('❌ '+e.message,'error');}}
+document.getElementById('paymentForm').addEventListener('submit',async e=>{e.preventDefault();try{state.payments=await apiCall('addPayment',[formToObj(e.currentTarget),token]);renderPayments();e.currentTarget.reset();msg('تم حفظ الدفع');}catch(err){msg('❌ '+err.message,'error');}});
+function renderPayments(){document.getElementById('paymentsBody').innerHTML=state.payments.slice().reverse().map(p=>`<tr><td>${escapeHtml(p.employeeName)}</td><td>${escapeHtml(p.month)}</td><td>${escapeHtml(p.amount)} دج</td><td>${escapeHtml(p.paymentType)}</td><td>${statusBadge(p.status)}</td><td>${escapeHtml(p.createdAt)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد مدفوعات</td></tr>';}
+async function loadLogs(){try{state.logs=await apiCall('listOperationLogs',[token]);document.getElementById('logsBody').innerHTML=state.logs.map(l=>`<tr><td>${escapeHtml(l.date)}</td><td>${escapeHtml(l.action)}</td><td>${escapeHtml(l.actor)}</td><td>${escapeHtml(l.role)}</td><td>${escapeHtml(l.ref)}</td><td>${escapeHtml(l.details)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد سجلات</td></tr>';}catch(e){msg('❌ '+e.message,'error');}}
+function openModal(){document.getElementById('modal').classList.add('show');}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+
+function canManageAdmins(){return currentUser&&currentUser.role==='super';}
+function canEditRecords(){return currentUser&&(currentUser.role==='super'||currentUser.role==='editor');}
+function applyRolePermissions(){
+ document.querySelectorAll('.admin-only').forEach(el=>el.classList.toggle('hidden-by-role',!canManageAdmins()));
+ document.querySelectorAll('[data-need-edit]').forEach(el=>{if(!canEditRecords())el.classList.add('viewer-disabled');else el.classList.remove('viewer-disabled');});
+}
+async function loadAdmins(){
+ if(!canManageAdmins()){msg('هذه الصفحة خاصة بالأدمن صاحب جميع الصلاحيات','error');return;}
+ try{state.admins=await apiCall('listAdmins',[token]);}
+ catch(e){state.admins=state.admins&&state.admins.length?state.admins:[{username:currentUser.username||'admin',name:currentUser.name||'المدير',role:currentUser.role||'super',status:'نشط',updatedAt:new Date().toISOString().slice(0,10)}];}
+ renderAdmins();
+}
+function resetAdminForm(){const f=document.getElementById('adminForm');if(f)f.reset();if(f&&f.elements.id)f.elements.id.value='';}
+function renderAdmins(){
+ const body=document.getElementById('adminsBody');if(!body)return;
+ body.innerHTML=(state.admins||[]).map(a=>`<tr><td>${escapeHtml(a.username)}</td><td>${escapeHtml(a.name)}</td><td>${roleLabel(a.role)}</td><td>${statusBadge(a.status||'نشط')}</td><td>${escapeHtml(a.updatedAt||a.createdAt||'—')}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editAdmin(${JSON.stringify(a).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-danger btn-small" onclick="deleteAdminAccount('${escapeHtml(a.id||a.username)}')">حذف</button></div></td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد حسابات أدمن</td></tr>';
+}
+function editAdmin(a){const f=document.getElementById('adminForm');if(!f)return;Object.keys(a).forEach(k=>{const el=f.elements[k];if(el)el.value=a[k]||''});if(f.elements.id)f.elements.id.value=a.id||a.username||'';if(f.elements.password)f.elements.password.value='';window.scrollTo({top:0,behavior:'smooth'});}
+const adminFormEl=document.getElementById('adminForm');
+if(adminFormEl){adminFormEl.addEventListener('submit',async e=>{e.preventDefault();if(!canManageAdmins()){msg('ليست لديك صلاحية تعديل حسابات الأدمن','error');return;}const data=formToObj(e.currentTarget);try{state.admins=await apiCall(data.id?'updateAdmin':'addAdmin',[data,token]);}catch(err){const idx=(state.admins||[]).findIndex(x=>String(x.id||x.username)===String(data.id||data.username));const row={...data,updatedAt:new Date().toISOString().slice(0,10)};if(idx>=0)state.admins[idx]={...state.admins[idx],...row};else state.admins.push(row);}renderAdmins();resetAdminForm();msg('تم حفظ صلاحيات الأدمن');});}
+async function deleteAdminAccount(id){if(!canManageAdmins()){msg('ليست لديك صلاحية حذف حسابات الأدمن','error');return;}if(!confirm('تأكيد حذف حساب الأدمن؟'))return;try{state.admins=await apiCall('deleteAdmin',[id,token]);}catch(e){state.admins=(state.admins||[]).filter(x=>String(x.id||x.username)!==String(id));}renderAdmins();msg('تم حذف الحساب');}
+
+function receiptDate(){return new Date().toISOString().slice(0,10);}
+function receiptValue(o,keys,def='—'){for(const k of keys){if(o&&o[k]!=null&&String(o[k]).trim()!=='')return o[k];}return def;}
+function buildMembershipReceiptHtml(o){
+ const no=receiptValue(o,['requestNo','cardNo','memberNo','id']);
+ const name=receiptValue(o,['fullName','name']);
+ const phone=receiptValue(o,['phone','mobile']);
+ const type=receiptValue(o,['membershipType','memberType','type']);
+ const amount=receiptValue(o,['amountPaid','amount','paidAmount'],'0');
+ const status=receiptValue(o,['status'],'قيد الدراسة');
+ const date=cleanDateValue(receiptValue(o,['requestDate','joinDate','approvedAt','confirmedAt','createdAt'],'')).replace(/^$/,'—');
+ const docType=receiptValue(o,['docType']);
+ const docNo=receiptValue(o,['docNumber','nationalId']);
+ const address=receiptValue(o,['address','location','commune']);
+ const email=receiptValue(o,['email']);
+ const qr=qrUrl('ALJAWAHIR-RECEIPT|'+no+'|'+name+'|'+status,180);
+ return `<div class="receipt-doc" id="receiptPreview" dir="rtl" lang="ar"><img class="receipt-watermark" src="${LOGO_URL}" alt="" crossorigin="anonymous" referrerpolicy="no-referrer"><div class="receipt-head"><img class="receipt-logo" src="${LOGO_URL}" alt="شعار الجمعية" crossorigin="anonymous" referrerpolicy="no-referrer"><div class="receipt-title"><h1>جمعية الجواهر بقمار</h1><p>ولاية الوادي - الجزائر</p><span class="receipt-pill">وصل استلام ملف الانخراط</span></div><img class="receipt-logo" src="${LOGO_URL}" alt="شعار الجمعية" crossorigin="anonymous" referrerpolicy="no-referrer"></div><div class="receipt-meta"><div class="receipt-field"><b>رقم الوصل / المرجع</b>${escapeHtml(no)}</div><div class="receipt-field"><b>تاريخ التحرير</b>${receiptDate()}</div></div><div class="receipt-section-title">بيانات صاحب الطلب</div><div class="receipt-grid"><div class="receipt-field"><b>الاسم واللقب</b>${escapeHtml(name)}</div><div class="receipt-field"><b>الهاتف</b>${escapeHtml(phone)}</div><div class="receipt-field"><b>البريد الإلكتروني</b>${escapeHtml(email)}</div><div class="receipt-field"><b>العنوان</b>${escapeHtml(address)}</div><div class="receipt-field"><b>نوع الوثيقة</b>${escapeHtml(docType)}</div><div class="receipt-field"><b>رقم الوثيقة</b>${escapeHtml(docNo)}</div></div><div class="receipt-section-title">بيانات الانخراط</div><div class="receipt-grid"><div class="receipt-field"><b>نوع الانخراط</b>${escapeHtml(type)}</div><div class="receipt-field"><b>المبلغ المدفوع</b>${escapeHtml(amount)} دج</div><div class="receipt-field"><b>تاريخ الإيداع / الانخراط</b>${escapeHtml(date)}</div><div class="receipt-field"><b>حالة الملف</b>${escapeHtml(status)}</div><div class="receipt-field"><b>رمز التحقق QR</b><img class="receipt-qr" src="${qr}" alt="QR"></div><div class="receipt-field"><b>ملاحظة</b>هذا الوصل يثبت استلام ملف الانخراط، ولا يعد بطاقة عضوية إلا بعد التأكيد الإداري.</div></div><div class="receipt-note">تم تحرير هذا الوصل آلياً من لوحة التحكم الإدارية لجمعية الجواهر بقمار، مع الحفاظ على الهوية البصرية الرسمية للجمعية.</div><div class="receipt-signs"><div class="receipt-sign">توقيع المعني</div><div class="receipt-sign">ختم وتوقيع الإدارة</div></div></div>`;
 }
 
-// تسجيل الدخول
-async function login() {
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
-    setMsg('loginMsg', 'جاري تسجيل الدخول...', 'ok');
-    try {
-        const res = await callAPI('loginAdmin', { username, password });
-        sessionToken = res.token;
-        currentAdmin = res.admin;
-        localStorage.setItem('membership_session_token', sessionToken);
-        localStorage.setItem('membership_current_admin', JSON.stringify(currentAdmin));
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('appShell').style.display = 'block';
-        applyRoleUI();
-        await loadReport(true);
-    } catch(e) {
-        setMsg('loginMsg', 'خطأ: ' + e.message, 'error');
-    }
+function addYearsToDate(d,years){
+ const v=cleanDateValue(d);if(!v||v==='—')return '—';
+ const m=String(v).match(/^(\d{4})-(\d{2})-(\d{2})$/);if(!m)return v;
+ const dt=new Date(Number(m[1]),Number(m[2])-1,Number(m[3]));
+ dt.setFullYear(dt.getFullYear()+years);
+ return dt.toISOString().slice(0,10);
+}
+function buildCardDeliveryReceiptHtml(o){
+ const cardNo=receiptValue(o,['cardNo','memberNo','membershipNo','id']);
+ const requestNo=receiptValue(o,['requestNo','requestId'],'—');
+ const name=receiptValue(o,['fullName','name']);
+ const phone=receiptValue(o,['phone','mobile']);
+ const type=receiptValue(o,['membershipType','memberType','type']);
+ const status=receiptValue(o,['status'],'نشط');
+ const joinDate=cleanDateValue(receiptValue(o,['joinDate','approvedAt','confirmedAt','confirmationDate','approvalDate','acceptedAt','requestDate','createdAt'],'')).replace(/^$/,'—');
+ const validTo=cleanDateValue(receiptValue(o,['validTo','expiryDate','expireDate','endDate'],'')).replace(/^$/,'') || addYearsToDate(joinDate,3);
+ const docType=receiptValue(o,['docType'],'—');
+ const docNo=receiptValue(o,['docNumber','nationalId','nin'],'—');
+ const address=receiptValue(o,['address','location','commune'],'—');
+ const email=receiptValue(o,['email'],'—');
+ const deliveryDate=receiptDate();
+ const qr=qrUrl('ALJAWAHIR-CARD-DELIVERY|CARD:'+cardNo+'|NAME:'+name+'|DATE:'+deliveryDate,180);
+ return `<div class="receipt-doc" id="receiptPreview" dir="rtl" lang="ar"><img class="receipt-watermark" src="${LOGO_URL}" alt="" crossorigin="anonymous" referrerpolicy="no-referrer"><div class="receipt-head"><img class="receipt-logo" src="${LOGO_URL}" alt="شعار الجمعية" crossorigin="anonymous" referrerpolicy="no-referrer"><div class="receipt-title"><h1>جمعية الجواهر بقمار</h1><p>ولاية الوادي - الجزائر</p><span class="receipt-pill">وصل استلام بطاقة العضوية</span></div><img class="receipt-logo" src="${LOGO_URL}" alt="شعار الجمعية" crossorigin="anonymous" referrerpolicy="no-referrer"></div><div class="receipt-meta"><div class="receipt-field"><b>رقم الوصل / رقم البطاقة</b>${escapeHtml(cardNo)}</div><div class="receipt-field"><b>تاريخ تسليم البطاقة</b>${escapeHtml(deliveryDate)}</div></div><div class="receipt-section-title">بيانات المستلم</div><div class="receipt-grid"><div class="receipt-field"><b>الاسم واللقب</b>${escapeHtml(name)}</div><div class="receipt-field"><b>الهاتف</b>${escapeHtml(phone)}</div><div class="receipt-field"><b>البريد الإلكتروني</b>${escapeHtml(email)}</div><div class="receipt-field"><b>العنوان</b>${escapeHtml(address)}</div><div class="receipt-field"><b>نوع الوثيقة</b>${escapeHtml(docType)}</div><div class="receipt-field"><b>رقم الوثيقة</b>${escapeHtml(docNo)}</div></div><div class="receipt-section-title">بيانات البطاقة المسلّمة</div><div class="receipt-grid"><div class="receipt-field"><b>رقم طلب الانخراط</b>${escapeHtml(requestNo)}</div><div class="receipt-field"><b>نوع الانخراط</b>${escapeHtml(type)}</div><div class="receipt-field"><b>تاريخ الانخراط / التأكيد</b>${escapeHtml(joinDate)}</div><div class="receipt-field"><b>صالحة إلى غاية</b>${escapeHtml(validTo)}</div><div class="receipt-field"><b>حالة البطاقة</b>${escapeHtml(status)}</div><div class="receipt-field"><b>رمز التحقق QR</b><img class="receipt-qr" src="${qr}" alt="QR"></div></div><div class="receipt-note"><b>تصريح بالاستلام:</b><br>أقر أنا الممضي أسفله أنني استلمت بطاقة العضوية الخاصة بي من جمعية الجواهر بقمار، وأتعهد بالمحافظة عليها واستعمالها في إطارها النظامي فقط. هذا الوصل يثبت تسليم البطاقة للمعني ولا يغني عن البطاقة الأصلية.</div><div class="receipt-signs"><div class="receipt-sign">توقيع المستلم</div><div class="receipt-sign">ختم وتوقيع الإدارة</div></div></div>`;
+}
+async function previewCardDeliveryReceipt(o){
+ document.getElementById('modalContent').innerHTML=`<div class="member-card-modal-title"><h2>وصل استلام بطاقة العضوية</h2></div><div class="receipt-stage">${buildCardDeliveryReceiptHtml(o)}</div><div class="receipt-actions"><button class="btn btn-primary" onclick="printCurrentReceipt()">طباعة الوصل</button><button class="btn btn-soft" onclick="downloadCurrentReceiptPdf()">تحميل PDF</button><button class="btn btn-dark" onclick="closeModal()">إغلاق</button></div>`;openModal();
 }
 
-function logout() {
-    localStorage.removeItem('membership_session_token');
-    localStorage.removeItem('membership_current_admin');
-    location.reload();
+async function previewMembershipReceipt(o){
+ document.getElementById('modalContent').innerHTML=`<div class="member-card-modal-title"><h2>وصل استلام ملف الانخراط</h2></div><div class="receipt-stage">${buildMembershipReceiptHtml(o)}</div><div class="receipt-actions"><button class="btn btn-primary" onclick="printCurrentReceipt()">طباعة الوصل</button><button class="btn btn-soft" onclick="downloadCurrentReceiptPdf()">تحميل PDF</button><button class="btn btn-dark" onclick="closeModal()">إغلاق</button></div>`;openModal();
+}
+async function waitForReceiptReady(root){try{if(document.fonts)await document.fonts.ready;}catch(e){}const imgs=Array.from((root||document).querySelectorAll('img'));await Promise.all(imgs.map(img=>img.complete?Promise.resolve():new Promise(r=>{img.onload=img.onerror=r;})));}
+
+async function inlineAllImages(container){
+ const images=[...container.querySelectorAll('img')];
+ await Promise.all(images.map(async(img)=>{
+   try{
+     const src=img.getAttribute('src')||img.src;
+     if(!src || src.startsWith('data:')) return;
+     let dataUrl='';
+     if(typeof imageDataUrl==='function'){
+       dataUrl=await imageDataUrl(src);
+     }
+     if(!dataUrl || !String(dataUrl).startsWith('data:image/')){
+       const res=await fetch(src,{mode:'cors',credentials:'omit',cache:'force-cache'});
+       const blob=await res.blob();
+       dataUrl=await blobToDataUrl(blob);
+     }
+     if(dataUrl && String(dataUrl).startsWith('data:image/')){
+       img.src=dataUrl;
+       img.removeAttribute('crossorigin');
+       img.setAttribute('decoding','sync');
+     }
+   }catch(e){}
+ }));
 }
 
-function applyRoleUI() {
-    document.getElementById('adminBadge').textContent = currentAdmin.name + ' | ' + currentAdmin.roleLabel;
-    document.querySelectorAll('.super-only').forEach(x => x.style.display = currentAdmin.role === 'super' ? 'block' : 'none');
+async function printCurrentReceipt(){
+ const el=document.getElementById('receiptPreview');
+ if(!el)return;
+ await waitForReceiptReady(el);
+ const clone=el.cloneNode(true);
+ await inlineAllImages(clone);
+ document.getElementById('printArea').innerHTML='';
+ document.getElementById('printArea').appendChild(clone);
+ await waitForReceiptReady(clone);
+ document.body.classList.add('printing-receipt');
+ setTimeout(()=>window.print(),260);
 }
 
-// تحميل التقرير الرئيسي
-async function loadReport(manual) {
-    if(manual) document.getElementById('syncStatus').textContent = 'جاري التحميل...';
-    try {
-        const report = await callAPI('getMembershipReport');
-        renderReport(report);
-        if(manual) document.getElementById('syncStatus').textContent = 'تم التحديث بنجاح';
-    } catch(e) {
-        document.getElementById('syncStatus').textContent = 'خطأ: ' + e.message;
-        console.error(e);
-    }
+async function downloadCurrentReceiptPdf(){
+ const el=document.getElementById('receiptPreview');
+ if(!el)return;
+ await waitForReceiptReady(el);
+ if(typeof html2pdf==='undefined'){printCurrentReceipt();return;}
+ const clone=el.cloneNode(true);
+ await inlineAllImages(clone);
+ clone.style.width='190mm';
+ clone.style.height='277mm';
+ clone.style.minHeight='277mm';
+ clone.style.maxHeight='277mm';
+ clone.style.background='#ffffff';
+ clone.style.padding='7mm';
+ clone.style.overflow='hidden';
+ const holder=document.createElement('div');
+ holder.style.position='fixed';
+ holder.style.left='-99999px';
+ holder.appendChild(clone);
+ document.body.appendChild(holder);
+ await waitForReceiptReady(clone);
+ const no=(el.querySelector('.receipt-field')?.textContent||'receipt').replace(/[\\/:*?"<>|\s]+/g,'-');
+ await html2pdf().set({
+   margin:[0,0,0,0],
+   filename:'وصل-استلام-'+no+'.pdf',
+   image:{type:'jpeg',quality:1},
+   html2canvas:{scale:4,useCORS:true,allowTaint:true,backgroundColor:'#ffffff',letterRendering:true},
+   pagebreak:{mode:['avoid-all','css','legacy']},
+   jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+ }).from(clone).save();
+ holder.remove();
 }
+window.addEventListener('afterprint',()=>{document.body.classList.remove('printing-receipt');});
 
-function renderReport(r) {
-    currentReport = r;
-    document.getElementById('syncStatus').textContent = new Date().toLocaleString('ar-DZ');
-    document.querySelectorAll('.brand-logo').forEach(i => i.src = r.identity.logoUrl);
-    document.getElementById('totalMembers').textContent = r.totals.total;
-    document.getElementById('activeMembers').textContent = r.totals.active;
-    document.getElementById('pendingRequests').textContent = r.pendingRequests.length;
-    document.getElementById('totalValue').textContent = r.totals.value.toLocaleString() + ' دج';
-    document.getElementById('pendingTable').innerHTML = pendingRequestsTable(r.pendingRequests.slice(0,5));
-    document.getElementById('recentMembersTable').innerHTML = membersTable(r.members.slice(0,5), true);
-    loadRequests();
-    loadMembers();
-}
-
-function pendingRequestsTable(rows) {
-    if(!rows.length) return '<p>لا توجد طلبات</p>';
-    return `<table><thead><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>${rows.map(r => `<tr>
-        <td>${esc(r.requestNo)}</td>
-        <td>${esc(r.firstName)} ${esc(r.lastName)}</td>
-        <td>${esc(r.phone)}</td>
-        <td>${esc(r.membershipType)}</td>
-        <td>${esc(r.status)}</td>
-        <td><button class="mini" onclick="approveReq('${esc(r.requestNo)}')">قبول</button> <button class="mini danger" onclick="rejectReq('${esc(r.requestNo)}')">رفض</button></td>
-    </tr>`).join('')}</tbody></table>`;
-}
-
-function membersTable(rows, simple) {
-    if(!rows.length) return '<p>لا يوجد أعضاء</p>';
-    return `<table><thead><tr><th>رقم العضوية</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>الحالة</th>${!simple ? '<th>طباعة</th>' : ''}</tr></thead><tbody>${rows.map(m => `<tr>
-        <td>${esc(m.memberId)}</td>
-        <td>${esc(m.firstName)} ${esc(m.lastName)}</td>
-        <td>${esc(m.phone)}</td>
-        <td>${esc(m.membershipType)}</td>
-        <td>${esc(m.status)}</td>
-        ${!simple ? `<td><button class="mini" onclick="printCard('${esc(m.memberId)}')">🖨️ طباعة البطاقة</button></td>` : ''}
-    </tr>`).join('')}</tbody></table>`;
-}
-
-function requestsTableHtml(rows) {
-    if(!rows.length) return '<p>لا توجد طلبات</p>';
-    return `<table><thead><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>تاريخ الطلب</th><th>الحالة</th><th>صور</th><th>إجراء</th></tr></thead><tbody>${rows.map(r => `<tr>
-        <td>${esc(r.requestNo)}</td>
-        <td>${esc(r.firstName)} ${esc(r.lastName)}</td>
-        <td>${esc(r.phone)}</td>
-        <td>${esc(r.membershipType)}</td>
-        <td>${esc(r.createdAt)}</td>
-        <td>${esc(r.status)}</td>
-        <td><a href="${esc(r.photoUrl)}" target="_blank">📷</a> <a href="${esc(r.docFrontUrl)}" target="_blank">🪪</a></td>
-        <td>${r.status === 'قيد الانتظار' && currentAdmin?.role !== 'viewer' ? `<button class="mini" onclick="approveReq('${esc(r.requestNo)}')">قبول</button> <button class="mini danger" onclick="rejectReq('${esc(r.requestNo)}')">رفض</button>` : ''}</td>
-    </tr>`).join('')}</tbody></table>`;
-}
-
-function loadRequests() { 
-    if(!currentReport) return; 
-    document.getElementById('requestsTable').innerHTML = requestsTableHtml(currentReport.requests); 
-}
-
-function loadMembers() { 
-    if(!currentReport) return; 
-    document.getElementById('membersTable').innerHTML = membersTable(currentReport.members, false); 
-}
-
-async function approveReq(no) { 
-    if(!confirm('تأكيد قبول الطلب؟')) return; 
-    try {
-        await callAPI('approveMembershipRequest', { requestNo: no });
-        await loadReport(true);
-    } catch(e) { alert(e.message); }
-}
-
-async function rejectReq(no) { 
-    if(!confirm('رفض الطلب؟')) return; 
-    try {
-        await callAPI('rejectMembershipRequest', { requestNo: no });
-        await loadReport(true);
-    } catch(e) { alert(e.message); }
-}
-
-async function printCard(memberId) { 
-    try {
-        const m = await callAPI('getMemberCardData', { memberId });
-        const win = window.open('', '_blank');
-        win.document.write(`
-<!DOCTYPE html>
-<html dir="rtl">
-<head>
-    <title>بطاقة العضوية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body{font-family:Cairo;padding:20px;background:#eee}
-        .card{max-width:400px;margin:auto;background:white;border-radius:24px;overflow:hidden;box-shadow:0 12px 30px #0002;direction:rtl}
-        .header{background:linear-gradient(135deg,#2986B0,#1d5f7d);color:white;padding:20px;text-align:center}
-        .header img{width:80px;height:80px;border-radius:50%;border:3px solid white;margin-bottom:10px}
-        .content{padding:20px}
-        .row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:12px 0}
-        .label{font-weight:700;color:#2986B0}
-        .qrcode{text-align:center;padding:15px;background:#f5f5f5;margin-top:15px;border-radius:12px}
-        .footer{background:#f9f9f9;padding:12px;text-align:center;font-size:12px;color:#777}
-        @media print{body{background:white}.card{box-shadow:none}}
-    </style>
-</head>
-<body>
-    <div class="card">
-        <div class="header">
-            <img src="${currentReport?.identity?.logoUrl || ''}">
-            <h2>بطاقة العضوية</h2>
-            <h3>${esc(m.memberId)}</h3>
-        </div>
-        <div class="content">
-            <div class="row"><span class="label">الاسم:</span><span>${esc(m.firstName)} ${esc(m.lastName)}</span></div>
-            <div class="row"><span class="label">نوع العضوية:</span><span>${esc(m.membershipType)}</span></div>
-            <div class="row"><span class="label">تاريخ التسجيل:</span><span>${esc(m.createdAt)}</span></div>
-            <div class="row"><span class="label">الحالة:</span><span>${m.status === 'نشط' ? '✔️ نشط' : '⛔ موقوف'}</span></div>
-            <div class="qrcode">🔹 رمز QR للتحقق 🔹<br><small>${esc(m.memberId)}</small></div>
-        </div>
-        <div class="footer">جمعية الجواهر بقمار - نظام العضوية الرسمي</div>
-    </div>
-    <script>window.print()<\/script>
-</body>
-</html>`);
-        win.document.close();
-    } catch(e) { alert(e.message); }
-}
-
-// إدارة الأدمن
-async function loadAdmins() { 
-    if(currentAdmin?.role !== 'super') return; 
-    try {
-        const list = await callAPI('listAdmins');
-        document.getElementById('adminsTable').innerHTML = `
-        <table><thead><tr><th>الاسم</th><th>الدخول</th><th>الصلاحية</th><th>نشط</th><th>كلمة مرور جديدة</th><th>إجراء</th></tr></thead><tbody>
-        ${list.map(a => `<tr>
-            <td><input id="n_${a.id}" value="${esc(a.name)}"></td>
-            <td><input id="u_${a.id}" value="${esc(a.username)}"></td>
-            <td><select id="r_${a.id}"><option ${a.role==='super'?'selected':''}>super</option><option ${a.role==='editor'?'selected':''}>editor</option><option ${a.role==='viewer'?'selected':''}>viewer</option></select></td>
-            <td><select id="a_${a.id}"><option ${a.active?'selected':''}>true</option><option ${!a.active?'selected':''}>false</option></select></td>
-            <td><input id="p_${a.id}" placeholder="كلمة مرور جديدة"></td>
-            <td><button class="mini" onclick="saveAdmin('${a.id}')">حفظ</button> <button class="mini danger" onclick="deleteAdmin('${a.id}')">حذف</button></td>
-        </tr>`).join('')}
-        </tbody></table>`;
-    } catch(e) { setMsg('adminMsg', e.message, 'error'); }
-}
-
-async function addAdminUser() { 
-    try {
-        await callAPI('addAdmin', { 
-            name: document.getElementById('adminName').value, 
-            username: document.getElementById('adminUsername').value, 
-            password: document.getElementById('adminPassword').value, 
-            role: document.getElementById('adminRole').value 
-        });
-        setMsg('adminMsg', 'تمت الإضافة', 'ok');
-        document.getElementById('adminName').value = '';
-        document.getElementById('adminUsername').value = '';
-        document.getElementById('adminPassword').value = '';
-        await loadAdmins();
-    } catch(e) { setMsg('adminMsg', e.message, 'error'); }
-}
-
-async function saveAdmin(id) { 
-    try {
-        const res = await callAPI('updateAdmin', { 
-            id, 
-            name: document.getElementById('n_'+id).value, 
-            username: document.getElementById('u_'+id).value, 
-            password: document.getElementById('p_'+id).value, 
-            role: document.getElementById('r_'+id).value, 
-            active: document.getElementById('a_'+id).value === 'true' 
-        });
-        if(res.currentAdmin) currentAdmin = res.currentAdmin;
-        await loadAdmins();
-    } catch(e) { alert(e.message); }
-}
-
-async function deleteAdmin(id) { 
-    if(!confirm('حذف؟')) return; 
-    try {
-        await callAPI('deleteAdmin', { id });
-        await loadAdmins();
-    } catch(e) { alert(e.message); }
-}
-
-// بدء التشغيل
-window.onload = () => { 
-    if(APPS_SCRIPT_WEB_APP_URL !== 'ضع_رابط_التطبيق_هنا' && sessionToken && currentAdmin) { 
-        document.getElementById('loginScreen').style.display = 'none'; 
-        document.getElementById('appShell').style.display = 'block'; 
-        applyRoleUI(); 
-        loadReport(true); 
-    } 
-};
+init();
 </script>
+
+<script id="card-download-fix">
+window.addEventListener('load',()=>{
+ document.fonts && document.fonts.ready.then(()=>{
+   document.body.classList.add('fonts-loaded');
+ });
+});
+
+async function fixedCardDownload(cardId='memberCard'){
+ const card=document.getElementById(cardId)||document.querySelector('.aj-member-card')||document.querySelector('.member-card');
+ if(!card || typeof html2canvas==='undefined') return;
+
+ await document.fonts.ready;
+
+ const imgs=card.querySelectorAll('img');
+ await Promise.all(Array.from(imgs).map(img=>{
+   if(img.complete) return Promise.resolve();
+   return new Promise(r=>{img.onload=r;img.onerror=r;});
+ }));
+
+ const canvas=await html2canvas(card,{
+   scale:3,
+   useCORS:true,
+   backgroundColor:null,
+   logging:false
+ });
+
+ const link=document.createElement('a');
+ link.download='member-card.png';
+ link.href=canvas.toDataURL('image/png');
+ link.click();
+}
+</script>
+
 </body>
 </html>
