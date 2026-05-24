@@ -1,6 +1,9 @@
 
 
 
+
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -248,16 +251,98 @@ th{background:rgba(41,158,157,.11)!important;color:var(--primary-dark)!important
 }
 </style>
 
+
+<style id="aljawahir-reports-css">
+/* ===== Reports inside dashboard ===== */
+.report-toolbar{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end}
+.report-toolbar .report-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.report-summary-grid{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:12px;margin:14px 0}
+.report-mini-stat{border:1px solid rgba(41,158,157,.18);border-radius:18px;background:#fff;padding:14px;box-shadow:0 8px 18px rgba(41,158,157,.06)}
+.report-mini-stat b{display:block;font-size:24px;color:var(--primary-dark);font-weight:900;line-height:1.2}
+.report-mini-stat span{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-top:4px}
+.report-doc{background:#fff;border:1px solid var(--border);border-radius:22px;padding:18px;box-shadow:var(--shadow);direction:rtl}
+.report-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px solid rgba(41,158,157,.18);padding-bottom:12px;margin-bottom:14px}
+.report-head .report-brand{display:flex;align-items:center;gap:12px}
+.report-head img{width:56px;height:56px;object-fit:contain;border-radius:16px;background:#fff}
+.report-head h2{margin:0;color:var(--primary);font-size:22px;font-weight:900}
+.report-head p{margin:2px 0 0;color:var(--muted);font-weight:800;font-size:12px}
+.report-meta{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.report-chip{display:inline-flex;align-items:center;border-radius:999px;background:rgba(41,158,157,.10);color:var(--primary-dark);padding:7px 12px;font-weight:900;font-size:12px}
+.report-table{width:100%;border-collapse:collapse;min-width:760px;background:#fff}
+.report-table th,.report-table td{border-bottom:1px solid rgba(41,158,157,.12);padding:10px 9px;text-align:right;font-size:12px;vertical-align:middle}
+.report-table th{background:rgba(41,158,157,.11);color:var(--primary-dark);font-weight:900}
+.report-note{margin-top:12px;border:1px dashed rgba(168,100,23,.35);border-radius:14px;padding:10px 12px;color:#555;font-weight:700;line-height:1.8}
+@media(max-width:1000px){.report-toolbar{grid-template-columns:1fr 1fr}.report-summary-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.report-toolbar{grid-template-columns:1fr}.report-summary-grid{grid-template-columns:1fr}.report-head{align-items:flex-start;flex-direction:column}.report-meta{justify-content:flex-start}}
+@media print{
+ body.printing-report #printArea{display:block!important;width:210mm!important;min-height:297mm!important;margin:0 auto!important;padding:10mm!important;background:#fff!important}
+ body.printing-report #printArea .report-doc{box-shadow:none!important;border-radius:10px!important;width:190mm!important;min-height:277mm!important;margin:0 auto!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+ body.printing-report #printArea .report-table{min-width:0!important}
+ body.printing-report #printArea .report-table th,body.printing-report #printArea .report-table td{font-size:10px!important;padding:6px!important}
+}
+</style>
+
+<style id="aljawahir-validity-no-frame">
+/* إخفاء الإطار حول عبارة صالحة لمدة 3 سنوات */
+.aj-validity{
+  border:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+</style>
+
 </head>
 <body>
-<section id="loginView" class="login-wrap"><div class="login-card"><img class="logo" src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"><h1>لوحة التحكم الإدارية</h1><p>جمعية الجواهر بقمار<br>نظام المنخرطين والبطاقات</p><form id="loginForm"><div class="field"><label>اسم المستخدم</label><input id="username" value="admin" autocomplete="username" required></div><div class="field"><label>كلمة المرور</label><input id="password" type="password" value="admin123" autocomplete="current-password" required></div><button class="btn btn-primary" style="width:100%;margin-top:18px">تسجيل الدخول</button><div id="loginMsg" class="msg"></div></form></div></section>
-<section id="appView" class="app hidden"><aside class="sidebar"><div class="brand"><a href="https://aljawahirdev.github.io/home/"><img src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"></a><h2>جمعية الجواهر بقمار<span>لوحة التحكم الإدارية</span></h2></div><nav class="nav"><button class="btn active" data-tab="dashboard">لوحة التحكم</button><button class="btn" data-tab="employees">الموارد البشرية</button><button class="btn" data-tab="requests">طلبات الانخراط</button><button class="btn" data-tab="members">المنخرطون</button><button class="btn" data-tab="leaves">العطل والحضور</button><button class="btn" data-tab="payments">الأجور/التعويضات</button><button class="btn admin-only" data-tab="admins">صلاحيات الأدمن</button><button class="btn" data-tab="logs">السجلات</button></nav><div class="side-info">نظام إداري موحد لتسيير المنخرطين والموارد البشرية والبطاقات الرقمية بهوية جمعية الجواهر.</div></aside><main class="main"><div class="top"><h1 id="pageTitle">لوحة التحكم - جمعية الجواهر</h1><div class="userbox"><span id="userName">—</span><button class="btn btn-danger btn-small" onclick="logout()">خروج</button></div></div><div id="globalMsg" class="msg"></div>
+<section id="loginView" class="login-wrap"><div class="login-card"><img class="logo" src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"><h1>لوحة التحكم الإدارية</h1><p>جمعية الجواهر بقمار<br>نظام المنخرطين والبطاقات</p><form id="loginForm"><div class="field"><label>اسم المستخدم</label><input id="username" value=" " autocomplete="username" required></div><div class="field"><label>كلمة المرور</label><input id="password" type="password" value=" " autocomplete="current-password" required></div><button class="btn btn-primary" style="width:100%;margin-top:18px">تسجيل الدخول</button><div id="loginMsg" class="msg"></div></form></div></section>
+<section id="appView" class="app hidden"><aside class="sidebar"><div class="brand"><a href="https://aljawahirdev.github.io/home/"><img src="https://drive.google.com/thumbnail?id=1mN39uinRmOQGj04B5OfC9ZTPtlXyF1mb&sz=w1000"></a><h2>جمعية الجواهر بقمار<span>لوحة التحكم الإدارية</span></h2></div><nav class="nav"><button class="btn active" data-tab="dashboard">لوحة التحكم</button><button class="btn" data-tab="employees">الموارد البشرية</button><button class="btn" data-tab="requests">طلبات الانخراط</button><button class="btn" data-tab="members">المنخرطون</button><button class="btn" data-tab="leaves">العطل والحضور</button><button class="btn" data-tab="payments">الأجور/التعويضات</button><button class="btn" data-tab="reports">التقارير</button><button class="btn admin-only" data-tab="admins">صلاحيات الأدمن</button><button class="btn" data-tab="logs">السجلات</button></nav><div class="side-info">نظام إداري موحد لتسيير المنخرطين والموارد البشرية والبطاقات الرقمية بهوية جمعية الجواهر.</div></aside><main class="main"><div class="top"><h1 id="pageTitle">لوحة التحكم - جمعية الجواهر</h1><div class="userbox"><span id="userName">—</span><button class="btn btn-danger btn-small" onclick="logout()">خروج</button></div></div><div id="globalMsg" class="msg"></div>
 <section id="dashboard" class="section active"><div class="grid cards"><div class="card stat"><b id="stEmployees">0</b><span>إجمالي الموارد البشرية</span></div><div class="card stat"><b id="stActiveEmployees">0</b><span>نشطون</span></div><div class="card stat"><b id="stPending">0</b><span>طلبات انخراط قيد الدراسة</span></div><div class="card stat"><b id="stMembers">0</b><span>منخرطون نشطون</span></div><div class="card stat"><b id="stLeaves">0</b><span>عطل قيد الدراسة</span></div></div><div class="grid" style="grid-template-columns:1fr 1fr;margin-top:18px"><div class="card"><h3 style="color:var(--primary-dark);margin-bottom:12px">آخر طلبات الانخراط</h3><div id="recentRequests"></div></div><div class="card"><h3 style="color:var(--primary-dark);margin-bottom:12px">آخر الموارد البشرية</h3><div id="recentEmployees"></div></div></div></section>
 <section id="employees" class="section"><div class="section-title"><h2>إدارة الموارد البشرية</h2><button class="btn btn-soft" onclick="resetEmployeeForm()">إضافة جديدة</button></div><div class="card"><form id="employeeForm"><input type="hidden" name="id"><input type="hidden" name="photoUrl"><div class="form-grid"><div class="field"><label>الرقم الوظيفي</label><input name="employeeNo" placeholder="يولد تلقائياً إذا ترك فارغاً"></div><div class="field two"><label>الاسم الكامل</label><input name="fullName" required></div><div class="field"><label>الحالة</label><select name="status"><option>نشط</option><option>موقوف</option><option>منتهي</option></select></div><div class="field"><label>المنصب</label><input name="position" required placeholder="موظف، متطوع، سائق..."></div><div class="field"><label>القسم</label><input name="department" placeholder="إدارة، نشاطات، إسعاف..."></div><div class="field"><label>الهاتف</label><input name="phone" required></div><div class="field"><label>البريد الإلكتروني</label><input name="email" type="email"></div><div class="field two"><label>العنوان</label><input name="address"></div><div class="field"><label>تاريخ الميلاد</label><input name="birthDate" type="date"></div><div class="field"><label>تاريخ الالتحاق</label><input name="startDate" type="date"></div><div class="field"><label>نوع العقد</label><select name="contractType"><option>تطوع</option><option>دوام كامل</option><option>دوام جزئي</option><option>مؤقت</option></select></div><div class="field"><label>الأجر الشهري</label><input name="salary" type="number" min="0"></div><div class="field"><label>نوع الوثيقة</label><select name="docType"><option>بطاقة التعريف الوطنية</option><option>رخصة السياقة</option><option>جواز السفر</option></select></div><div class="field"><label>رقم الوثيقة</label><input name="docNumber"></div><div class="field"><label>جهة الإصدار</label><input name="docPlace"></div><div class="field"><label>تاريخ الإصدار</label><input name="issueDate" type="date"></div><div class="field two"><label>جهة الاتصال الطارئ</label><input name="emergencyContact"></div><div class="field two"><label>صورة شخصية</label><input name="photoFile" type="file" accept="image/*"></div><div class="field full"><label>ملاحظات</label><textarea name="notes"></textarea></div></div><div class="toolbar"><button class="btn btn-primary">حفظ المورد البشري</button><button class="btn btn-soft" type="button" onclick="resetEmployeeForm()">تفريغ</button></div></form></div><div class="toolbar"><input class="search" id="employeeSearch" placeholder="بحث في الموارد البشرية..." oninput="renderEmployees()"><button class="btn btn-dark" onclick="loadAll()">تحديث</button></div><div class="table-wrap"><table><thead><tr><th>الصورة</th><th>الرقم</th><th>الاسم</th><th>المنصب</th><th>القسم</th><th>الهاتف</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="employeesBody"></tbody></table></div></section>
 <section id="requests" class="section"><div class="section-title"><h2>طلبات الانخراط</h2><button class="btn btn-dark" onclick="loadAll()">تحديث</button></div><div class="toolbar"><input class="search" id="requestSearch" placeholder="بحث في الطلبات..." oninput="renderRequests()"><select id="requestStatusFilter" onchange="renderRequests()"><option value="">كل الحالات</option><option>قيد الدراسة</option><option>مقبول</option><option>مرفوض</option></select></div><div class="table-wrap"><table><thead><tr><th>رقم الطلب</th><th>التاريخ</th><th>الاسم</th><th>الهاتف</th><th>نوع الانخراط</th><th>المبلغ</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="requestsBody"></tbody></table></div></section>
 <section id="members" class="section"><div class="section-title"><h2>المنخرطون وبطاقات QR</h2><button class="btn btn-dark" onclick="loadAll()">تحديث</button></div><div class="toolbar"><input class="search" id="memberSearch" placeholder="بحث في المنخرطين..." oninput="renderMembers()"></div><div class="table-wrap"><table><thead><tr><th>رقم البطاقة</th><th>الاسم</th><th>الهاتف</th><th>النوع</th><th>تاريخ الانخراط</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="membersBody"></tbody></table></div></section>
 <section id="leaves" class="section"><div class="section-title"><h2>الحضور والعطل</h2></div><div class="grid" style="grid-template-columns:1fr 1fr"><div class="card"><h3 style="color:var(--primary-dark)">تسجيل حضور</h3><form id="attendanceForm"><div class="form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>الموظف</label><select name="employeeNo" class="employeeSelect" required></select></div><div class="field"><label>التاريخ</label><input type="date" name="date" required></div><div class="field"><label>الحالة</label><select name="status"><option>حاضر</option><option>غائب</option><option>مهمة خارجية</option><option>راحة</option></select></div><div class="field"><label>وقت الدخول</label><input name="checkIn" type="time"></div><div class="field"><label>وقت الخروج</label><input name="checkOut" type="time"></div><div class="field"><label>ملاحظات</label><input name="notes"></div></div><button class="btn btn-primary" style="margin-top:12px">حفظ الحضور</button></form></div><div class="card"><h3 style="color:var(--primary-dark)">طلب عطلة</h3><form id="leaveForm"><div class="form-grid" style="grid-template-columns:1fr 1fr"><div class="field"><label>الموظف</label><select name="employeeNo" class="employeeSelect" required></select></div><div class="field"><label>نوع العطلة</label><select name="leaveType"><option>سنوية</option><option>مرضية</option><option>استثنائية</option><option>بدون أجر</option></select></div><div class="field"><label>من تاريخ</label><input type="date" name="fromDate" required></div><div class="field"><label>إلى تاريخ</label><input type="date" name="toDate" required></div><div class="field" style="grid-column:1/-1"><label>السبب</label><input name="reason"></div></div><button class="btn btn-primary" style="margin-top:12px">حفظ طلب العطلة</button></form></div></div><div class="section-title"><h2>طلبات العطل</h2></div><div class="table-wrap"><table><thead><tr><th>الموظف</th><th>النوع</th><th>من</th><th>إلى</th><th>الأيام</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="leavesBody"></tbody></table></div><div class="section-title"><h2>سجل الحضور</h2></div><div class="table-wrap"><table><thead><tr><th>الموظف</th><th>التاريخ</th><th>الحالة</th><th>الدخول</th><th>الخروج</th><th>ملاحظات</th></tr></thead><tbody id="attendanceBody"></tbody></table></div></section>
 <section id="payments" class="section"><div class="section-title"><h2>الأجور والتعويضات</h2></div><div class="card"><form id="paymentForm"><div class="form-grid"><div class="field"><label>الموظف</label><select name="employeeNo" class="employeeSelect" required></select></div><div class="field"><label>الشهر</label><input name="month" type="month" required></div><div class="field"><label>المبلغ</label><input name="amount" type="number" min="0" required></div><div class="field"><label>نوع الدفع</label><select name="paymentType"><option>أجر شهري</option><option>تعويض</option><option>منحة</option><option>مصروف مهمة</option></select></div><div class="field"><label>الحالة</label><select name="status"><option>مدفوع</option><option>قيد التحضير</option><option>مؤجل</option></select></div><div class="field two"><label>ملاحظات</label><input name="notes"></div></div><button class="btn btn-primary" style="margin-top:12px">حفظ الدفع</button></form></div><div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>الموظف</th><th>الشهر</th><th>المبلغ</th><th>النوع</th><th>الحالة</th><th>تاريخ التسجيل</th></tr></thead><tbody id="paymentsBody"></tbody></table></div></section>
+
+
+<section id="reports" class="section">
+  <div class="section-title">
+    <h2>التقارير</h2>
+    <button class="btn btn-dark" onclick="loadAll()">تحديث البيانات</button>
+  </div>
+  <div class="card">
+    <div class="report-toolbar">
+      <div class="field">
+        <label>نوع التقرير</label>
+        <select id="reportType" onchange="renderReports()">
+          <option value="summary">تقرير عام شامل</option>
+          <option value="requests">طلبات الانخراط</option>
+          <option value="members">المنخرطون والبطاقات</option>
+          <option value="employees">الموارد البشرية</option>
+          <option value="attendance">الحضور</option>
+          <option value="leaves">العطل</option>
+          <option value="payments">الأجور والتعويضات</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>من تاريخ</label>
+        <input id="reportFrom" type="date" onchange="renderReports()">
+      </div>
+      <div class="field">
+        <label>إلى تاريخ</label>
+        <input id="reportTo" type="date" onchange="renderReports()">
+      </div>
+      <div class="field">
+        <label>بحث داخل التقرير</label>
+        <input id="reportSearch" placeholder="اسم، رقم، هاتف..." oninput="renderReports()">
+      </div>
+      <div class="report-actions">
+        <button class="btn btn-primary" onclick="renderReports()">عرض التقرير</button>
+        <button class="btn btn-soft" onclick="printCurrentReport()">طباعة</button>
+        <button class="btn btn-gold" onclick="downloadCurrentReportPdf()">تحميل PDF</button>
+      </div>
+    </div>
+  </div>
+  <div id="reportsContent" style="margin-top:16px"></div>
+</section>
 
 <section id="admins" class="section"><div class="section-title"><h2>إدارة صلاحيات الأدمن</h2><button class="btn btn-dark" onclick="loadAdmins()">تحديث</button></div><div class="card admin-permissions-card"><form id="adminForm"><input type="hidden" name="id"><div class="form-grid"><div class="field"><label>اسم المستخدم</label><input name="username" required></div><div class="field"><label>كلمة المرور</label><input name="password" type="password" placeholder="اتركها فارغة عند التعديل"></div><div class="field two"><label>الاسم الكامل</label><input name="name" required></div><div class="field"><label>الدور</label><select name="role"><option value="super">أدمن جميع الصلاحيات</option><option value="editor">محرر تعديل</option><option value="viewer">مشاهد فقط</option></select></div><div class="field"><label>الحالة</label><select name="status"><option>نشط</option><option>موقوف</option></select></div><div class="field full"><label>ملاحظات</label><textarea name="notes" placeholder="ملاحظات داخلية حول صلاحيات هذا الحساب"></textarea></div></div><div class="toolbar"><button class="btn btn-primary">حفظ حساب الأدمن</button><button class="btn btn-soft" type="button" onclick="resetAdminForm()">تفريغ</button></div></form></div><div class="table-wrap" style="margin-top:15px"><table><thead><tr><th>اسم المستخدم</th><th>الاسم</th><th>الدور</th><th>الحالة</th><th>آخر تحديث</th><th>إجراءات</th></tr></thead><tbody id="adminsBody"></tbody></table></div></section>
 
@@ -288,6 +373,23 @@ function apiCall(action,args=[]){
 function msg(text,type='success'){const el=document.getElementById('globalMsg');el.className='msg '+(type==='error'?'error':'success');el.textContent=text;setTimeout(()=>{el.style.display='none'},4500);}
 function escapeHtml(v){return String(v??'').replace(/[&<>'"]/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[s]));}
 function statusBadge(status){const s=String(status||'');let c=s.includes('قيد')?'pending':(s.includes('مقبول')||s.includes('نشط')||s.includes('مدفوع'))?'ok':(s.includes('مرفوض')||s.includes('موقوف'))?'no':'off';return `<span class="badge ${c}">${escapeHtml(s||'—')}</span>`;}
+function recordTimeValue(row,keys=[]){
+ const all=[...(keys||[]),'updatedAt','createdAt','createdDate','date','requestDate','joinDate','approvedAt','confirmedAt','confirmationDate','startDate','fromDate','toDate','month','timestamp','id'];
+ for(const k of [...new Set(all)]){
+  const raw=row&&row[k];
+  if(raw===undefined||raw===null||String(raw).trim()==='')continue;
+  let s=String(raw).trim();
+  if(/^\d{4}-\d{2}$/.test(s))s+='-01';
+  let t=Date.parse(s);
+  if(!Number.isNaN(t))return t;
+  const dmy=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})/);
+  if(dmy){t=Date.parse(`${dmy[3]}-${String(dmy[2]).padStart(2,'0')}-${String(dmy[1]).padStart(2,'0')}`);if(!Number.isNaN(t))return t;}
+  const n=Number(s.replace(/\D/g,''));
+  if(Number.isFinite(n)&&n>0)return n;
+ }
+ return 0;
+}
+function newestFirst(rows,keys=[]){return (rows||[]).map((row,index)=>({row,index,time:recordTimeValue(row,keys)})).sort((a,b)=>{if(a.time!==b.time)return b.time-a.time;return b.index-a.index;}).map(x=>x.row);}
 function formToObj(form){const o={};new FormData(form).forEach((v,k)=>{if(!(v instanceof File))o[k]=String(v).trim();});return o;}
 function compressImage(file,maxW=900,quality=.72){return new Promise((resolve,reject)=>{if(!file||!file.size)return resolve('');const img=new Image();const reader=new FileReader();reader.onload=e=>{img.onload=()=>{let w=img.width,h=img.height;if(w>maxW){h=Math.round(h*(maxW/w));w=maxW}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);resolve(c.toDataURL('image/jpeg',quality));};img.onerror=reject;img.src=e.target.result};reader.onerror=reject;reader.readAsDataURL(file)});}
 async function init(){if(!token){showLogin();return}try{currentUser=await apiCall('verifySession',[token]);if(!currentUser){showLogin();return}showApp();await loadAll();}catch(e){showLogin();}}
@@ -296,20 +398,20 @@ function showApp(){document.getElementById('loginView').classList.add('hidden');
 function roleLabel(r){return r==='super'?'ادمن جميع الصلاحيات':r==='editor'?'محرر تعديل':'مشاهد';}
 document.getElementById('loginForm').addEventListener('submit',async e=>{e.preventDefault();const lm=document.getElementById('loginMsg');lm.className='msg';lm.style.display='none';try{const res=await apiCall('loginAdmin',[document.getElementById('username').value,document.getElementById('password').value]);token=res.token;currentUser=res.user;localStorage.setItem('hrMembershipToken',token);showApp();await loadAll();}catch(err){lm.className='msg error';lm.style.display='block';lm.textContent='❌ '+err.message;}});
 async function logout(){try{await apiCall('logoutAdmin',[token])}catch(e){}localStorage.removeItem('hrMembershipToken');token='';showLogin();}
-document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.tab).classList.add('active');document.getElementById('pageTitle').textContent=b.textContent.trim();if(b.dataset.tab==='logs')loadLogs();if(b.dataset.tab==='admins')loadAdmins();}));
-async function loadAll(){try{const [dash,employees,requests,members,leaves,attendance,payments]=await Promise.all([apiCall('getDashboard',[token]),apiCall('listEmployees',[token]),apiCall('listMembershipRequests',[token]),apiCall('listMembers',[token]),apiCall('listLeaveRequests',[token]),apiCall('listAttendance',[token]),apiCall('listPayments',[token])]);Object.assign(state,{employees,requests,members,leaves,attendance,payments});renderDashboard(dash);renderEmployees();renderRequests();renderMembers();renderLeaveAttendance();renderPayments();fillEmployeeSelects();applyRolePermissions();if(canManageAdmins())loadAdmins();}catch(e){msg('❌ '+e.message,'error');}}
-function renderDashboard(d){document.getElementById('stEmployees').textContent=d.employeesTotal||0;document.getElementById('stActiveEmployees').textContent=d.employeesActive||0;document.getElementById('stPending').textContent=d.requestsPending||0;document.getElementById('stMembers').textContent=d.membersActive||0;document.getElementById('stLeaves').textContent=d.leavesPending||0;document.getElementById('recentRequests').innerHTML=(d.recentRequests||[]).map(r=>`<div class="detail"><b>${escapeHtml(r.requestNo)}</b>${escapeHtml(r.fullName)} - ${statusBadge(r.status)}</div>`).join('')||'<div class="empty">لا توجد طلبات حديثة</div>';document.getElementById('recentEmployees').innerHTML=(d.recentEmployees||[]).map(e=>`<div class="detail"><b>${escapeHtml(e.employeeNo)}</b>${escapeHtml(e.fullName)} - ${escapeHtml(e.position)}</div>`).join('')||'<div class="empty">لا توجد موارد بشرية</div>';}
-function renderEmployees(){const q=(document.getElementById('employeeSearch')?.value||'').toLowerCase();const rows=state.employees.filter(e=>(e.employeeNo+e.fullName+e.position+e.phone+e.department).toLowerCase().includes(q));document.getElementById('employeesBody').innerHTML=rows.map(e=>`<tr><td>${e.photoUrl?`<img class="photo" src="${escapeHtml(e.photoUrl)}">`:'—'}</td><td>${escapeHtml(e.employeeNo)}</td><td>${escapeHtml(e.fullName)}</td><td>${escapeHtml(e.position)}</td><td>${escapeHtml(e.department)}</td><td>${escapeHtml(e.phone)}</td><td>${statusBadge(e.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editEmployee(${JSON.stringify(e).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-gold btn-small" onclick='printEmployeeBadge(${JSON.stringify(e).replace(/'/g,"&#39;")})'>بطاقة</button><button class="btn btn-danger btn-small" onclick="deleteEmployee('${escapeHtml(e.id)}')">حذف</button></div></td></tr>`).join('')||'<tr><td colspan="8" class="empty">لا توجد بيانات</td></tr>';}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(b.dataset.tab).classList.add('active');document.getElementById('pageTitle').textContent=b.textContent.trim();if(b.dataset.tab==='reports')renderReports();if(b.dataset.tab==='logs')loadLogs();if(b.dataset.tab==='admins')loadAdmins();}));
+async function loadAll(){try{const [dash,employees,requests,members,leaves,attendance,payments]=await Promise.all([apiCall('getDashboard',[token]),apiCall('listEmployees',[token]),apiCall('listMembershipRequests',[token]),apiCall('listMembers',[token]),apiCall('listLeaveRequests',[token]),apiCall('listAttendance',[token]),apiCall('listPayments',[token])]);Object.assign(state,{employees,requests,members,leaves,attendance,payments});renderDashboard(dash);renderEmployees();renderRequests();renderMembers();renderLeaveAttendance();renderPayments();fillEmployeeSelects();renderReports();applyRolePermissions();if(canManageAdmins())loadAdmins();}catch(e){msg('❌ '+e.message,'error');}}
+function renderDashboard(d){document.getElementById('stEmployees').textContent=d.employeesTotal||0;document.getElementById('stActiveEmployees').textContent=d.employeesActive||0;document.getElementById('stPending').textContent=d.requestsPending||0;document.getElementById('stMembers').textContent=d.membersActive||0;document.getElementById('stLeaves').textContent=d.leavesPending||0;document.getElementById('recentRequests').innerHTML=newestFirst(d.recentRequests||[],['updatedAt','createdAt','requestDate','date','requestNo']).map(r=>`<div class="detail"><b>${escapeHtml(r.requestNo)}</b>${escapeHtml(r.fullName)} - ${statusBadge(r.status)}</div>`).join('')||'<div class="empty">لا توجد طلبات حديثة</div>';document.getElementById('recentEmployees').innerHTML=newestFirst(d.recentEmployees||[],['updatedAt','createdAt','startDate','employeeNo']).map(e=>`<div class="detail"><b>${escapeHtml(e.employeeNo)}</b>${escapeHtml(e.fullName)} - ${escapeHtml(e.position)}</div>`).join('')||'<div class="empty">لا توجد موارد بشرية</div>';}
+function renderEmployees(){const q=(document.getElementById('employeeSearch')?.value||'').toLowerCase();const rows=newestFirst(state.employees,['updatedAt','createdAt','startDate','employeeNo','id']).filter(e=>(e.employeeNo+e.fullName+e.position+e.phone+e.department).toLowerCase().includes(q));document.getElementById('employeesBody').innerHTML=rows.map(e=>`<tr><td>${e.photoUrl?`<img class="photo" src="${escapeHtml(e.photoUrl)}">`:'—'}</td><td>${escapeHtml(e.employeeNo)}</td><td>${escapeHtml(e.fullName)}</td><td>${escapeHtml(e.position)}</td><td>${escapeHtml(e.department)}</td><td>${escapeHtml(e.phone)}</td><td>${statusBadge(e.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editEmployee(${JSON.stringify(e).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-gold btn-small" onclick='printEmployeeBadge(${JSON.stringify(e).replace(/'/g,"&#39;")})'>بطاقة</button><button class="btn btn-danger btn-small" onclick="deleteEmployee('${escapeHtml(e.id)}')">حذف</button></div></td></tr>`).join('')||'<tr><td colspan="8" class="empty">لا توجد بيانات</td></tr>';}
 function resetEmployeeForm(){document.getElementById('employeeForm').reset();document.querySelector('#employeeForm [name=id]').value='';document.querySelector('#employeeForm [name=photoUrl]').value='';}
 function editEmployee(e){const f=document.getElementById('employeeForm');Object.keys(e).forEach(k=>{const el=f.elements[k];if(el)el.value=e[k]||''});window.scrollTo({top:0,behavior:'smooth'});}
 document.getElementById('employeeForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.currentTarget;const data=formToObj(f);const file=f.elements.photoFile.files[0];if(file)data.photo=await compressImage(file,900,.72);try{const action=data.id?'updateEmployee':'addEmployee';state.employees=await apiCall(action,[data,token]);renderEmployees();fillEmployeeSelects();resetEmployeeForm();msg('تم حفظ المورد البشري بنجاح');}catch(err){msg('❌ '+err.message,'error');}});
 async function deleteEmployee(id){if(!confirm('تأكيد حذف هذا المورد البشري؟'))return;try{state.employees=await apiCall('deleteEmployee',[id,token]);renderEmployees();fillEmployeeSelects();msg('تم الحذف');}catch(e){msg('❌ '+e.message,'error');}}
-function renderRequests(){const q=(document.getElementById('requestSearch')?.value||'').toLowerCase();const st=document.getElementById('requestStatusFilter')?.value||'';const rows=state.requests.filter(r=>(!st||r.status===st)&&(r.requestNo+r.fullName+r.phone+r.membershipType).toLowerCase().includes(q));document.getElementById('requestsBody').innerHTML=rows.map(r=>`<tr><td>${escapeHtml(r.requestNo)}</td><td>${escapeHtml(r.requestDate)}</td><td>${escapeHtml(r.fullName)}</td><td>${escapeHtml(r.phone)}</td><td>${escapeHtml(r.membershipType)}</td><td>${escapeHtml(r.amount)} دج</td><td>${statusBadge(r.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='showRequest(${JSON.stringify(r).replace(/'/g,"&#39;")})'>عرض</button><button class="btn btn-dark btn-small" onclick='previewMembershipReceipt(${JSON.stringify(r).replace(/'/g,"&#39;")})'>وصل استلام</button>${r.status==='قيد الدراسة'?`<button class="btn btn-success btn-small" onclick="approveRequest('${escapeHtml(r.requestNo)}')">قبول</button><button class="btn btn-danger btn-small" onclick="rejectRequest('${escapeHtml(r.requestNo)}')">رفض</button>`:''}${r.cardNo?`<button class="btn btn-gold btn-small" onclick="printMemberByCard('${escapeHtml(r.cardNo)}')">معاينة البطاقة</button>`:''}</div></td></tr>`).join('')||'<tr><td colspan="8" class="empty">لا توجد طلبات</td></tr>';}
+function renderRequests(){const q=(document.getElementById('requestSearch')?.value||'').toLowerCase();const st=document.getElementById('requestStatusFilter')?.value||'';const rows=newestFirst(state.requests,['updatedAt','createdAt','requestDate','date','requestNo','id']).filter(r=>(!st||r.status===st)&&(r.requestNo+r.fullName+r.phone+r.membershipType).toLowerCase().includes(q));document.getElementById('requestsBody').innerHTML=rows.map(r=>`<tr><td>${escapeHtml(r.requestNo)}</td><td>${escapeHtml(r.requestDate)}</td><td>${escapeHtml(r.fullName)}</td><td>${escapeHtml(r.phone)}</td><td>${escapeHtml(r.membershipType)}</td><td>${escapeHtml(r.amount)} دج</td><td>${statusBadge(r.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='showRequest(${JSON.stringify(r).replace(/'/g,"&#39;")})'>عرض</button><button class="btn btn-dark btn-small" onclick='previewMembershipReceipt(${JSON.stringify(r).replace(/'/g,"&#39;")})'>وصل استلام</button>${r.status==='قيد الدراسة'?`<button class="btn btn-success btn-small" onclick="approveRequest('${escapeHtml(r.requestNo)}')">قبول</button><button class="btn btn-danger btn-small" onclick="rejectRequest('${escapeHtml(r.requestNo)}')">رفض</button>`:''}${r.cardNo?`<button class="btn btn-gold btn-small" onclick="printMemberByCard('${escapeHtml(r.cardNo)}')">معاينة البطاقة</button>`:''}</div></td></tr>`).join('')||'<tr><td colspan="8" class="empty">لا توجد طلبات</td></tr>';}
 function showRequest(r){document.getElementById('modalContent').innerHTML=`<h2 style="color:var(--primary-dark)">تفاصيل طلب الانخراط ${escapeHtml(r.requestNo)}</h2><div class="detail-grid">${detail('الاسم الكامل',r.fullName)}${detail('الهاتف',r.phone)}${detail('البريد',r.email)}${detail('تاريخ الميلاد',r.birthDate)}${detail('الجنس',r.gender)}${detail('نوع الوثيقة',r.docType)}${detail('رقم الوثيقة',r.docNumber)}${detail('جهة الإصدار',r.docPlace)}${detail('نوع الانخراط',r.membershipType)}${detail('المبلغ',r.amount+' دج')}${detail('العنوان',r.address)}${detail('الحالة',r.status)}${detail('الصورة الشخصية',r.photoUrl?`<a href="${r.photoUrl}" target="_blank">فتح الصورة</a>`:'—')}${detail('الوثيقة الأمامية',r.docFrontUrl?`<a href="${r.docFrontUrl}" target="_blank">فتح الوثيقة</a>`:'—')}${detail('الوثيقة الخلفية',r.docBackUrl?`<a href="${r.docBackUrl}" target="_blank">فتح الوثيقة</a>`:'—')}</div><div class="toolbar"><button class="btn btn-dark" onclick='previewMembershipReceipt(${JSON.stringify(r).replace(/'/g,"&#39;")})'>وصل استلام</button>${r.status==='قيد الدراسة'?`<button class="btn btn-success" onclick="approveRequest('${escapeHtml(r.requestNo)}')">قبول وإصدار بطاقة</button><button class="btn btn-danger" onclick="rejectRequest('${escapeHtml(r.requestNo)}')">رفض</button>`:''}</div>`;openModal();}
 function detail(k,v){return `<div class="detail"><b>${k}</b>${v||'—'}</div>`;}
 async function approveRequest(no){const amount=prompt('المبلغ المدفوع بالدينار الجزائري:', '');const notes=prompt('ملاحظات الإدارة:', '')||'';const confirmedAt=new Date().toISOString().slice(0,10);try{const res=await apiCall('approveMembershipRequest',[no,{amountPaid:amount,notes,approvedAt:confirmedAt,confirmedAt:confirmedAt,confirmationDate:confirmedAt,joinDate:confirmedAt},token]);state.members=res.members;state.requests=res.requests;const member=state.members.find(x=>String(x.cardNo||'')===String(res.cardNo||''));if(member){member.approvedAt=member.approvedAt||confirmedAt;member.confirmedAt=member.confirmedAt||confirmedAt;member.confirmationDate=member.confirmationDate||confirmedAt;member.joinDate=memberJoinDate(member)||confirmedAt;}renderRequests();renderMembers();closeModal();msg('تم قبول الطلب وإصدار البطاقة: '+res.cardNo);printMemberByCard(res.cardNo);}catch(e){msg('❌ '+e.message,'error');}}
 async function rejectRequest(no){const reason=prompt('سبب الرفض:', '')||'';try{state.requests=await apiCall('rejectMembershipRequest',[no,reason,token]);renderRequests();closeModal();msg('تم رفض الطلب');}catch(e){msg('❌ '+e.message,'error');}}
-function renderMembers(){const q=(document.getElementById('memberSearch')?.value||'').toLowerCase();const rows=state.members.filter(m=>(m.cardNo+m.fullName+m.phone+m.membershipType+m.requestNo+m.email+memberJoinDate(m)).toLowerCase().includes(q));document.getElementById('membersBody').innerHTML=rows.map(m=>`<tr><td>${escapeHtml(m.cardNo)}</td><td>${escapeHtml(m.fullName)}</td><td>${escapeHtml(m.phone)}</td><td>${escapeHtml(m.membershipType)}</td><td>${escapeHtml(memberJoinDate(m))}</td><td>${statusBadge(m.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editMember(${JSON.stringify(m).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-gold btn-small" onclick='previewMemberCard(${JSON.stringify(m).replace(/'/g,"&#39;")})'>معاينة البطاقة</button><button class="btn btn-dark btn-small" onclick='previewCardDeliveryReceipt(${JSON.stringify(m).replace(/'/g,"&#39;")})'>وصل استلام البطاقة</button>${m.status==='نشط'?`<button class="btn btn-danger btn-small" onclick="suspendMember('${escapeHtml(m.cardNo)}')">توقيف</button>`:`<button class="btn btn-success btn-small" onclick="activateMember('${escapeHtml(m.cardNo)}')">تفعيل</button>`}</div></td></tr>`).join('')||'<tr><td colspan="7" class="empty">لا يوجد منخرطون</td></tr>';}
+function renderMembers(){const q=(document.getElementById('memberSearch')?.value||'').toLowerCase();const rows=newestFirst(state.members,['updatedAt','createdAt','joinDate','approvedAt','confirmedAt','confirmationDate','requestDate','cardNo','id']).filter(m=>(m.cardNo+m.fullName+m.phone+m.membershipType+m.requestNo+m.email+memberJoinDate(m)).toLowerCase().includes(q));document.getElementById('membersBody').innerHTML=rows.map(m=>`<tr><td>${escapeHtml(m.cardNo)}</td><td>${escapeHtml(m.fullName)}</td><td>${escapeHtml(m.phone)}</td><td>${escapeHtml(m.membershipType)}</td><td>${escapeHtml(memberJoinDate(m))}</td><td>${statusBadge(m.status)}</td><td><div class="actions"><button class="btn btn-soft btn-small" onclick='editMember(${JSON.stringify(m).replace(/'/g,"&#39;")})'>تعديل</button><button class="btn btn-gold btn-small" onclick='previewMemberCard(${JSON.stringify(m).replace(/'/g,"&#39;")})'>معاينة البطاقة</button><button class="btn btn-dark btn-small" onclick='previewCardDeliveryReceipt(${JSON.stringify(m).replace(/'/g,"&#39;")})'>وصل استلام البطاقة</button>${m.status==='نشط'?`<button class="btn btn-danger btn-small" onclick="suspendMember('${escapeHtml(m.cardNo)}')">توقيف</button>`:`<button class="btn btn-success btn-small" onclick="activateMember('${escapeHtml(m.cardNo)}')">تفعيل</button>`}</div></td></tr>`).join('')||'<tr><td colspan="7" class="empty">لا يوجد منخرطون</td></tr>';}
 async function printMemberByCard(cardNo){const m=state.members.find(x=>x.cardNo===cardNo)||await apiCall('getMemberByNo',[cardNo,token]);if(m)printMemberCard(m);}
 
 function editSafeValue(m,keys){for(const k of keys){if(m&&m[k]!==undefined&&m[k]!==null&&String(m[k]).trim()!=='')return m[k];}return '';}
@@ -485,11 +587,11 @@ function printField(k,v){return `<div class="doc-field"><b>${k}</b>${escapeHtml(
 function fillEmployeeSelects(){const opts='<option value="">اختر</option>'+state.employees.map(e=>`<option value="${escapeHtml(e.employeeNo)}">${escapeHtml(e.employeeNo+' - '+e.fullName)}</option>`).join('');document.querySelectorAll('.employeeSelect').forEach(s=>s.innerHTML=opts);}
 document.getElementById('attendanceForm').addEventListener('submit',async e=>{e.preventDefault();try{state.attendance=await apiCall('addAttendance',[formToObj(e.currentTarget),token]);renderLeaveAttendance();e.currentTarget.reset();msg('تم حفظ الحضور');}catch(err){msg('❌ '+err.message,'error');}});
 document.getElementById('leaveForm').addEventListener('submit',async e=>{e.preventDefault();try{state.leaves=await apiCall('addLeaveRequest',[formToObj(e.currentTarget),token]);renderLeaveAttendance();e.currentTarget.reset();msg('تم حفظ طلب العطلة');}catch(err){msg('❌ '+err.message,'error');}});
-function renderLeaveAttendance(){document.getElementById('leavesBody').innerHTML=state.leaves.slice().reverse().map(l=>`<tr><td>${escapeHtml(l.employeeName)}</td><td>${escapeHtml(l.leaveType)}</td><td>${escapeHtml(l.fromDate)}</td><td>${escapeHtml(l.toDate)}</td><td>${escapeHtml(l.days)}</td><td>${statusBadge(l.status)}</td><td><div class="actions">${l.status==='قيد الدراسة'?`<button class="btn btn-success btn-small" onclick="processLeave('${escapeHtml(l.id)}','approve')">قبول</button><button class="btn btn-danger btn-small" onclick="processLeave('${escapeHtml(l.id)}','reject')">رفض</button>`:'—'}</div></td></tr>`).join('')||'<tr><td colspan="7" class="empty">لا توجد عطل</td></tr>';document.getElementById('attendanceBody').innerHTML=state.attendance.slice().reverse().slice(0,80).map(a=>`<tr><td>${escapeHtml(a.employeeName)}</td><td>${escapeHtml(a.date)}</td><td>${statusBadge(a.status)}</td><td>${escapeHtml(a.checkIn)}</td><td>${escapeHtml(a.checkOut)}</td><td>${escapeHtml(a.notes)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا يوجد حضور مسجل</td></tr>';}
+function renderLeaveAttendance(){document.getElementById('leavesBody').innerHTML=newestFirst(state.leaves,['updatedAt','createdAt','fromDate','date','id']).map(l=>`<tr><td>${escapeHtml(l.employeeName)}</td><td>${escapeHtml(l.leaveType)}</td><td>${escapeHtml(l.fromDate)}</td><td>${escapeHtml(l.toDate)}</td><td>${escapeHtml(l.days)}</td><td>${statusBadge(l.status)}</td><td><div class="actions">${l.status==='قيد الدراسة'?`<button class="btn btn-success btn-small" onclick="processLeave('${escapeHtml(l.id)}','approve')">قبول</button><button class="btn btn-danger btn-small" onclick="processLeave('${escapeHtml(l.id)}','reject')">رفض</button>`:'—'}</div></td></tr>`).join('')||'<tr><td colspan="7" class="empty">لا توجد عطل</td></tr>';document.getElementById('attendanceBody').innerHTML=newestFirst(state.attendance,['updatedAt','createdAt','date','id']).slice(0,80).map(a=>`<tr><td>${escapeHtml(a.employeeName)}</td><td>${escapeHtml(a.date)}</td><td>${statusBadge(a.status)}</td><td>${escapeHtml(a.checkIn)}</td><td>${escapeHtml(a.checkOut)}</td><td>${escapeHtml(a.notes)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا يوجد حضور مسجل</td></tr>';}
 async function processLeave(id,type){const note=prompt('ملاحظة المعالجة:', '')||'';try{state.leaves=await apiCall(type==='approve'?'approveLeaveRequest':'rejectLeaveRequest',[id,note,token]);renderLeaveAttendance();msg('تمت معالجة طلب العطلة');}catch(e){msg('❌ '+e.message,'error');}}
 document.getElementById('paymentForm').addEventListener('submit',async e=>{e.preventDefault();try{state.payments=await apiCall('addPayment',[formToObj(e.currentTarget),token]);renderPayments();e.currentTarget.reset();msg('تم حفظ الدفع');}catch(err){msg('❌ '+err.message,'error');}});
-function renderPayments(){document.getElementById('paymentsBody').innerHTML=state.payments.slice().reverse().map(p=>`<tr><td>${escapeHtml(p.employeeName)}</td><td>${escapeHtml(p.month)}</td><td>${escapeHtml(p.amount)} دج</td><td>${escapeHtml(p.paymentType)}</td><td>${statusBadge(p.status)}</td><td>${escapeHtml(p.createdAt)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد مدفوعات</td></tr>';}
-async function loadLogs(){try{state.logs=await apiCall('listOperationLogs',[token]);document.getElementById('logsBody').innerHTML=state.logs.map(l=>`<tr><td>${escapeHtml(l.date)}</td><td>${escapeHtml(l.action)}</td><td>${escapeHtml(l.actor)}</td><td>${escapeHtml(l.role)}</td><td>${escapeHtml(l.ref)}</td><td>${escapeHtml(l.details)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد سجلات</td></tr>';}catch(e){msg('❌ '+e.message,'error');}}
+function renderPayments(){document.getElementById('paymentsBody').innerHTML=newestFirst(state.payments,['updatedAt','createdAt','month','date','id']).map(p=>`<tr><td>${escapeHtml(p.employeeName)}</td><td>${escapeHtml(p.month)}</td><td>${escapeHtml(p.amount)} دج</td><td>${escapeHtml(p.paymentType)}</td><td>${statusBadge(p.status)}</td><td>${escapeHtml(p.createdAt)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد مدفوعات</td></tr>';}
+async function loadLogs(){try{state.logs=await apiCall('listOperationLogs',[token]);const logsRows=newestFirst(state.logs,['updatedAt','createdAt','date','timestamp','id']);document.getElementById('logsBody').innerHTML=logsRows.map(l=>`<tr><td>${escapeHtml(l.date)}</td><td>${escapeHtml(l.action)}</td><td>${escapeHtml(l.actor)}</td><td>${escapeHtml(l.role)}</td><td>${escapeHtml(l.ref)}</td><td>${escapeHtml(l.details)}</td></tr>`).join('')||'<tr><td colspan="6" class="empty">لا توجد سجلات</td></tr>';}catch(e){msg('❌ '+e.message,'error');}}
 function openModal(){document.getElementById('modal').classList.add('show');}
 function closeModal(){document.getElementById('modal').classList.remove('show');}
 
@@ -635,6 +737,200 @@ async function downloadCurrentReceiptPdf(){
  holder.remove();
 }
 window.addEventListener('afterprint',()=>{document.body.classList.remove('printing-receipt');});
+
+
+/* ===== Reports module inside dashboard ===== */
+function reportCleanNumber(v){
+  const n=Number(String(v??'').replace(/[^\d.-]/g,''));
+  return Number.isFinite(n)?n:0;
+}
+function reportDateValue(row,keys){
+  for(const k of keys){
+    const v=row&&row[k];
+    if(v!==undefined&&v!==null&&String(v).trim()!==''){
+      const s=String(v).trim();
+      const iso=s.match(/^(\d{4}-\d{2}-\d{2})/);
+      if(iso)return iso[1];
+      const month=s.match(/^(\d{4}-\d{2})$/);
+      if(month)return month[1]+'-01';
+      return s;
+    }
+  }
+  return '';
+}
+function reportBetween(dateStr,from,to){
+  const d=cleanDateValue(dateStr)||dateStr||'';
+  if(!d)return !from&&!to;
+  const day=String(d).slice(0,10);
+  if(from&&day<from)return false;
+  if(to&&day>to)return false;
+  return true;
+}
+function reportText(row){
+  return Object.values(row||{}).map(v=>String(v??'')).join(' ').toLowerCase();
+}
+function reportFilterRows(rows,dateKeys){
+  const from=document.getElementById('reportFrom')?.value||'';
+  const to=document.getElementById('reportTo')?.value||'';
+  const q=(document.getElementById('reportSearch')?.value||'').toLowerCase().trim();
+  const filtered=(rows||[]).filter(row=>{
+    const d=reportDateValue(row,dateKeys);
+    return reportBetween(d,from,to)&&(!q||reportText(row).includes(q));
+  });
+  return newestFirst(filtered,dateKeys);
+}
+function reportRangeLabel(){
+  const from=document.getElementById('reportFrom')?.value||'';
+  const to=document.getElementById('reportTo')?.value||'';
+  if(from&&to)return from+' إلى '+to;
+  if(from)return 'ابتداءً من '+from;
+  if(to)return 'إلى غاية '+to;
+  return 'كل الفترات';
+}
+function reportTitle(type){
+  return ({
+    summary:'تقرير عام شامل',
+    requests:'تقرير طلبات الانخراط',
+    members:'تقرير المنخرطين والبطاقات',
+    employees:'تقرير الموارد البشرية',
+    attendance:'تقرير الحضور',
+    leaves:'تقرير العطل',
+    payments:'تقرير الأجور والتعويضات'
+  })[type]||'تقرير';
+}
+function reportStat(label,value){
+  return `<div class="report-mini-stat"><b>${escapeHtml(value)}</b><span>${escapeHtml(label)}</span></div>`;
+}
+function reportTable(headers,rows){
+  if(!rows.length)return '<div class="empty">لا توجد بيانات مطابقة للفلاتر الحالية</div>';
+  return `<div class="table-wrap"><table class="report-table"><thead><tr>${headers.map(h=>`<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+}
+function reportDoc(inner,type){
+  return `<div class="report-doc" id="reportPreview" dir="rtl" lang="ar">
+    <div class="report-head">
+      <div class="report-brand">
+        <img src="${LOGO_URL}" alt="شعار جمعية الجواهر" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <div><h2>${escapeHtml(reportTitle(type))}</h2><p>جمعية الجواهر بقمار | ولاية الوادي - الجزائر</p></div>
+      </div>
+      <div class="report-meta">
+        <span class="report-chip">الفترة: ${escapeHtml(reportRangeLabel())}</span>
+        <span class="report-chip">تاريخ التقرير: ${receiptDate()}</span>
+      </div>
+    </div>
+    ${inner}
+    <div class="report-note">تم إنشاء هذا التقرير آلياً من بيانات لوحة التحكم الحالية، لذلك تعكس الأرقام آخر عملية تحميل أو تحديث للبيانات داخل الواجهة.</div>
+  </div>`;
+}
+function buildSummaryReport(){
+  const requests=reportFilterRows(state.requests,['requestDate','createdAt','date']);
+  const members=reportFilterRows(state.members,['joinDate','approvedAt','confirmedAt','confirmationDate','requestDate','createdAt']);
+  const employees=reportFilterRows(state.employees,['startDate','createdAt','date']);
+  const attendance=reportFilterRows(state.attendance,['date','createdAt']);
+  const leaves=reportFilterRows(state.leaves,['fromDate','createdAt','date']);
+  const payments=reportFilterRows(state.payments,['month','createdAt','date']);
+  const totalPayments=payments.reduce((s,p)=>s+reportCleanNumber(p.amount),0);
+  const html=`<div class="report-summary-grid">
+    ${reportStat('إجمالي الموارد البشرية',employees.length)}
+    ${reportStat('الموارد البشرية النشطة',employees.filter(e=>String(e.status||'').includes('نشط')).length)}
+    ${reportStat('طلبات الانخراط',requests.length)}
+    ${reportStat('طلبات قيد الدراسة',requests.filter(r=>String(r.status||'').includes('قيد')).length)}
+    ${reportStat('المنخرطون',members.length)}
+    ${reportStat('بطاقات نشطة',members.filter(m=>String(m.status||'').includes('نشط')).length)}
+    ${reportStat('سجلات الحضور',attendance.length)}
+    ${reportStat('إجمالي المدفوعات',totalPayments+' دج')}
+  </div>
+  ${reportTable(['المؤشر','القيمة','ملاحظة'],[
+    `<tr><td>الطلبات المقبولة</td><td>${requests.filter(r=>String(r.status||'').includes('مقبول')).length}</td><td>حسب حالة طلب الانخراط</td></tr>`,
+    `<tr><td>الطلبات المرفوضة</td><td>${requests.filter(r=>String(r.status||'').includes('مرفوض')).length}</td><td>حسب حالة طلب الانخراط</td></tr>`,
+    `<tr><td>العطل قيد الدراسة</td><td>${leaves.filter(l=>String(l.status||'').includes('قيد')).length}</td><td>حسب سجل العطل</td></tr>`,
+    `<tr><td>الحضور المسجل</td><td>${attendance.filter(a=>String(a.status||'').includes('حاضر')).length}</td><td>حسب سجل الحضور</td></tr>`,
+    `<tr><td>الغيابات المسجلة</td><td>${attendance.filter(a=>String(a.status||'').includes('غائب')).length}</td><td>حسب سجل الحضور</td></tr>`,
+    `<tr><td>عدد عمليات الدفع</td><td>${payments.length}</td><td>حسب سجل الأجور والتعويضات</td></tr>`
+  ])}`;
+  return reportDoc(html,'summary');
+}
+function buildRequestsReport(){
+  const rows=reportFilterRows(state.requests,['requestDate','createdAt','date']);
+  const body=rows.map(r=>`<tr><td>${escapeHtml(r.requestNo||'—')}</td><td>${escapeHtml(r.requestDate||r.createdAt||'—')}</td><td>${escapeHtml(r.fullName||'—')}</td><td>${escapeHtml(r.phone||'—')}</td><td>${escapeHtml(r.membershipType||'—')}</td><td>${escapeHtml(r.amount||'0')} دج</td><td>${escapeHtml(r.status||'—')}</td></tr>`);
+  return reportDoc(`<div class="report-summary-grid">${reportStat('عدد الطلبات',rows.length)}${reportStat('قيد الدراسة',rows.filter(r=>String(r.status||'').includes('قيد')).length)}${reportStat('مقبولة',rows.filter(r=>String(r.status||'').includes('مقبول')).length)}${reportStat('مرفوضة',rows.filter(r=>String(r.status||'').includes('مرفوض')).length)}</div>${reportTable(['رقم الطلب','التاريخ','الاسم','الهاتف','نوع الانخراط','المبلغ','الحالة'],body)}`,'requests');
+}
+function buildMembersReport(){
+  const rows=reportFilterRows(state.members,['joinDate','approvedAt','confirmedAt','confirmationDate','requestDate','createdAt']);
+  const body=rows.map(m=>`<tr><td>${escapeHtml(m.cardNo||'—')}</td><td>${escapeHtml(m.fullName||'—')}</td><td>${escapeHtml(m.phone||'—')}</td><td>${escapeHtml(m.membershipType||'—')}</td><td>${escapeHtml(memberJoinDate(m)||'—')}</td><td>${escapeHtml(m.status||'—')}</td></tr>`);
+  return reportDoc(`<div class="report-summary-grid">${reportStat('عدد المنخرطين',rows.length)}${reportStat('بطاقات نشطة',rows.filter(m=>String(m.status||'').includes('نشط')).length)}${reportStat('بطاقات موقوفة',rows.filter(m=>String(m.status||'').includes('موقوف')).length)}${reportStat('بطاقات منتهية',rows.filter(m=>String(m.status||'').includes('منتهي')).length)}</div>${reportTable(['رقم البطاقة','الاسم','الهاتف','النوع','تاريخ الانخراط','الحالة'],body)}`,'members');
+}
+function buildEmployeesReport(){
+  const rows=reportFilterRows(state.employees,['startDate','createdAt','date']);
+  const body=rows.map(e=>`<tr><td>${escapeHtml(e.employeeNo||'—')}</td><td>${escapeHtml(e.fullName||'—')}</td><td>${escapeHtml(e.position||'—')}</td><td>${escapeHtml(e.department||'—')}</td><td>${escapeHtml(e.phone||'—')}</td><td>${escapeHtml(e.startDate||'—')}</td><td>${escapeHtml(e.status||'—')}</td></tr>`);
+  return reportDoc(`<div class="report-summary-grid">${reportStat('إجمالي الموارد البشرية',rows.length)}${reportStat('نشطون',rows.filter(e=>String(e.status||'').includes('نشط')).length)}${reportStat('موقوفون',rows.filter(e=>String(e.status||'').includes('موقوف')).length)}${reportStat('منتهون',rows.filter(e=>String(e.status||'').includes('منتهي')).length)}</div>${reportTable(['الرقم','الاسم','المنصب','القسم','الهاتف','تاريخ الالتحاق','الحالة'],body)}`,'employees');
+}
+function buildAttendanceReport(){
+  const rows=reportFilterRows(state.attendance,['date','createdAt']);
+  const body=rows.map(a=>`<tr><td>${escapeHtml(a.employeeName||a.employeeNo||'—')}</td><td>${escapeHtml(a.date||'—')}</td><td>${escapeHtml(a.status||'—')}</td><td>${escapeHtml(a.checkIn||'—')}</td><td>${escapeHtml(a.checkOut||'—')}</td><td>${escapeHtml(a.notes||'—')}</td></tr>`);
+  return reportDoc(`<div class="report-summary-grid">${reportStat('سجلات الحضور',rows.length)}${reportStat('حاضر',rows.filter(a=>String(a.status||'').includes('حاضر')).length)}${reportStat('غائب',rows.filter(a=>String(a.status||'').includes('غائب')).length)}${reportStat('مهمة خارجية',rows.filter(a=>String(a.status||'').includes('مهمة')).length)}</div>${reportTable(['الموظف','التاريخ','الحالة','الدخول','الخروج','ملاحظات'],body)}`,'attendance');
+}
+function buildLeavesReport(){
+  const rows=reportFilterRows(state.leaves,['fromDate','createdAt','date']);
+  const totalDays=rows.reduce((s,l)=>s+reportCleanNumber(l.days),0);
+  const body=rows.map(l=>`<tr><td>${escapeHtml(l.employeeName||l.employeeNo||'—')}</td><td>${escapeHtml(l.leaveType||'—')}</td><td>${escapeHtml(l.fromDate||'—')}</td><td>${escapeHtml(l.toDate||'—')}</td><td>${escapeHtml(l.days||'—')}</td><td>${escapeHtml(l.status||'—')}</td></tr>`);
+  return reportDoc(`<div class="report-summary-grid">${reportStat('طلبات العطل',rows.length)}${reportStat('إجمالي الأيام',totalDays)}${reportStat('قيد الدراسة',rows.filter(l=>String(l.status||'').includes('قيد')).length)}${reportStat('مقبولة',rows.filter(l=>String(l.status||'').includes('مقبول')).length)}</div>${reportTable(['الموظف','نوع العطلة','من','إلى','الأيام','الحالة'],body)}`,'leaves');
+}
+function buildPaymentsReport(){
+  const rows=reportFilterRows(state.payments,['month','createdAt','date']);
+  const total=rows.reduce((s,p)=>s+reportCleanNumber(p.amount),0);
+  const paid=rows.filter(p=>String(p.status||'').includes('مدفوع')).reduce((s,p)=>s+reportCleanNumber(p.amount),0);
+  const body=rows.map(p=>`<tr><td>${escapeHtml(p.employeeName||p.employeeNo||'—')}</td><td>${escapeHtml(p.month||'—')}</td><td>${escapeHtml(p.amount||'0')} دج</td><td>${escapeHtml(p.paymentType||'—')}</td><td>${escapeHtml(p.status||'—')}</td><td>${escapeHtml(p.createdAt||'—')}</td></tr>`);
+  return reportDoc(`<div class="report-summary-grid">${reportStat('عدد العمليات',rows.length)}${reportStat('إجمالي المبالغ',total+' دج')}${reportStat('المدفوع فعلياً',paid+' دج')}${reportStat('قيد التحضير',rows.filter(p=>String(p.status||'').includes('قيد')).length)}</div>${reportTable(['الموظف','الشهر','المبلغ','النوع','الحالة','تاريخ التسجيل'],body)}`,'payments');
+}
+function renderReports(){
+  const box=document.getElementById('reportsContent');
+  if(!box)return;
+  const type=document.getElementById('reportType')?.value||'summary';
+  const builders={summary:buildSummaryReport,requests:buildRequestsReport,members:buildMembersReport,employees:buildEmployeesReport,attendance:buildAttendanceReport,leaves:buildLeavesReport,payments:buildPaymentsReport};
+  box.innerHTML=(builders[type]||buildSummaryReport)();
+}
+async function printCurrentReport(){
+  const el=document.getElementById('reportPreview');
+  if(!el)return;
+  await waitForReceiptReady(el);
+  const clone=el.cloneNode(true);
+  await inlineAllImages(clone);
+  const printArea=document.getElementById('printArea');
+  printArea.innerHTML='';
+  printArea.appendChild(clone);
+  await waitForReceiptReady(clone);
+  document.body.classList.add('printing-report');
+  setTimeout(()=>window.print(),250);
+}
+async function downloadCurrentReportPdf(){
+  const el=document.getElementById('reportPreview');
+  if(!el)return;
+  await waitForReceiptReady(el);
+  if(typeof html2pdf==='undefined'){printCurrentReport();return;}
+  const clone=el.cloneNode(true);
+  await inlineAllImages(clone);
+  clone.style.width='190mm';
+  clone.style.minHeight='277mm';
+  clone.style.background='#ffffff';
+  const holder=document.createElement('div');
+  holder.style.position='fixed';
+  holder.style.left='-99999px';
+  holder.appendChild(clone);
+  document.body.appendChild(holder);
+  await waitForReceiptReady(clone);
+  const type=document.getElementById('reportType')?.value||'summary';
+  await html2pdf().set({
+    margin:[10,10,10,10],
+    filename:'تقرير-'+reportTitle(type).replace(/[\\/:*?"<>|\s]+/g,'-')+'-'+receiptDate()+'.pdf',
+    image:{type:'jpeg',quality:1},
+    html2canvas:{scale:3,useCORS:true,allowTaint:true,backgroundColor:'#ffffff',letterRendering:true},
+    pagebreak:{mode:['avoid-all','css','legacy']},
+    jsPDF:{unit:'mm',format:'a4',orientation:'portrait'}
+  }).from(clone).save();
+  holder.remove();
+}
+window.addEventListener('afterprint',()=>{document.body.classList.remove('printing-report');});
+
 
 init();
 </script>
